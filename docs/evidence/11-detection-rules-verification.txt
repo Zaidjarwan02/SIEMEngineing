@@ -13,28 +13,28 @@ space tkt: 2062
 
 =========== OWNERSHIP SAMPLE (tenant spaces) ===========
 --- greencircle (first 3 rules) ---
-   created_by= greencircle_user updated_by= greencircle_user | Attempt to Clear Kernel Ring Buffer
-   created_by= greencircle_user updated_by= greencircle_user | M365 Exchange Mail Flow Transport Rule Modified
-   created_by= greencircle_user updated_by= greencircle_user | Incoming Execution via PowerShell Remoting
+   created_by= T1_user updated_by= T1_user | Attempt to Clear Kernel Ring Buffer
+   created_by= T1_user updated_by= T1_user | M365 Exchange Mail Flow Transport Rule Modified
+   created_by= T1_user updated_by= T1_user | Incoming Execution via PowerShell Remoting
 --- tkt (first 3 rules) ---
-   created_by= tkt_user updated_by= tkt_user | Azure Diagnostic Settings Deleted
-   created_by= tkt_user updated_by= tkt_user | Potential Network Sweep Detected
-   created_by= tkt_user updated_by= tkt_user | Azure AD Graph Potential Enumeration (ROADrecon)
+   created_by= T2_user updated_by= T2_user | Azure Diagnostic Settings Deleted
+   created_by= T2_user updated_by= T2_user | Potential Network Sweep Detected
+   created_by= T2_user updated_by= T2_user | Azure AD Graph Potential Enumeration (ROADrecon)
 
 =========== TENANT RULE ISOLATION ===========
-PASS  greencircle_user can query own space rules (expected 200, got 200)
-PASS  greencircle_user blocked from tkt rules (403) (expected 403, got 403)
-PASS  greencircle_user can READ shared default rules (expected 200, got 200)
-PASS  greencircle_user sees shared default rule set (2062) (expected 2062, got 2062)
-PASS  tkt_user can query own space rules (expected 200, got 200)
-PASS  tkt_user blocked from greencircle rules (403) (expected 403, got 403)
-PASS  tkt_user can READ shared default rules (expected 200, got 200)
-PASS  tkt_user sees shared default rule set (2062) (expected 2062, got 2062)
+PASS  T1_user can query own space rules (expected 200, got 200)
+PASS  T1_user blocked from tkt rules (403) (expected 403, got 403)
+PASS  T1_user can READ shared default rules (expected 200, got 200)
+PASS  T1_user sees shared default rule set (2062) (expected 2062, got 2062)
+PASS  T2_user can query own space rules (expected 200, got 200)
+PASS  T2_user blocked from greencircle rules (403) (expected 403, got 403)
+PASS  T2_user can READ shared default rules (expected 200, got 200)
+PASS  T2_user sees shared default rule set (2062) (expected 2062, got 2062)
 known tkt rule id: 6ec72995-8cbf-45e3-9ca2-2ce1ab85bde9
-PASS  greencircle_user direct GET of tkt rule (expected 403, got 403)
-PASS  greencircle_user direct DELETE of tkt rule (expected 403, got 403)
-PASS  greencircle_user cannot fetch tkt rule via default space (404) (expected 404, got 404)
-PASS  greencircle_user cannot CREATE rule in shared default space (403) (expected 403, got 403)
+PASS  T1_user direct GET of tkt rule (expected 403, got 403)
+PASS  T1_user direct DELETE of tkt rule (expected 403, got 403)
+PASS  T1_user cannot fetch tkt rule via default space (404) (expected 404, got 404)
+PASS  T1_user cannot CREATE rule in shared default space (403) (expected 403, got 403)
 
 =========== RESULT ===========
 PASS=12 FAIL=0

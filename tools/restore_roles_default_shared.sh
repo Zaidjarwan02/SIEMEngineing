@@ -144,7 +144,7 @@ for a in d.get('applications',[]):
 done
 
 sec "4. SPACE VISIBILITY PER TENANT"
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u spaces: "
   curl -s --max-time 30 -u "$c" -H "$X" "$KB/api/spaces/space" \
@@ -152,7 +152,7 @@ for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>";
 done
 
 sec "5. DEFAULT SPACE READ (should be 200, shared)"
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u GET default saved objects: "
   curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" \
@@ -160,7 +160,7 @@ for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>";
 done
 
 sec "6. DEFAULT SPACE WRITE (should be 403, read-only)"
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u POST dashboard into default: "
   curl -s -o /tmp/dw_$u.json -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" -H "$J" \
@@ -170,7 +170,7 @@ for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>";
 done
 
 sec "7. OWN SPACE WRITE (should be 200, full access)"
-for pair in "greencircle_user:<TENANT1_PASSWORD>:greencircle" "tkt_user:<TENANT2_PASSWORD>:tkt"; do
+for pair in "T1_user:<TENANT1_PASSWORD>:greencircle" "T2_user:<TENANT2_PASSWORD>:tkt"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2); sp=$(echo "$pair" | cut -d: -f3)
   echo -n "$u POST dashboard into $sp: "
   curl -s -o /tmp/ow_$u.json -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" -H "$J" \
@@ -183,11 +183,11 @@ for pair in "greencircle_user:<TENANT1_PASSWORD>:greencircle" "tkt_user:<TENANT2
 done
 
 sec "8. CROSS-TENANT STILL BLOCKED (should be 403)"
-echo -n "greencircle_user -> tkt saved objects: "
-curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "greencircle_user:<TENANT1_PASSWORD>" -H "$X" \
+echo -n "T1_user -> tkt saved objects: "
+curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "T1_user:<TENANT1_PASSWORD>" -H "$X" \
   "$KB/s/tkt/api/saved_objects/_find?type=dashboard&per_page=1"
-echo -n "tkt_user -> greencircle saved objects: "
-curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "tkt_user:<TENANT2_PASSWORD>" -H "$X" \
+echo -n "T2_user -> greencircle saved objects: "
+curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "T2_user:<TENANT2_PASSWORD>" -H "$X" \
   "$KB/s/greencircle/api/saved_objects/_find?type=dashboard&per_page=1"
 
 sec "END"

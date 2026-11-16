@@ -105,7 +105,7 @@ cat > /tmp/user_greencircle.json <<'EOF'
   "password": "<TENANT1_PASSWORD>",
   "roles": ["greencircle"],
   "full_name": "greencircle Tenant User",
-  "email": "greencircle_user@greencircle.local",
+  "email": "T1_user@greencircle.local",
   "metadata": {"tenant": "greencircle", "managed_by": "mssp-provisioning"}
 }
 EOF
@@ -114,13 +114,13 @@ cat > /tmp/user_tkt.json <<'EOF'
   "password": "<TENANT2_PASSWORD>",
   "roles": ["tkt"],
   "full_name": "TKT Tenant User",
-  "email": "tkt_user@tkt.local",
+  "email": "T2_user@tkt.local",
   "metadata": {"tenant": "tkt", "managed_by": "mssp-provisioning"}
 }
 EOF
 
-echo -n "greencircle_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/greencircle_user" -d @/tmp/user_greencircle.json; echo
-echo -n "tkt_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/tkt_user" -d @/tmp/user_tkt.json; echo
+echo -n "T1_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/T1_user" -d @/tmp/user_greencircle.json; echo
+echo -n "T2_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/T2_user" -d @/tmp/user_tkt.json; echo
 
 echo
 echo "### 3. Data views per space"
@@ -148,15 +148,15 @@ curl -s -u "$U" "$ES/_security/role/tkt" | python3 -m json.tool
 
 echo
 echo "### 5. Verify users"
-curl -s -u "$U" "$ES/_security/user/greencircle_user" | python3 -m json.tool
-curl -s -u "$U" "$ES/_security/user/tkt_user" | python3 -m json.tool
+curl -s -u "$U" "$ES/_security/user/T1_user" | python3 -m json.tool
+curl -s -u "$U" "$ES/_security/user/T2_user" | python3 -m json.tool
 
 echo
 echo "### 6. Verify spaces visible to each user"
-echo "--- greencircle_user spaces ---"
-curl -s -u "greencircle_user:<TENANT1_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
-echo "--- tkt_user spaces ---"
-curl -s -u "tkt_user:<TENANT2_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
+echo "--- T1_user spaces ---"
+curl -s -u "T1_user:<TENANT1_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
+echo "--- T2_user spaces ---"
+curl -s -u "T2_user:<TENANT2_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
 
 echo
 echo "### 7. Detection engine (should now be 200)"

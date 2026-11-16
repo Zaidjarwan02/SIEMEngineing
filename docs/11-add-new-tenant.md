@@ -8,8 +8,8 @@ The lab currently uses these names; the same pattern works for any new tenant:
 | Screenshot label | Kibana space | Data namespace | Role | User |
 |------------------|--------------|----------------|------|------|
 | **All Tenant** | `default` | *(shared, read-only)* | — | every tenant |
-| **Tenant 1** | `greencircle` | `greencircle` | `greencircle` | `greencircle_user` |
-| **Tenant 2** | `tkt` | `tkt` | `tkt` | `tkt_user` |
+| **Tenant 1** | `greencircle` | `greencircle` | `greencircle` | `T1_user` |
+| **Tenant 2** | `tkt` | `tkt` | `tkt` | `T2_user` |
 | *new tenant* | `<SPACE_ID>` | `<NAMESPACE>` | `<ROLE_NAME>` | `<USERNAME>` |
 
 ---
@@ -438,7 +438,7 @@ Always confirm the exact names before deleting. Deletion is not reversible.
 ## Appendix C — Why the tenant rule copies are scoped
 
 A detection rule runs with an API key derived from the user who enabled it. The
-tenant-space rules are enabled by `greencircle_user` / `tkt_user`, so their API keys can
+tenant-space rules are enabled by `T1_user` / `T2_user`, so their API keys can
 only read that tenant's namespace. This is deliberate: a tenant editing one of
 its own rules cannot make it query another tenant's data. The trade-off is that
 many prebuilt rules report `partial failure` because their index patterns

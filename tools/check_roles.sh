@@ -15,10 +15,10 @@ print('  indices:',[i.get('names') for i in d.get('indices',[])])
 " 2>&1
 done
 echo "=== spaces for tenants ==="
-for u in greencircle_user tkt_user; do
+for u in T1_user T2_user; do
   case "$u" in
-    greencircle_user) p='<TENANT1_PASSWORD>' ;;
-    tkt_user) p='<TENANT2_PASSWORD>' ;;
+    T1_user) p='<TENANT1_PASSWORD>' ;;
+    T2_user) p='<TENANT2_PASSWORD>' ;;
   esac
   echo -n "$u: "
   curl -s --max-time 20 -u "$u:$p" -H 'kbn-xsrf: true' "http://127.0.0.1:5601/api/spaces/space" \

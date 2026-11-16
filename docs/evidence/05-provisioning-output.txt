@@ -3,8 +3,8 @@ greencircle: {"role":{"created":false}}
 tkt:         {"role":{"created":false}}
 
 ### 2. Users
-greencircle_user: {"created":true}
-tkt_user: {"created":true}
+T1_user: {"created":true}
+T2_user: {"created":true}
 
 ### 3. Data views per space
 greencircle     greencircle Logs             -> {"data_view":{"id":"5704fb21-bd59-4aca-8b48-3613db451ff8","version":"WzkxNiw3XQ==","title":"logs-*-greencircle*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"greencircle Logs","allowHidden":false,"fields":{},"name
@@ -130,13 +130,13 @@ tkt        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a-411
 
 ### 5. Verify users
 {
-    "greencircle_user": {
-        "username": "greencircle_user",
+    "T1_user": {
+        "username": "T1_user",
         "roles": [
             "greencircle"
         ],
         "full_name": "greencircle Tenant User",
-        "email": "greencircle_user@greencircle.local",
+        "email": "T1_user@greencircle.local",
         "metadata": {
             "managed_by": "mssp-provisioning",
             "tenant": "greencircle"
@@ -145,13 +145,13 @@ tkt        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a-411
     }
 }
 {
-    "tkt_user": {
-        "username": "tkt_user",
+    "T2_user": {
+        "username": "T2_user",
         "roles": [
             "tkt"
         ],
         "full_name": "TKT Tenant User",
-        "email": "tkt_user@tkt.local",
+        "email": "T2_user@tkt.local",
         "metadata": {
             "managed_by": "mssp-provisioning",
             "tenant": "tkt"
@@ -161,9 +161,9 @@ tkt        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a-411
 }
 
 ### 6. Verify spaces visible to each user
---- greencircle_user spaces ---
+--- T1_user spaces ---
 [{"id":"greencircle","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
---- tkt_user spaces ---
+--- T2_user spaces ---
 [{"id":"tkt","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
 
 ### 7. Detection engine (should now be 200)

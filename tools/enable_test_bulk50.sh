@@ -3,7 +3,7 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
 X='kbn-xsrf: true'
 J='Content-Type: application/json'
 
@@ -24,7 +24,7 @@ PY
 N=$(python3 -c "import json;print(len(json.load(open('/tmp/bulk50.json'))['data']))")
 echo "rules fetched: $N"
 
-echo "=== bulk enable 50 as greencircle_user (timed) ==="
+echo "=== bulk enable 50 as T1_user (timed) ==="
 START=$(date +%s)
 curl -s -o /tmp/bulk50_en.json -w 'http=%{http_code} time=%{time_total}s\n' --max-time 500 -u "$TENANT1" -H "$X" -H "$J" \
   -X POST "$KB/s/greencircle/api/detection_engine/rules/_bulk_action" \
@@ -36,7 +36,7 @@ echo "=== enabled count ==="
 curl -s --max-time 60 -u "$ADMIN" -H "$X" "$KB/s/greencircle/api/detection_engine/rules/_find?per_page=1&filter=alert.attributes.enabled:true" \
   | python3 -c "import sys,json;print(json.load(sys.stdin).get('total'))" 2>/dev/null
 
-echo "=== bulk disable 50 as greencircle_user ==="
+echo "=== bulk disable 50 as T1_user ==="
 START=$(date +%s)
 curl -s -o /tmp/bulk50_dis.json -w 'http=%{http_code} time=%{time_total}s\n' --max-time 500 -u "$TENANT1" -H "$X" -H "$J" \
   -X POST "$KB/s/greencircle/api/detection_engine/rules/_bulk_action" \

@@ -9,8 +9,8 @@ installed in **all three Kibana spaces**:
 | Space | Rules installed | Created by | Enabled |
 |-------|-----------------|------------|---------|
 | `default` (shared general) | 2,062 | `elastic` | **2,062** |
-| `greencircle` (Tenant 1) | 2,062 | `greencircle_user` | **2,062** |
-| `tkt` (TKT) | 2,062 | `tkt_user` | **2,062** |
+| `greencircle` (Tenant 1) | 2,062 | `T1_user` | **2,062** |
+| `tkt` (TKT) | 2,062 | `T2_user` | **2,062** |
 
 Package: `security_detection_engine` **v8.19.37** (license `basic`).
 Package total: 2,157 rules; **2,062 installable on the Basic license** (95 require a
@@ -42,7 +42,7 @@ and rules in **Default + tenant spaces**:
   namespace. A tenant editing its own rule cannot make it query another tenant's data.
 
 Installing the tenant copies as `elastic` would have produced rules whose API keys can
-read every index; that is why the install was done as `greencircle_user` / `tkt_user`.
+read every index; that is why the install was done as `T1_user` / `T2_user`.
 
 ## Enabled state: all 2,062 rules in every space
 
@@ -51,8 +51,8 @@ All 2,062 rules in all three spaces are **enabled**:
 | Space | Enabled | API key owner | Alert index |
 |-------|---------|---------------|-------------|
 | `default` | 2,062 / 2,062 | `elastic` (global) | `.alerts-security.alerts-default*` |
-| `greencircle` | 2,062 / 2,062 | `greencircle_user` (tenant-scoped) | `.alerts-security.alerts-greencircle*` |
-| `tkt` | 2,062 / 2,062 | `tkt_user` (tenant-scoped) | `.alerts-security.alerts-tkt*` |
+| `greencircle` | 2,062 / 2,062 | `T1_user` (tenant-scoped) | `.alerts-security.alerts-greencircle*` |
+| `tkt` | 2,062 / 2,062 | `T2_user` (tenant-scoped) | `.alerts-security.alerts-tkt*` |
 
 Total detection-engine API keys after enablement: **6,236**.
 
@@ -79,7 +79,7 @@ enabled count. The API also accepts a query form:
 Individual rules can still be toggled in the UI or with:
 
 ```bash
-curl -u "greencircle_user:<password>" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' \
+curl -u "T1_user:<password>" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' \
   -X PATCH "http://192.168.1.212:5601/s/greencircle/api/detection_engine/rules" \
   -d '{"rule_id":"<rule_id>","enabled":true}'
 ```
@@ -158,9 +158,9 @@ If a tenant space shows 0 rules, re-run:
 
 ```bash
 python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
-  "bash /tmp/dr_sync_space.sh greencircle greencircle_user:<password>"
+  "bash /tmp/dr_sync_space.sh greencircle T1_user:<password>"
 python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
-  "bash /tmp/dr_sync_space.sh tkt tkt_user:<password>"
+  "bash /tmp/dr_sync_space.sh tkt T2_user:<password>"
 ```
 
 ## Verification
@@ -169,7 +169,7 @@ python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
 
 - 2,062 rules in each space; **2,062 enabled in each space**.
 - Tenant-space rules show `created_by` = the tenant user.
-- `greencircle_user` / `tkt_user` can query their own space rules (`200`).
+- `T1_user` / `T2_user` can query their own space rules (`200`).
 - Cross-tenant rule queries are `403`.
 - Tenants can read the shared Default rule set (`200`, 2,062 rules).
 - A tenant cannot fetch a foreign rule through the Default space (`404`) and cannot

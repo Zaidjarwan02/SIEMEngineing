@@ -3,8 +3,8 @@ set +e
 export LC_ALL=C
 ES="http://127.0.0.1:9200"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 J='Content-Type: application/json'
 code() { curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$@"; }
 hits() { curl -s --max-time 10 "$@" | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('hits',{}).get('total',{}).get('value','ERR'))" 2>/dev/null || echo ERR; }

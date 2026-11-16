@@ -9,8 +9,8 @@ set +e
 export LC_ALL=C
 ES="http://127.0.0.1:9200"; KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 J='Content-Type: application/json'
 X='kbn-xsrf: true'
 PASS=0; FAIL=0
@@ -28,42 +28,42 @@ echo "created logs-/metrics- test indices for both tenants"
 
 echo
 echo "=========== ELASTICSEARCH: WILDCARD NAMESPACE ISOLATION ==========="
-res 200 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*/_search")" "greencircle_user searches own logs namespace"
-res 403 "$(code -u "$TENANT1" "$ES/logs-*-tkt*/_search")"          "greencircle_user blocked from tkt logs namespace"
-res 403 "$(code -u "$TENANT1" "$ES/metrics-*-tkt*/_search")"       "greencircle_user blocked from tkt metrics namespace"
-res 403 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "greencircle_user blocked when mixing both namespaces"
-res 200 "$(code -u "$TKT" "$ES/logs-*-tkt*/_search")"          "tkt_user searches own logs namespace"
-res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*/_search")"  "tkt_user blocked from greencircle logs namespace"
-res 403 "$(code -u "$TKT" "$ES/metrics-*-greencircle*/_search")" "tkt_user blocked from greencircle metrics namespace"
-res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "tkt_user blocked when mixing both namespaces"
+res 200 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*/_search")" "T1_user searches own logs namespace"
+res 403 "$(code -u "$TENANT1" "$ES/logs-*-tkt*/_search")"          "T1_user blocked from tkt logs namespace"
+res 403 "$(code -u "$TENANT1" "$ES/metrics-*-tkt*/_search")"       "T1_user blocked from tkt metrics namespace"
+res 403 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "T1_user blocked when mixing both namespaces"
+res 200 "$(code -u "$TKT" "$ES/logs-*-tkt*/_search")"          "T2_user searches own logs namespace"
+res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*/_search")"  "T2_user blocked from greencircle logs namespace"
+res 403 "$(code -u "$TKT" "$ES/metrics-*-greencircle*/_search")" "T2_user blocked from greencircle metrics namespace"
+res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "T2_user blocked when mixing both namespaces"
 
 echo
 echo "=========== ELASTICSEARCH: CROSS-TENANT DOC CONTENT ==========="
 G=$(body -u "$TENANT1" "$ES/logs-*-tkt*/_search?q=SECRET")
 T=$(body -u "$TKT" "$ES/logs-*-greencircle*/_search?q=SECRET")
-echo "greencircle_user tkt query result: $(echo "$G" | head -c 200)"
-echo "tkt_user greencircle query result: $(echo "$T" | head -c 200)"
-echo "$G" | grep -q 'logs-test-tkt' && { echo "FAIL  greencircle_user saw tkt document"; FAIL=$((FAIL+1)); } || { echo "PASS  greencircle_user saw no tkt document"; PASS=$((PASS+1)); }
-echo "$T" | grep -q 'logs-test-greencircle' && { echo "FAIL  tkt_user saw greencircle document"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user saw no greencircle document"; PASS=$((PASS+1)); }
+echo "T1_user tkt query result: $(echo "$G" | head -c 200)"
+echo "T2_user greencircle query result: $(echo "$T" | head -c 200)"
+echo "$G" | grep -q 'logs-test-tkt' && { echo "FAIL  T1_user saw tkt document"; FAIL=$((FAIL+1)); } || { echo "PASS  T1_user saw no tkt document"; PASS=$((PASS+1)); }
+echo "$T" | grep -q 'logs-test-greencircle' && { echo "FAIL  T2_user saw greencircle document"; FAIL=$((FAIL+1)); } || { echo "PASS  T2_user saw no greencircle document"; PASS=$((PASS+1)); }
 
 echo
 echo "=========== KIBANA: SPACE-SCOPED SAVED OBJECT ACCESS ==========="
 # Listing dashboards in a space requires privileges in that space.
-res 200 "$(code -u "$TENANT1" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "greencircle_user lists saved objects in own space"
-res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "greencircle_user blocked from tkt space saved objects"
-res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "greencircle_user blocked from default space saved objects"
-res 200 "$(code -u "$TKT" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "tkt_user lists saved objects in own space"
-res 403 "$(code -u "$TKT" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "tkt_user blocked from greencircle space saved objects"
-res 403 "$(code -u "$TKT" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "tkt_user blocked from default space saved objects"
+res 200 "$(code -u "$TENANT1" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "T1_user lists saved objects in own space"
+res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "T1_user blocked from tkt space saved objects"
+res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "T1_user blocked from default space saved objects"
+res 200 "$(code -u "$TKT" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "T2_user lists saved objects in own space"
+res 403 "$(code -u "$TKT" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "T2_user blocked from greencircle space saved objects"
+res 403 "$(code -u "$TKT" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "T2_user blocked from default space saved objects"
 
 echo
 echo "=========== KIBANA: SPACE LIST VISIBILITY ==========="
 GS=$(body -u "$TENANT1" -H "$X" "$KB/api/spaces/space")
 TS=$(body -u "$TKT" -H "$X" "$KB/api/spaces/space")
-echo "greencircle_user spaces: $GS"
-echo "tkt_user spaces: $TS"
-echo "$GS" | grep -q '"id":"tkt"' && { echo "FAIL  greencircle_user sees tkt space"; FAIL=$((FAIL+1)); } || { echo "PASS  greencircle_user does not see tkt space"; PASS=$((PASS+1)); }
-echo "$TS" | grep -q '"id":"greencircle"' && { echo "FAIL  tkt_user sees greencircle space"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user does not see greencircle space"; PASS=$((PASS+1)); }
+echo "T1_user spaces: $GS"
+echo "T2_user spaces: $TS"
+echo "$GS" | grep -q '"id":"tkt"' && { echo "FAIL  T1_user sees tkt space"; FAIL=$((FAIL+1)); } || { echo "PASS  T1_user does not see tkt space"; PASS=$((PASS+1)); }
+echo "$TS" | grep -q '"id":"greencircle"' && { echo "FAIL  T2_user sees greencircle space"; FAIL=$((FAIL+1)); } || { echo "PASS  T2_user does not see greencircle space"; PASS=$((PASS+1)); }
 
 echo
 echo "=========== CLEANUP ==========="

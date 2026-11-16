@@ -4,7 +4,7 @@ export LC_ALL=C
 ES="http://127.0.0.1:9200"
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
 X='kbn-xsrf: true'
 J='Content-Type: application/json'
 
@@ -12,7 +12,7 @@ RID=$(curl -s --max-time 90 -u "$ADMIN" -H "$X" "$KB/s/greencircle/api/detection
   | python3 -c "import sys,json;d=json.load(sys.stdin);print(d['data'][0]['rule_id'])" 2>/dev/null)
 echo "chosen rule_id=$RID"
 
-echo "=== enable as greencircle_user ==="
+echo "=== enable as T1_user ==="
 curl -s -o /tmp/greencircle_enable_one.json -w 'http=%{http_code}\n' --max-time 60 -u "$TENANT1" -H "$X" -H "$J" \
   -X PATCH "$KB/s/greencircle/api/detection_engine/rules" -d "{\"rule_id\":\"$RID\",\"enabled\":true}"
 head -c 600 /tmp/greencircle_enable_one.json; echo

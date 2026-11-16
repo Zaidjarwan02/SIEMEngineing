@@ -35,8 +35,8 @@ security gaps that still need attention before this could be considered producti
 
 | Tenant | Kibana Space | Data namespace | Role | User |
 |--------|--------------|----------------|------|------|
-| Tenant 1 (`greencircle`) | `greencircle` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` | `greencircle` | `greencircle_user` |
-| Tenant 2 (`TKT`) | `tkt` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` | `tkt` | `tkt_user` |
+| Tenant 1 (`greencircle`) | `greencircle` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` | `greencircle` | `T1_user` |
+| Tenant 2 (`TKT`) | `tkt` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` | `tkt` | `T2_user` |
 
 Each tenant user has **full read/write inside its own namespace** and **no visibility of the
 other tenant** — verified at both the Elasticsearch data layer and the Kibana UI layer.

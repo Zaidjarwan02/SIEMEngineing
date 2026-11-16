@@ -84,18 +84,18 @@ Cluster: greencircle.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
   - A scheduled task was created | 92a6faf5-78ec-4e25-bea1-73bacc9b59d9 | 2026-11-12T06:21:44.706Z | sev=low | risk=21 | status=open | spaces=['default']
 
 ========== 8. TENANT ACCESS MATRIX ==========
-  greencircle_user  default alert index read: HTTP 200
-  greencircle_user  tkt alert index read (must be 403): HTTP 403
-  greencircle_user  greencircle alert index read: HTTP 200
-  tkt_user  default alert index read: HTTP 200
-  tkt_user  greencircle alert index read (must be 403): HTTP 403
-  tkt_user  tkt alert index read: HTTP 200
-  greencircle_user  default alert write (must be 403): HTTP 403
-  greencircle_user  Kibana default alert search: HTTP 200
-  greencircle_user  Kibana default alerts page: HTTP 200
-  tkt_user  default alert write (must be 403): HTTP 403
-  tkt_user  Kibana default alert search: HTTP 200
-  tkt_user  Kibana default alerts page: HTTP 200
+  T1_user  default alert index read: HTTP 200
+  T1_user  tkt alert index read (must be 403): HTTP 403
+  T1_user  greencircle alert index read: HTTP 200
+  T2_user  default alert index read: HTTP 200
+  T2_user  greencircle alert index read (must be 403): HTTP 403
+  T2_user  tkt alert index read: HTTP 200
+  T1_user  default alert write (must be 403): HTTP 403
+  T1_user  Kibana default alert search: HTTP 200
+  T1_user  Kibana default alerts page: HTTP 200
+  T2_user  default alert write (must be 403): HTTP 403
+  T2_user  Kibana default alert search: HTTP 200
+  T2_user  Kibana default alerts page: HTTP 200
 
 ========== 9. TENANT ROLE DEFINITIONS ==========
   --- greencircle ---
@@ -116,17 +116,17 @@ Cluster: greencircle.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
     app: kibana-.kibana ['space_read'] -> ['space:default']
 
 ========== 10. TENANT SPACE VISIBILITY ==========
-  greencircle_user: ['default', 'greencircle']
-  tkt_user: ['default', 'tkt']
+  T1_user: ['default', 'greencircle']
+  T2_user: ['default', 'tkt']
 
 ========== 11. RULE OWNERSHIP SAMPLE ==========
   --- greencircle ---
-    created_by=greencircle_user updated_by=greencircle_user enabled=True | Threat Intel IP Address Indicator Match
-    created_by=greencircle_user updated_by=greencircle_user enabled=True | Elastic Defend and Network Security Alerts Correlation
-    created_by=greencircle_user updated_by=greencircle_user enabled=True | Multiple Alerts Involving a User
+    created_by=T1_user updated_by=T1_user enabled=True | Threat Intel IP Address Indicator Match
+    created_by=T1_user updated_by=T1_user enabled=True | Elastic Defend and Network Security Alerts Correlation
+    created_by=T1_user updated_by=T1_user enabled=True | Multiple Alerts Involving a User
   --- tkt ---
-    created_by=tkt_user updated_by=tkt_user enabled=True | AWS Bedrock Detected Multiple Attempts to use Denied Models by a Single User
-    created_by=tkt_user updated_by=tkt_user enabled=True | Potential Persistence via File Modification
-    created_by=tkt_user updated_by=tkt_user enabled=True | Process Created with a Duplicated Token
+    created_by=T2_user updated_by=T2_user enabled=True | AWS Bedrock Detected Multiple Attempts to use Denied Models by a Single User
+    created_by=T2_user updated_by=T2_user enabled=True | Potential Persistence via File Modification
+    created_by=T2_user updated_by=T2_user enabled=True | Process Created with a Duplicated Token
 
 ========== END ==========

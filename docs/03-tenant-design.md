@@ -13,7 +13,7 @@ Kibana UI layer.
                         │                   Elasticsearch                   │
                         │              cluster greencircle.SIEM             │
                         │                                                   │
-  greencircle_user ────►│  logs-*-greencircle*                              │
+  T1_user          ────►│  logs-*-greencircle*                              │
   (Tenant 1)            │  metrics-*-greencircle*                           │
                         │  traces-*-greencircle*                            │
                         │  synthetics-*-greencircle*                        │
@@ -21,7 +21,7 @@ Kibana UI layer.
                         │  greencircle-*                                    │
                         │  .alerts-security.alerts-greencircle*             │
                         │                                                   │
-  tkt_user          ───►│  logs-*-tkt*                                      │
+  T2_user          ────►│  logs-*-tkt*                                      │
   (Tenant 2)            │  metrics-*-tkt*                                   │
                         │  traces-*-tkt*                                    │
                         │  synthetics-*-tkt*                                │
@@ -53,8 +53,8 @@ Isolation is enforced in **three independent layers**:
 
 | Tenant | Space ID | Space name | ES role | User | Index / data-stream patterns |
 |--------|----------|------------|---------|------|------------------------------|
-| Tenant 1 (`greencircle`) | `greencircle` | Tenant 1 | `greencircle` | `greencircle_user` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` |
-| Tenant 2 (`TKT`) | `tkt` | Tenant 2 | `tkt` | `tkt_user` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` |
+| Tenant 1 (`greencircle`) | `greencircle` | Tenant 1 | `greencircle` | `T1_user` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` |
+| Tenant 2 (`TKT`) | `tkt` | Tenant 2 | `tkt` | `T2_user` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` |
 
 ## Role definitions (effective)
 

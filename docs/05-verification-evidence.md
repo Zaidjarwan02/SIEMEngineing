@@ -35,14 +35,14 @@ Scripts:
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user reads own data stream | 200 | 200 | PASS |
-| greencircle_user reads other data stream | 0 hits | 0 | PASS |
-| greencircle_user writes own data stream | 201 | 201 | PASS |
-| greencircle_user writes other data stream | 403 | 403 | PASS |
-| tkt_user reads own data stream | 200 | 200 | PASS |
-| tkt_user reads other data stream | 0 hits | 0 | PASS |
-| tkt_user writes own data stream | 201 | 201 | PASS |
-| tkt_user writes other data stream | 403 | 403 | PASS |
+| T1_user reads own data stream | 200 | 200 | PASS |
+| T1_user reads other data stream | 0 hits | 0 | PASS |
+| T1_user writes own data stream | 201 | 201 | PASS |
+| T1_user writes other data stream | 403 | 403 | PASS |
+| T2_user reads own data stream | 200 | 200 | PASS |
+| T2_user reads other data stream | 0 hits | 0 | PASS |
+| T2_user writes own data stream | 201 | 201 | PASS |
+| T2_user writes other data stream | 403 | 403 | PASS |
 
 ### 2. Wildcard namespace isolation (8 checks)
 
@@ -50,14 +50,14 @@ Counts are filtered by a per-run `run_id`, so they are exact regardless of exist
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user sees own logs | 2 run docs | 2 | PASS |
-| greencircle_user sees own metrics | 1 run doc | 1 | PASS |
-| greencircle_user sees tkt logs | 0 | 0 | PASS |
-| greencircle_user sees tkt metrics | 0 | 0 | PASS |
-| tkt_user sees own logs | 2 run docs | 2 | PASS |
-| tkt_user sees own metrics | 1 run doc | 1 | PASS |
-| tkt_user sees greencircle logs | 0 | 0 | PASS |
-| tkt_user sees greencircle metrics | 0 | 0 | PASS |
+| T1_user sees own logs | 2 run docs | 2 | PASS |
+| T1_user sees own metrics | 1 run doc | 1 | PASS |
+| T1_user sees tkt logs | 0 | 0 | PASS |
+| T1_user sees tkt metrics | 0 | 0 | PASS |
+| T2_user sees own logs | 2 run docs | 2 | PASS |
+| T2_user sees own metrics | 1 run doc | 1 | PASS |
+| T2_user sees greencircle logs | 0 | 0 | PASS |
+| T2_user sees greencircle metrics | 0 | 0 | PASS |
 
 > **Why 0 hits instead of 403:** Elasticsearch resolves a wildcard to the concrete indices
 > the user is allowed to see. Unauthorized indices are silently dropped from the resolved
@@ -68,14 +68,14 @@ Counts are filtered by a per-run `run_id`, so they are exact regardless of exist
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user blocked from tkt alert index | 403 | 403 | PASS |
-| tkt_user blocked from greencircle alert index | 403 | 403 | PASS |
-| greencircle_user reads shared Default alerts | 200 | 200 | PASS |
-| tkt_user reads shared Default alerts | 200 | 200 | PASS |
-| greencircle_user writes shared Default alerts | 403 | 403 | PASS |
-| tkt_user writes shared Default alerts | 403 | 403 | PASS |
-| greencircle_user searches Default alerts in Kibana | 200 | 200 | PASS |
-| tkt_user searches Default alerts in Kibana | 200 | 200 | PASS |
+| T1_user blocked from tkt alert index | 403 | 403 | PASS |
+| T2_user blocked from greencircle alert index | 403 | 403 | PASS |
+| T1_user reads shared Default alerts | 200 | 200 | PASS |
+| T2_user reads shared Default alerts | 200 | 200 | PASS |
+| T1_user writes shared Default alerts | 403 | 403 | PASS |
+| T2_user writes shared Default alerts | 403 | 403 | PASS |
+| T1_user searches Default alerts in Kibana | 200 | 200 | PASS |
+| T2_user searches Default alerts in Kibana | 200 | 200 | PASS |
 
 ### 4. Kibana space-list visibility (4 checks)
 
@@ -84,30 +84,30 @@ tenant's space.
 
 | Test | Result |
 |------|--------|
-| greencircle_user sees shared `default` | PASS |
-| greencircle_user does not see `tkt` | PASS |
-| tkt_user sees shared `default` | PASS |
-| tkt_user does not see `greencircle` | PASS |
+| T1_user sees shared `default` | PASS |
+| T1_user does not see `tkt` | PASS |
+| T2_user sees shared `default` | PASS |
+| T2_user does not see `greencircle` | PASS |
 
 Actual responses:
 
 ```json
-greencircle_user: [{"id":"default", ...}, {"id":"greencircle", "name":"greencircle", ...}]
-tkt_user: [{"id":"default", ...}, {"id":"tkt",    "name":"tkt", ...}]
+T1_user: [{"id":"default", ...}, {"id":"greencircle", "name":"greencircle", ...}]
+T2_user: [{"id":"default", ...}, {"id":"tkt",    "name":"tkt", ...}]
 ```
 
 ### 5. Kibana cross-space saved objects (8 checks)
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user sees own dashboards | > 0 | yes | PASS |
-| greencircle_user sees tkt dashboards | 0 | 0 | PASS |
-| greencircle_user can read shared Default space | 200 | 200 | PASS |
-| greencircle_user sees shared Default dashboards | > 0 | yes | PASS |
-| tkt_user sees own dashboards | > 0 | yes | PASS |
-| tkt_user sees greencircle dashboards | 0 | 0 | PASS |
-| tkt_user can read shared Default space | 200 | 200 | PASS |
-| tkt_user sees shared Default dashboards | > 0 | yes | PASS |
+| T1_user sees own dashboards | > 0 | yes | PASS |
+| T1_user sees tkt dashboards | 0 | 0 | PASS |
+| T1_user can read shared Default space | 200 | 200 | PASS |
+| T1_user sees shared Default dashboards | > 0 | yes | PASS |
+| T2_user sees own dashboards | > 0 | yes | PASS |
+| T2_user sees greencircle dashboards | 0 | 0 | PASS |
+| T2_user can read shared Default space | 200 | 200 | PASS |
+| T2_user sees shared Default dashboards | > 0 | yes | PASS |
 
 > Kibana's saved-object `_find` is space-filtered: querying the other tenant's space
 > returns `200` with `total: 0`, not `403`. The data is not exposed. The Default space is
@@ -117,17 +117,17 @@ tkt_user: [{"id":"default", ...}, {"id":"tkt",    "name":"tkt", ...}]
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user creates dashboard in own space | 200 | 200 | PASS |
-| greencircle_user creates dashboard in tkt space | 403 | 403 | PASS |
-| greencircle_user creates dashboard in default space | 403 | 403 | PASS |
-| tkt_user creates dashboard in own space | 200 | 200 | PASS |
-| tkt_user creates dashboard in greencircle space | 403 | 403 | PASS |
-| tkt_user creates dashboard in default space | 403 | 403 | PASS |
-| greencircle_user direct GET of a known tkt object | 403 | 403 | PASS |
-| greencircle_user direct DELETE of a known tkt object | 403 | 403 | PASS |
-| greencircle_user updates a shared Default object | 403 | 403 | PASS |
-| greencircle_user deletes a shared Default object | 403 | 403 | PASS |
-| tkt_user deletes a shared Default object | 403 | 403 | PASS |
+| T1_user creates dashboard in own space | 200 | 200 | PASS |
+| T1_user creates dashboard in tkt space | 403 | 403 | PASS |
+| T1_user creates dashboard in default space | 403 | 403 | PASS |
+| T2_user creates dashboard in own space | 200 | 200 | PASS |
+| T2_user creates dashboard in greencircle space | 403 | 403 | PASS |
+| T2_user creates dashboard in default space | 403 | 403 | PASS |
+| T1_user direct GET of a known tkt object | 403 | 403 | PASS |
+| T1_user direct DELETE of a known tkt object | 403 | 403 | PASS |
+| T1_user updates a shared Default object | 403 | 403 | PASS |
+| T1_user deletes a shared Default object | 403 | 403 | PASS |
+| T2_user deletes a shared Default object | 403 | 403 | PASS |
 
 The Default-space write checks use a disposable dashboard created by `elastic` and removed
 by `elastic` after the assertions, so no shared content is touched.
@@ -136,12 +136,12 @@ by `elastic` after the assertions, so no shared content is touched.
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| greencircle_user reads security users | 403 | 403 | PASS |
-| greencircle_user reads cluster health | 403 | 403 | PASS |
-| greencircle_user creates an index outside its namespace | 403 | 403 | PASS |
-| tkt_user reads security users | 403 | 403 | PASS |
-| tkt_user reads cluster health | 403 | 403 | PASS |
-| tkt_user creates an index outside its namespace | 403 | 403 | PASS |
+| T1_user reads security users | 403 | 403 | PASS |
+| T1_user reads cluster health | 403 | 403 | PASS |
+| T1_user creates an index outside its namespace | 403 | 403 | PASS |
+| T2_user reads security users | 403 | 403 | PASS |
+| T2_user reads cluster health | 403 | 403 | PASS |
+| T2_user creates an index outside its namespace | 403 | 403 | PASS |
 
 ## Detection-rule isolation and enablement (15 checks)
 
@@ -152,25 +152,25 @@ by `elastic` after the assertions, so no shared content is touched.
 | Default space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
 | `greencircle` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
 | `tkt` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
-| greencircle_user can query own space rules | 200 | 200 | PASS |
-| greencircle_user blocked from tkt rules | 403 | 403 | PASS |
-| greencircle_user can read shared Default rules | 200 | 200 | PASS |
-| greencircle_user sees shared Default rule set | 2,062 | 2,062 | PASS |
-| tkt_user can query own space rules | 200 | 200 | PASS |
-| tkt_user blocked from greencircle rules | 403 | 403 | PASS |
-| tkt_user can read shared Default rules | 200 | 200 | PASS |
-| tkt_user sees shared Default rule set | 2,062 | 2,062 | PASS |
-| greencircle_user direct GET of a tkt rule | 403 | 403 | PASS |
-| greencircle_user direct DELETE of a tkt rule | 403 | 403 | PASS |
-| greencircle_user cannot fetch a tkt rule via Default | 404 | 404 | PASS |
-| greencircle_user cannot create a rule in shared Default | 403 | 403 | PASS |
+| T1_user can query own space rules | 200 | 200 | PASS |
+| T1_user blocked from tkt rules | 403 | 403 | PASS |
+| T1_user can read shared Default rules | 200 | 200 | PASS |
+| T1_user sees shared Default rule set | 2,062 | 2,062 | PASS |
+| T2_user can query own space rules | 200 | 200 | PASS |
+| T2_user blocked from greencircle rules | 403 | 403 | PASS |
+| T2_user can read shared Default rules | 200 | 200 | PASS |
+| T2_user sees shared Default rule set | 2,062 | 2,062 | PASS |
+| T1_user direct GET of a tkt rule | 403 | 403 | PASS |
+| T1_user direct DELETE of a tkt rule | 403 | 403 | PASS |
+| T1_user cannot fetch a tkt rule via Default | 404 | 404 | PASS |
+| T1_user cannot create a rule in shared Default | 403 | 403 | PASS |
 
 ## Login-flow verification
 
 The real Kibana login API was exercised with each user's credentials (not just Basic auth
 on Elasticsearch):
 
-| Check | greencircle_user | tkt_user |
+| Check | T1_user | T2_user |
 |-------|----------|----------|
 | `POST /internal/security/login` | `200 {"location":"/"}` | `200 {"location":"/"}` |
 | `GET /` redirect | `/spaces/space_selector` | `/spaces/space_selector` |
@@ -188,7 +188,7 @@ their own space. Access to the other tenant's space remains `403`.
 
 | Test | Result |
 |------|--------|
-| `greencircle_user` with wrong password | `401` |
+| `T1_user` with wrong password | `401` |
 | unknown user | `401` |
 
 ## Final state after verification

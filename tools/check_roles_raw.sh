@@ -8,8 +8,8 @@ for r in greencircle tkt; do
   echo
 done
 echo "=== tenant users ==="
-curl -s -u "$ADMIN" "$ES/_security/user/greencircle_user" | head -c 800; echo
-curl -s -u "$ADMIN" "$ES/_security/user/tkt_user" | head -c 800; echo
+curl -s -u "$ADMIN" "$ES/_security/user/T1_user" | head -c 800; echo
+curl -s -u "$ADMIN" "$ES/_security/user/T2_user" | head -c 800; echo
 echo "=== temp files left from failed run ==="
 ls -la /tmp/role_*.json 2>/dev/null
 for f in /tmp/role_greencircle_new.json /tmp/role_tkt_new.json; do

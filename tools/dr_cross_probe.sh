@@ -2,8 +2,8 @@
 set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 X='kbn-xsrf: true'
 probe() {
   name="$1"; cred="$2"; sp="$3"

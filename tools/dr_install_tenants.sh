@@ -4,8 +4,8 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 J='Content-Type: application/json'
 X='kbn-xsrf: true'
 sec() { printf '\n\n========== %s ==========\n' "$1"; }
@@ -40,13 +40,13 @@ print('summary:',d.get('summary'))
 sec "BEFORE: greencircle"
 status greencircle; count greencircle
 
-sec "INSTALL greencircle AS greencircle_user"
+sec "INSTALL greencircle AS T1_user"
 install_as "$TENANT1" greencircle "greencircle"
 
 sec "AFTER: greencircle"
 status greencircle; count greencircle
 
-sec "INSTALL tkt AS tkt_user"
+sec "INSTALL tkt AS T2_user"
 install_as "$TKT" tkt "TKT"
 
 sec "AFTER: tkt"

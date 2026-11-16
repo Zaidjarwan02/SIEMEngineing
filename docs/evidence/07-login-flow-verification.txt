@@ -1,4 +1,4 @@
-================ GREEN CIRCLE TENANT (greencircle_user) ================
+================ GREEN CIRCLE TENANT (T1_user) ================
 --- login POST ---
 http=200
 {"location":"/"}
@@ -17,7 +17,7 @@ http=200 redirect=
 --- GET /s/tkt/app/dashboards ---
 http=403 redirect=
 
-================ TKT TENANT (tkt_user) ================
+================ TKT TENANT (T2_user) ================
 --- login POST ---
 http=200
 {"location":"/"}
@@ -37,6 +37,6 @@ http=403 redirect=
 http=200 redirect=
 
 ================ NEGATIVE LOGIN TESTS ================
-greencircle_user wrong password -> http=401
+T1_user wrong password -> http=401
 unknown user -> http=401
 done

@@ -3,7 +3,7 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
 X='kbn-xsrf: true'
 J='Content-Type: application/json'
 
@@ -23,7 +23,7 @@ PY
 )
 echo "ids payload: $IDS"
 
-echo "=== bulk enable (3) as greencircle_user ==="
+echo "=== bulk enable (3) as T1_user ==="
 curl -s -o /tmp/bulk_enable3.json -w 'http=%{http_code}\n' --max-time 120 -u "$TENANT1" -H "$X" -H "$J" \
   -X POST "$KB/s/greencircle/api/detection_engine/rules/_bulk_action" \
   -d "{\"action\":\"enable\",\"ids\":$IDS}"
@@ -33,7 +33,7 @@ echo "=== enabled count ==="
 curl -s --max-time 60 -u "$ADMIN" -H "$X" "$KB/s/greencircle/api/detection_engine/rules/_find?per_page=1&filter=alert.attributes.enabled:true" \
   | python3 -c "import sys,json;print(json.load(sys.stdin).get('total'))" 2>/dev/null
 
-echo "=== bulk disable (3) as greencircle_user ==="
+echo "=== bulk disable (3) as T1_user ==="
 curl -s -o /tmp/bulk_disable3.json -w 'http=%{http_code}\n' --max-time 120 -u "$TENANT1" -H "$X" -H "$J" \
   -X POST "$KB/s/greencircle/api/detection_engine/rules/_bulk_action" \
   -d "{\"action\":\"disable\",\"ids\":$IDS}"

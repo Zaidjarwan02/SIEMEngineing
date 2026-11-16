@@ -4,7 +4,7 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
 J='Content-Type: application/json'
 X='kbn-xsrf: true'
 sec() { printf '\n\n========== %s ==========\n' "$1"; }
@@ -27,13 +27,13 @@ curl -s -u "$ADMIN" -H "$J" -X POST "http://127.0.0.1:9200/_security/_query/api_
   -d '{"query":{"match_all":{}},"size":0}' 2>/dev/null | head -c 400; echo
 
 sec "TENANT: prebuilt_rules status in own space"
-curl -s -o /dev/null -w 'greencircle_user status endpoint -> %{http_code}\n' --max-time 30 \
+curl -s -o /dev/null -w 'T1_user status endpoint -> %{http_code}\n' --max-time 30 \
   -u "$TENANT1" -H "$X" "$KB/s/greencircle/internal/detection_engine/prebuilt_rules/status"
 curl -s --max-time 30 -u "$TENANT1" -H "$X" \
   "$KB/s/greencircle/internal/detection_engine/prebuilt_rules/status" | head -c 400; echo
 
 sec "TENANT: prebuilt install perform in own space"
-curl -s -o /dev/null -w 'greencircle_user perform endpoint -> %{http_code}\n' --max-time 60 \
+curl -s -o /dev/null -w 'T1_user perform endpoint -> %{http_code}\n' --max-time 60 \
   -u "$TENANT1" -H "$X" -H "$J" -X POST \
   "$KB/s/greencircle/internal/detection_engine/prebuilt_rules/installation/_perform" \
   -d '{"mode":"ALL_RULES"}'
@@ -54,13 +54,13 @@ RULE='{
   "interval":"5m",
   "enabled":false
 }'
-curl -s -o /tmp/probe_rule.json -w 'greencircle_user create rule -> %{http_code}\n' --max-time 60 \
+curl -s -o /tmp/probe_rule.json -w 'T1_user create rule -> %{http_code}\n' --max-time 60 \
   -u "$TENANT1" -H "$X" -H "$J" -X POST "$KB/s/greencircle/api/detection_engine/rules" -d "$RULE"
 head -c 700 /tmp/probe_rule.json; echo
 
 sec "TENANT: rule import endpoint"
 printf '%s\n' "$RULE" > /tmp/probe_import.ndjson
-curl -s -o /tmp/probe_import.json -w 'greencircle_user import rules -> %{http_code}\n' --max-time 60 \
+curl -s -o /tmp/probe_import.json -w 'T1_user import rules -> %{http_code}\n' --max-time 60 \
   -u "$TENANT1" -H "$X" -X POST "$KB/s/greencircle/api/detection_engine/rules/_import?overwrite=true" \
   --data-binary @/tmp/probe_import.ndjson
 head -c 700 /tmp/probe_import.json; echo

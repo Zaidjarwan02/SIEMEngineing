@@ -17,8 +17,8 @@ This is the day-to-day guide for people logging in as a tenant user. Passwords l
 
 | Tenant | Username | Accessible spaces |
 |--------|----------|-------------------|
-| Tenant 1 (`greencircle`) | `greencircle_user` | `greencircle` (full) + `default` (read-only) |
-| Tenant 2 (`TKT`) | `tkt_user` | `tkt` (full) + `default` (read-only) |
+| Tenant 1 (`greencircle`) | `T1_user` | `greencircle` (full) + `default` (read-only) |
+| Tenant 2 (`TKT`) | `T2_user` | `tkt` (full) + `default` (read-only) |
 
 ## Logging in
 
@@ -138,7 +138,7 @@ Ask the administrator to run:
 
 ```bash
 curl -s -u 'elastic:<admin-password>' -H 'Content-Type: application/json' \
-  -X POST 'http://127.0.0.1:9200/_security/user/greencircle_user/_password' \
+  -X POST 'http://127.0.0.1:9200/_security/user/T1_user/_password' \
   -d '{"password":"NEW_PASSWORD"}'
 ```
 

@@ -49,8 +49,8 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
 
 
 ========== NON-SYSTEM USERS ==========
-greencircle_user     roles=['greencircle'] enabled=True metadata={}
-tkt_user     roles=['tkt'] enabled=True metadata={}
+T1_user     roles=['greencircle'] enabled=True metadata={}
+T2_user     roles=['tkt'] enabled=True metadata={}
 
 
 ========== CUSTOM ROLES ==========

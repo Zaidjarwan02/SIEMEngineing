@@ -50,8 +50,8 @@ Script: `tools/fix_kibana_keys.sh`.
 |---|--------|--------|
 | 4.1 | Rewrote role `greencircle` | `all` on `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*`; `all` on its own alert indices; `space_all` on `space:greencircle`; no cluster privileges |
 | 4.2 | Rewrote role `tkt` | Same model with `tkt` namespace and `space:tkt` |
-| 4.3 | Created user `greencircle_user` | Role `greencircle`; metadata `tenant=greencircle` |
-| 4.4 | Created user `tkt_user` | Role `tkt`; metadata `tenant=tkt` |
+| 4.3 | Created user `T1_user` | Role `greencircle`; metadata `tenant=greencircle` |
+| 4.4 | Created user `T2_user` | Role `tkt`; metadata `tenant=tkt` |
 | 4.5 | Created per-space data views | greencircle Logs/Metrics/Custom; TKT Logs/Metrics/Custom |
 
 Script: `tools/provision_tenants.sh`.
@@ -63,7 +63,7 @@ Output: `docs/evidence/05-provisioning-output.txt`.
 |---|--------|-------|
 | greencircle indices | `logs-*`, `metrics-*` (all tenants) | `*-greencircle*`, `greencircle-*`, own alert indices only |
 | tkt indices | `logs-*`, `metrics-*` (all tenants) | `*-tkt*`, `tkt-*`, own alert indices only |
-| Users | none | `greencircle_user`, `tkt_user` |
+| Users | none | `T1_user`, `T2_user` |
 | Data views | global `logs-*` / `metrics-*` | tenant-scoped per space |
 
 Fleet policies and existing spaces were left unchanged.
@@ -107,7 +107,7 @@ Final snapshot: `docs/evidence/08-final-state-snapshot.txt`.
 | 7.2 | Cloned the source repo for reference | `github.com/elastic/detection-rules` → `%TEMP%\dr-repo` on Windows (2,348 TOML rules) |
 | 7.3 | Installed the package | `POST /api/fleet/epm/packages/security_detection_engine {"force":true}` — 2,128 rules, 2,033 installable on Basic |
 | 7.4 | Installed rules into Default | `POST /internal/detection_engine/prebuilt_rules/installation/_perform {"mode":"ALL_RULES"}` — 2,033/2,033 in 109 s |
-| 7.5 | Installed rules into tenant spaces **as the tenant users** | `greencircle_user` → `greencircle`, `tkt_user` → `tkt`; keeps rule API keys tenant-scoped |
+| 7.5 | Installed rules into tenant spaces **as the tenant users** | `T1_user` → `greencircle`, `T2_user` → `tkt`; keeps rule API keys tenant-scoped |
 | 7.6 | Removed duplicates | An interrupted first `greencircle` install left 253 duplicate `rule_id`s; `tools/dr_dedup.sh` removed them → 2,033 unique |
 | 7.7 | Set a uniform disabled baseline | Disabled the auto-enabled immutable `Endpoint Security (Elastic Defend)` rule in all three spaces → 0 enabled |
 | 7.8 | Verified rule isolation | `tools/dr_verify_isolation.sh` — 9/9 at the time (own `200`, cross-space `403`) |
@@ -161,7 +161,7 @@ Default space showing all tenants' alerts, and documented new-tenant steps.
 | 10.1 | Discovered the bulk-action API | `POST /s/<space>/api/detection_engine/rules/_bulk_action` supports `{"action":"enable","ids":[...]}`; max **100 ids** per request |
 | 10.2 | Verified tenant enablement | A tenant user can enable a rule; Kibana creates the tenant-scoped API key automatically (API keys 51 → 52) |
 | 10.3 | Enabled Default rules | 2,062/2,062 in `default` as `elastic`; 21 batches, zero failures, ~126 s |
-| 10.4 | Enabled tenant rules | 2,062/2,062 in `greencircle` as `greencircle_user` (~141 s) and `tkt` as `tkt_user` (~138 s); zero batch failures |
+| 10.4 | Enabled tenant rules | 2,062/2,062 in `greencircle` as `T1_user` (~141 s) and `tkt` as `T2_user` (~138 s); zero batch failures |
 | 10.5 | Granted shared Default alert read | Added `read` + `view_index_metadata` on `.alerts-security.alerts-default*` and `.internal.alerts-security.alerts-default*` to both roles; tenants can view, not write |
 | 10.6 | Verified alert visibility | Both tenants can search/read Default alerts (`200`), cannot write them (`403`); cross-tenant alert indices remain `403`; the attempted acknowledgement updated 0 docs and the alert stayed `open` |
 | 10.7 | Captured state | 6,236 API keys; Default alert index 2 alerts; `tkt` 1 alert; execution status/failure reasons sampled |

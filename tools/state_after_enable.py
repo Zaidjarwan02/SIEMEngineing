@@ -14,8 +14,8 @@ import urllib.request
 ES = "http://192.168.1.212:9200"
 KB = "http://192.168.1.212:5601"
 ADMIN = ("elastic", "<ADMIN_PASSWORD>")
-TENANT1 = ("greencircle_user", "<TENANT1_PASSWORD>")
-TKT = ("tkt_user", "<TENANT2_PASSWORD>")
+TENANT1 = ("T1_user", "<TENANT1_PASSWORD>")
+TKT = ("T2_user", "<TENANT2_PASSWORD>")
 SPACES = ("default", "greencircle", "tkt")
 OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "evidence",
                    "12-rules-enabled-state.txt")
@@ -156,16 +156,16 @@ out("")
 
 out("========== 8. TENANT ACCESS MATRIX ==========")
 matrix = [
-    ("greencircle_user", TENANT1, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
-    ("greencircle_user", TENANT1, "tkt alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
-    ("greencircle_user", TENANT1, "greencircle alert index read", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
-    ("tkt_user", TKT, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
-    ("tkt_user", TKT, "greencircle alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
-    ("tkt_user", TKT, "tkt alert index read", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
+    ("T1_user", TENANT1, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
+    ("T1_user", TENANT1, "tkt alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
+    ("T1_user", TENANT1, "greencircle alert index read", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
+    ("T2_user", TKT, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
+    ("T2_user", TKT, "greencircle alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
+    ("T2_user", TKT, "tkt alert index read", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
 ]
 for user, auth, label, base, path in matrix:
     out(f"  {user:9s} {label}: HTTP {status_only(base, path, auth)}")
-for user, auth in (("greencircle_user", TENANT1), ("tkt_user", TKT)):
+for user, auth in (("T1_user", TENANT1), ("T2_user", TKT)):
     out(f"  {user:9s} default alert write (must be 403): HTTP "
         f"{status_only(ES, '/.alerts-security.alerts-default/_doc?refresh=true', auth, {'test': 'evidence'})}")
     out(f"  {user:9s} Kibana default alert search: HTTP "
@@ -188,7 +188,7 @@ for role in ("greencircle", "tkt"):
 out("")
 
 out("========== 10. TENANT SPACE VISIBILITY ==========")
-for user, auth in (("greencircle_user", TENANT1), ("tkt_user", TKT)):
+for user, auth in (("T1_user", TENANT1), ("T2_user", TKT)):
     _, d = call(KB, "/api/spaces/space", auth)
     out(f"  {user}: {sorted(s['id'] for s in d) if isinstance(d, list) else d}")
 out("")

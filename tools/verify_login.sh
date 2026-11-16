@@ -32,13 +32,13 @@ login() {
   echo
 }
 
-login greencircle_user '<TENANT1_PASSWORD>' 'GREEN CIRCLE TENANT'
-login tkt_user '<TENANT2_PASSWORD>' 'TKT TENANT'
+login T1_user '<TENANT1_PASSWORD>' 'GREEN CIRCLE TENANT'
+login T2_user '<TENANT2_PASSWORD>' 'TKT TENANT'
 
 echo "================ NEGATIVE LOGIN TESTS ================"
-curl -s -o /dev/null -w 'greencircle_user wrong password -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
+curl -s -o /dev/null -w 'T1_user wrong password -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
   -X POST "$KB/internal/security/login" \
-  -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"greencircle_user","password":"wrongpass"}}'
+  -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"T1_user","password":"wrongpass"}}'
 curl -s -o /dev/null -w 'unknown user -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
   -X POST "$KB/internal/security/login" \
   -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"nosuchuser","password":"whatever"}}'

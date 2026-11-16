@@ -9,8 +9,8 @@
 
 | Tenant | Username | Password | Space |
 |--------|----------|----------|-------|
-| Tenant 1 (`greencircle`) | `greencircle_user` | `<TENANT1_PASSWORD>` | `greencircle` |
-| Tenant 2 (`TKT`) | `tkt_user` | `<TENANT2_PASSWORD>` | `tkt` |
+| Tenant 1 (`greencircle`) | `T1_user` | `<TENANT1_PASSWORD>` | `greencircle` |
+| Tenant 2 (`TKT`) | `T2_user` | `<TENANT2_PASSWORD>` | `tkt` |
 
 ## Elasticsearch / Kibana administration
 

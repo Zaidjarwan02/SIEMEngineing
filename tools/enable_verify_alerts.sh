@@ -4,8 +4,8 @@ export LC_ALL=C
 ES="http://127.0.0.1:9200"
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 X='kbn-xsrf: true'
 J='Content-Type: application/json'
 
@@ -23,7 +23,7 @@ for h in d.get('hits',{}).get('hits',[]):
 
 echo
 echo "=== direct ES alert index access per tenant ==="
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=${pair%%:*}
   echo -n "  $u default internal count: "
   curl -s --max-time 30 -u "$pair" "$ES/.internal.alerts-security.alerts-default*/_count"; echo
@@ -34,7 +34,7 @@ for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>";
 done
 
 echo
-echo "=== Kibana alerts search endpoints as greencircle_user in default ==="
+echo "=== Kibana alerts search endpoints as T1_user in default ==="
 for ep in "api/detection_engine/signals/search" "internal/detection_engine/signals/search"; do
   echo -n "  /s/default/$ep: "
   curl -s -o /tmp/alert_search.json -w '%{http_code}\n' --max-time 60 -u "$TENANT1" -H "$X" -H "$J" \
@@ -44,7 +44,7 @@ done
 
 echo
 echo "=== Security alerts UI page as tenants ==="
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=${pair%%:*}
   echo -n "  $u /s/default/app/security/alerts: "
   curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "$pair" -H "$X" "$KB/s/default/app/security/alerts"

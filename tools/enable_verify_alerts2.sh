@@ -4,8 +4,8 @@ export LC_ALL=C
 ES="http://127.0.0.1:9200"
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"
-TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"
+TKT="T2_user:<TENANT2_PASSWORD>"
 X='kbn-xsrf: true'
 J='Content-Type: application/json'
 
@@ -20,7 +20,7 @@ for h in d.get('hits',{}).get('hits',[]):
 " 2>&1
 
 echo
-echo "=== signals/search variants as greencircle_user in default ==="
+echo "=== signals/search variants as T1_user in default ==="
 echo -n "  variant A (es query dsl): "
 curl -s -o /tmp/a.json -w '%{http_code}\n' --max-time 60 -u "$TENANT1" -H "$X" -H "$J" \
   -X POST "$KB/s/default/api/detection_engine/signals/search" -d '{"query":{"bool":{"must":[]}},"size":10}'
@@ -44,7 +44,7 @@ curl -s --max-time 30 -u "$TENANT1" -H "$J" -X POST "$ES/.alerts-security.alerts
   | python3 -c "import sys,json;d=json.load(sys.stdin);print('hits',d.get('hits',{}).get('total',{}).get('value'))" 2>&1
 
 echo
-echo "=== ack a real alert as greencircle_user (expect blocked) ==="
+echo "=== ack a real alert as T1_user (expect blocked) ==="
 AID=$(curl -s --max-time 30 -u "$ADMIN" -H "$J" -X POST "$ES/.internal.alerts-security.alerts-default*/_search?size=1" -d '{"query":{"match_all":{}}}' \
   | python3 -c "import sys,json;print(json.load(sys.stdin)['hits']['hits'][0]['_id'])" 2>/dev/null)
 echo "  alert id=$AID"

@@ -50,8 +50,8 @@ print('  indices:',[i.get('names') for i in d.get('indices',[])])
 done
 
 sec "TENANT SPACE VISIBILITY"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"; TKT="tkt_user:<TENANT2_PASSWORD>"
-for pair in "greencircle_user:$TENANT1" "tkt_user:$TKT"; do
+TENANT1="T1_user:<TENANT1_PASSWORD>"; TKT="T2_user:<TENANT2_PASSWORD>"
+for pair in "T1_user:$TENANT1" "T2_user:$TKT"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u spaces: "
   curl -s --max-time 30 -u "$c" -H 'kbn-xsrf: true' "http://127.0.0.1:5601/api/spaces/space" \

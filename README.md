@@ -64,7 +64,7 @@ tenant's agents write to that tenant's data-stream namespace.
                         │                   Elasticsearch                   │
                         │              cluster greencircle.SIEM             │
                         │                                                   │
-  greencircle_user ────►│  logs-*-greencircle*                              │
+  T1_user          ────►│  logs-*-greencircle*                              │
   (Tenant 1)            │  metrics-*-greencircle*                           │
                         │  traces-*-greencircle*                            │
                         │  synthetics-*-greencircle*                        │
@@ -72,7 +72,7 @@ tenant's agents write to that tenant's data-stream namespace.
                         │  greencircle-*                                    │
                         │  .alerts-security.alerts-greencircle*             │
                         │                                                   │
-  tkt_user          ───►│  logs-*-tkt*                                      │
+  T2_user          ────►│  logs-*-tkt*                                      │
   (Tenant 2)            │  metrics-*-tkt*                                   │
                         │  traces-*-tkt*                                    │
                         │  synthetics-*-tkt*                                │
@@ -85,8 +85,8 @@ tenant's agents write to that tenant's data-stream namespace.
                         │                       Kibana                      │
                         │                                                   │
                         │  default     "All Tenant"  ◄─ every tenant (read) │
-                        │  greencircle "Tenant 1"    ◄─ greencircle_user    │
-                        │  tkt         "Tenant 2"    ◄─ tkt_user            │
+                        │  greencircle "Tenant 1"    ◄─ T1_user             │
+                        │  tkt         "Tenant 2"    ◄─ T2_user             │
                         └───────────────────────────────────────────────────┘
 ```
 
@@ -241,8 +241,8 @@ profiling-<dataset>-<namespace>
 The tenant can also have a custom index pattern such as `<namespace>-*`.
 
 > Tenant 1 uses `greencircle` for its space, namespace and role, with user
-> `greencircle_user`. Tenant 2 uses `tkt` for its space, namespace and role,
-> with user `tkt_user`.
+> `T1_user`. Tenant 2 uses `tkt` for its space, namespace and role,
+> with user `T2_user`.
 
 ---
 
@@ -615,15 +615,15 @@ It covers:
 ### Isolation suite — 53/53
 
 ```
-PASS  greencircle_user READ own data stream (expected 200, got 200)
-PASS  greencircle_user READ other data stream (0 hits) (expected 0, got 0)
-PASS  greencircle_user WRITE own data stream (expected 201, got 201)
-PASS  greencircle_user WRITE other data stream (403) (expected 403, got 403)
+PASS  T1_user READ own data stream (expected 200, got 200)
+PASS  T1_user READ other data stream (0 hits) (expected 0, got 0)
+PASS  T1_user WRITE own data stream (expected 201, got 201)
+PASS  T1_user WRITE other data stream (403) (expected 403, got 403)
 ...
-PASS  greencircle_user blocked from tkt alert index (expected 403, got 403)
-PASS  greencircle_user can READ shared default alerts (expected 200, got 200)
-PASS  greencircle_user cannot WRITE shared default alerts (expected 403, got 403)
-PASS  greencircle_user can search default alerts in Kibana (expected 200, got 200)
+PASS  T1_user blocked from tkt alert index (expected 403, got 403)
+PASS  T1_user can READ shared default alerts (expected 200, got 200)
+PASS  T1_user cannot WRITE shared default alerts (expected 403, got 403)
+PASS  T1_user can search default alerts in Kibana (expected 200, got 200)
 ...
 PASS=53 FAIL=0
 ```
@@ -634,9 +634,9 @@ PASS=53 FAIL=0
 PASS  default space has all 2062 rules enabled (expected 2062, got 2062)
 PASS  greencircle space has all 2062 rules enabled (expected 2062, got 2062)
 PASS  tkt space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  greencircle_user can query own space rules (expected 200, got 200)
-PASS  greencircle_user blocked from tkt rules (403) (expected 403, got 403)
-PASS  greencircle_user can READ shared default rules (expected 200, got 200)
+PASS  T1_user can query own space rules (expected 200, got 200)
+PASS  T1_user blocked from tkt rules (403) (expected 403, got 403)
+PASS  T1_user can READ shared default rules (expected 200, got 200)
 ...
 PASS=15 FAIL=0
 ```

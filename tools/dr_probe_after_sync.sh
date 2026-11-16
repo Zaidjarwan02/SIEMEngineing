@@ -3,7 +3,7 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-TENANT1="greencircle_user:<TENANT1_PASSWORD>"; TKT="tkt_user:<TENANT2_PASSWORD>"
+TENANT1="T1_user:<TENANT1_PASSWORD>"; TKT="T2_user:<TENANT2_PASSWORD>"
 X='kbn-xsrf: true'
 
 echo "=== counts per space (admin) ==="
@@ -14,7 +14,7 @@ for sp in default greencircle tkt; do
 done
 
 echo "=== tenant view of default rules ==="
-for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "T1_user:<TENANT1_PASSWORD>" "T2_user:<TENANT2_PASSWORD>"; do
   u=${pair%%:*}
   echo -n "  $u default rules: "
   curl -s --max-time 90 -u "$pair" -H "$X" -w ' (http %{http_code})' "$KB/s/default/api/detection_engine/rules/_find?per_page=1" \
