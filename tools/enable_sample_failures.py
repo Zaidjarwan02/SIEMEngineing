@@ -21,7 +21,7 @@ def call(path, body=None, timeout=180):
         return json.loads(r.read())
 
 
-for space in ("default", "grcico-com", "tkt-org"):
+for space in ("default", "greencircle", "tkt"):
     d = call(f"/s/{space}/api/detection_engine/rules/_find?per_page=10000&page=1")
     rules = d.get("data", [])
     reasons = collections.Counter()

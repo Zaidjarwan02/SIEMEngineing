@@ -15,7 +15,7 @@ sec "DETECTION ENGINE STATUS"
 $K "$KB/api/detection_engine/status"; echo
 
 sec "EXISTING RULES PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "space $sp total rules: "
   $K "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1" | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('total','ERR'), d.get('page'), d.get('perPage'))" 2>/dev/null || echo ERR
 done
@@ -32,7 +32,7 @@ sec "ALERT INDICES"
 $C "$ES/_cat/indices/.alerts*,.internal.alerts*?v&h=index,docs.count,store.size" 2>/dev/null
 
 sec "RULE SAVED OBJECTS PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "space $sp alerting rules saved objects: "
   $K "$KB/s/$sp/api/saved_objects/_find?type=alert&per_page=1" | python3 -c "import sys,json;print(json.load(sys.stdin).get('total','ERR'))" 2>/dev/null || echo ERR
 done

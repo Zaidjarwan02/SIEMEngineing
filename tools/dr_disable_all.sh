@@ -6,7 +6,7 @@ KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
 X='kbn-xsrf: true'
 
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo "=== space $sp ==="
   ids=$(curl -s --max-time 90 -u "$ADMIN" -H "$X" \
     "$KB/s/$sp/api/detection_engine/rules/_find?per_page=100&filter=alert.attributes.enabled:true" \
@@ -27,7 +27,7 @@ done
 
 echo
 echo "=== enabled counts after ==="
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "space $sp enabled: "
   curl -s --max-time 60 -u "$ADMIN" -H "$X" \
     "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1&filter=alert.attributes.enabled:true" \

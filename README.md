@@ -60,30 +60,34 @@ tenant's agents write to that tenant's data-stream namespace.
 ## Architecture
 
 ```
-                         ┌─────────────────────────────────────────────┐
-                         │              Elasticsearch                   │
-                         │              cluster grcico.SIEM             │
-                         │                                             │
-  T1_user ──role──►     │  logs-*-greencircle*   metrics-*-greencircle*│
-  (Tenant 1)             │  traces-*-greencircle* synthetics-*-...      │
-                         │  grc-*                                       │
-                         │  .alerts-security.alerts-grcico-com*         │
-                         │                                             │
-  T2_user ──role──►     │  logs-*-tkt*   metrics-*-tkt*                │
-  (Tenant 2)             │  traces-*-tkt* synthetics-*-tkt*             │
-                         │  tkt-*                                       │
-                         │  .alerts-security.alerts-tkt-org*            │
-                         └─────────────────────────────────────────────┘
+                        ┌───────────────────────────────────────────────────┐
+                        │                   Elasticsearch                   │
+                        │              cluster greencircle.SIEM             │
+                        │                                                   │
+  greencircle_user ────►│  logs-*-greencircle*                              │
+  (Tenant 1)            │  metrics-*-greencircle*                           │
+                        │  traces-*-greencircle*                            │
+                        │  synthetics-*-greencircle*                        │
+                        │  profiling-*-greencircle*                         │
+                        │  greencircle-*                                    │
+                        │  .alerts-security.alerts-greencircle*             │
+                        │                                                   │
+  tkt_user          ───►│  logs-*-tkt*                                      │
+  (Tenant 2)            │  metrics-*-tkt*                                   │
+                        │  traces-*-tkt*                                    │
+                        │  synthetics-*-tkt*                                │
+                        │  profiling-*-tkt*                                 │
+                        │  tkt-*                                            │
+                        │  .alerts-security.alerts-tkt*                     │
+                        └───────────────────────────────────────────────────┘
 
-                         ┌─────────────────────────────────────────────┐
-                         │                 Kibana                       │
-                         │  Space default     ◄── all tenants (read)    │
-                         │      "All Tenant"      shared alerts + rules │
-                         │  Space grcico-com  ◄── grc_user (space_all)  │
-                         │      "Tenant 1"                              │
-                         │  Space tkt-org     ◄── tkt_user  (space_all) │
-                         │      "Tenant 2"                              │
-                         └─────────────────────────────────────────────┘
+                        ┌───────────────────────────────────────────────────┐
+                        │                       Kibana                      │
+                        │                                                   │
+                        │  default     "All Tenant"  ◄─ every tenant (read) │
+                        │  greencircle "Tenant 1"    ◄─ greencircle_user    │
+                        │  tkt         "Tenant 2"    ◄─ tkt_user            │
+                        └───────────────────────────────────────────────────┘
 ```
 
 ### The three isolation layers
@@ -108,8 +112,8 @@ a cross-tenant data reader.
 |------|-------|
 | Kibana / Elasticsearch | 8.19.24 |
 | License | Basic (active) |
-| Cluster | `grcico.SIEM` / `node-1` |
-| Spaces | `default` (All Tenant), `grcico-com` (Tenant 1), `tkt-org` (Tenant 2) |
+| Cluster | `greencircle.SIEM` / `node-1` |
+| Spaces | `default` (All Tenant), `greencircle` (Tenant 1), `tkt` (Tenant 2) |
 | Detection package | `security_detection_engine` 8.19.37 |
 | Rules per space | 2,062 (of 2,157 packaged; 95 need a higher license) |
 | Rules enabled per space | **2,062 / 2,062** |
@@ -117,7 +121,7 @@ a cross-tenant data reader.
 | Isolation suite | **53 / 53 PASS** |
 | Rule suite | **15 / 15 PASS** |
 | Default alert index | 2 alerts at capture |
-| Tenant alert indices | own alerts only (e.g. `tkt-org` 1 at capture) |
+| Tenant alert indices | own alerts only (e.g. `tkt` 1 at capture) |
 | Cluster health | yellow (single node, unassigned replicas — expected) |
 
 > **Enabled is not the same as healthy.** Many rules report `warning`/`failed`
@@ -236,8 +240,9 @@ profiling-<dataset>-<namespace>
 
 The tenant can also have a custom index pattern such as `<namespace>-*`.
 
-> The lab mapping is: Tenant 1 = `grcico-com` / `greencircle` / `GreenCircle` /
-> `grc_user`; Tenant 2 = `tkt-org` / `tkt` / `tkt` / `tkt_user`.
+> Tenant 1 uses `greencircle` for its space, namespace and role, with user
+> `greencircle_user`. Tenant 2 uses `tkt` for its space, namespace and role,
+> with user `tkt_user`.
 
 ---
 
@@ -468,8 +473,8 @@ chunking:
 
 ```bash
 python tools/enable_all_rules_http.py default
-python tools/enable_all_rules_http.py grcico-com
-python tools/enable_all_rules_http.py tkt-org
+python tools/enable_all_rules_http.py greencircle
+python tools/enable_all_rules_http.py tkt
 
 # Generic new tenant:
 python tools/enable_all_rules_http.py acme --user acme_user --password '<TENANT_PASSWORD>'
@@ -610,15 +615,15 @@ It covers:
 ### Isolation suite — 53/53
 
 ```
-PASS  grc_user READ own data stream (expected 200, got 200)
-PASS  grc_user READ other data stream (0 hits) (expected 0, got 0)
-PASS  grc_user WRITE own data stream (expected 201, got 201)
-PASS  grc_user WRITE other data stream (403) (expected 403, got 403)
+PASS  greencircle_user READ own data stream (expected 200, got 200)
+PASS  greencircle_user READ other data stream (0 hits) (expected 0, got 0)
+PASS  greencircle_user WRITE own data stream (expected 201, got 201)
+PASS  greencircle_user WRITE other data stream (403) (expected 403, got 403)
 ...
-PASS  grc_user blocked from tkt alert index (expected 403, got 403)
-PASS  grc_user can READ shared default alerts (expected 200, got 200)
-PASS  grc_user cannot WRITE shared default alerts (expected 403, got 403)
-PASS  grc_user can search default alerts in Kibana (expected 200, got 200)
+PASS  greencircle_user blocked from tkt alert index (expected 403, got 403)
+PASS  greencircle_user can READ shared default alerts (expected 200, got 200)
+PASS  greencircle_user cannot WRITE shared default alerts (expected 403, got 403)
+PASS  greencircle_user can search default alerts in Kibana (expected 200, got 200)
 ...
 PASS=53 FAIL=0
 ```
@@ -627,11 +632,11 @@ PASS=53 FAIL=0
 
 ```
 PASS  default space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  grcico-com space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  tkt-org space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  grc_user can query own space rules (expected 200, got 200)
-PASS  grc_user blocked from tkt rules (403) (expected 403, got 403)
-PASS  grc_user can READ shared default rules (expected 200, got 200)
+PASS  greencircle space has all 2062 rules enabled (expected 2062, got 2062)
+PASS  tkt space has all 2062 rules enabled (expected 2062, got 2062)
+PASS  greencircle_user can query own space rules (expected 200, got 200)
+PASS  greencircle_user blocked from tkt rules (403) (expected 403, got 403)
+PASS  greencircle_user can READ shared default rules (expected 200, got 200)
 ...
 PASS=15 FAIL=0
 ```

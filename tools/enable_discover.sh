@@ -23,7 +23,7 @@ sec "ALERT INDICES"
 curl -s --max-time 30 -u "$ADMIN" "$ES/_cat/indices/.alerts-security.alerts-*,.internal.alerts-security.alerts-*?h=index,docs.count,store.size&s=index" | head -30
 
 sec "RULE COUNTS PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "  $sp total="
   curl -s --max-time 60 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1" \
     | python3 -c "import sys,json;print(json.load(sys.stdin).get('total','ERR'))" 2>/dev/null
@@ -33,7 +33,7 @@ for sp in default grcico-com tkt-org; do
 done
 
 sec "BULK ACTION ENDPOINT PROBE (empty ids)"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "  $sp POST _bulk_action: "
   curl -s -o /tmp/bulk_probe_$sp.json -w '%{http_code}\n' --max-time 30 -u "$ADMIN" -H "$X" -H "$J" \
     -X POST "$KB/s/$sp/api/detection_engine/rules/_bulk_action" -d '{"action":"enable","ids":[]}'
@@ -41,7 +41,7 @@ for sp in default grcico-com tkt-org; do
 done
 
 sec "TENANT ROLE CLUSTER PRIVILEGES"
-for r in GreenCircle tkt; do
+for r in greencircle tkt; do
   echo -n "  $r cluster: "
   curl -s --max-time 15 -u "$ADMIN" "$ES/_security/role/$r" \
     | python3 -c "import sys,json;w=json.load(sys.stdin);d=w[list(w.keys())[0]];print(d.get('cluster'))" 2>/dev/null

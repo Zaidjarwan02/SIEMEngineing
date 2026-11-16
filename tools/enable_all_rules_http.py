@@ -25,8 +25,8 @@ import urllib.request
 KB = "http://192.168.1.212:5601"
 CREDS = {
     "default": ("elastic", "<ADMIN_PASSWORD>"),
-    "grcico-com": ("grc_user", "<TENANT1_PASSWORD>"),
-    "tkt-org": ("tkt_user", "<TENANT2_PASSWORD>"),
+    "greencircle": ("greencircle_user", "<TENANT1_PASSWORD>"),
+    "tkt": ("tkt_user", "<TENANT2_PASSWORD>"),
 }
 BATCH = 100
 

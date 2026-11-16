@@ -3,7 +3,7 @@
 ========== CLUSTER ==========
 {
     "name": "node-1",
-    "cluster_name": "grcico.SIEM",
+    "cluster_name": "greencircle.SIEM",
     "cluster_uuid": "qLpz5Y1MSxqOucWlV9vndg",
     "version": {
         "number": "8.19.24",
@@ -19,7 +19,7 @@
     "tagline": "You Know, for Search"
 }
 {
-  "cluster_name" : "grcico.SIEM",
+  "cluster_name" : "greencircle.SIEM",
   "status" : "yellow",
   "timed_out" : false,
   "number_of_nodes" : 1,
@@ -49,12 +49,12 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
 
 
 ========== NON-SYSTEM USERS ==========
-grc_user     roles=['GreenCircle'] enabled=True metadata={}
+greencircle_user     roles=['greencircle'] enabled=True metadata={}
 tkt_user     roles=['tkt'] enabled=True metadata={}
 
 
 ========== CUSTOM ROLES ==========
---- GreenCircle ---
+--- greencircle ---
 {
   "cluster": [],
   "indices": [
@@ -73,7 +73,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
     },
     {
       "names": [
-        "grc-*"
+        "greencircle-*"
       ],
       "privileges": [
         "all"
@@ -82,8 +82,8 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
     },
     {
       "names": [
-        ".alerts-security.alerts-grcico-com*",
-        ".internal.alerts-security.alerts-grcico-com*"
+        ".alerts-security.alerts-greencircle*",
+        ".internal.alerts-security.alerts-greencircle*"
       ],
       "privileges": [
         "all"
@@ -98,7 +98,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
         "space_all"
       ],
       "resources": [
-        "space:grcico-com"
+        "space:greencircle"
       ]
     },
     {
@@ -111,7 +111,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
       ]
     }
   ],
-  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space."
+  "description": "greencircle tenant: full read/write on greencircle data and greencircle-* only; full UI in space greencircle; read-only in shared Default space."
 }
 --- tkt ---
 {
@@ -141,8 +141,8 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
     },
     {
       "names": [
-        ".alerts-security.alerts-tkt-org*",
-        ".internal.alerts-security.alerts-tkt-org*"
+        ".alerts-security.alerts-tkt*",
+        ".internal.alerts-security.alerts-tkt*"
       ],
       "privileges": [
         "all"
@@ -157,7 +157,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
         "space_all"
       ],
       "resources": [
-        "space:tkt-org"
+        "space:tkt"
       ]
     },
     {
@@ -170,7 +170,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
       ]
     }
   ],
-  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space."
+  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt; read-only in shared Default space."
 }
 
 
@@ -185,7 +185,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
         "_reserved": true
     },
     {
-        "id": "grcico-com",
+        "id": "greencircle",
         "name": "greencircle",
         "color": "#9170B8",
         "initials": "g",
@@ -194,7 +194,7 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
         "solution": "classic"
     },
     {
-        "id": "tkt-org",
+        "id": "tkt",
         "name": "tkt",
         "color": "#B9A888",
         "initials": "t",
@@ -206,28 +206,28 @@ tkt_user     roles=['tkt'] enabled=True metadata={}
 
 
 ========== DATA VIEWS PER SPACE ==========
---- space grcico-com ---
+--- space greencircle ---
    metrics-* -> metrics-*
    logs-* -> logs-*
---- space tkt-org ---
+--- space tkt ---
    .kibana-event-log-* -> .kibana-event-log-*
-   Default security data view -> .alerts-security.alerts-tkt-org,apm-*-transaction*,auditbeat-*,endgame-*,filebeat-*,logs-*,packetbeat-*,traces-apm*,winlogbeat-*,-*elastic-cloud-logs-*
-   Security alert data view -> .alerts-security.alerts-tkt-org
+   Default security data view -> .alerts-security.alerts-tkt,apm-*-transaction*,auditbeat-*,endgame-*,filebeat-*,logs-*,packetbeat-*,traces-apm*,winlogbeat-*,-*elastic-cloud-logs-*
+   Security alert data view -> .alerts-security.alerts-tkt
    metrics-* -> metrics-*
    logs-* -> logs-*
 
 
 ========== DETECTION RULES PER SPACE ==========
 space default: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
-space grcico-com: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
-space tkt-org: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space greencircle: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space tkt: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
 installed security_detection_engine version: 8.19.37 installed
 
 
 ========== DASHBOARDS PER SPACE (should be empty after test cleanup) ==========
 space default dashboards: 44
-space grcico-com dashboards: 0
-space tkt-org dashboards: 1
+space greencircle dashboards: 0
+space tkt dashboards: 1
 
 
 ========== DATA STREAMS (tenant test streams should be gone) ==========
@@ -298,7 +298,7 @@ yellow open .ds-metrics-system.memory-default-2026.11.10-000001                 
 
 
 ========== FLEET AGENT POLICIES ==========
-grc                  namespace=default      agents=1 status=active
+greencircle                  namespace=default      agents=1 status=active
 Agent policy 1       namespace=default      agents=0 status=active
 tkt                  namespace=tkt          agents=1 status=active
 Fleet Server Policy  namespace=default      agents=1 status=active
@@ -308,7 +308,7 @@ Fleet Server Policy  namespace=default      agents=1 status=active
 total: 3
 4e4e8bfe-11be-4196-afd0-086ecbef0798 host=GC-LD-051 status=online policy=877ebc8b-9083-4dd7-a206-b054a2091221
 ed081c97-4a9d-4edd-bc02-95c512ce6aef host=GC-LD-002 status=online policy=ca22092c-460c-489b-b7c8-fa7e8786f189
-d30d95f9-fee3-4577-919d-3986513c1a13 host=ubuntu status=online policy=tkt-org-fleet-server-policy
+d30d95f9-fee3-4577-919d-3986513c1a13 host=ubuntu status=online policy=tkt-fleet-server-policy
 
 
 ========== KIBANA ENCRYPTION KEYS (masked) ==========

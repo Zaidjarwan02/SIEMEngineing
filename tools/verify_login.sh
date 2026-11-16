@@ -25,20 +25,20 @@ login() {
   curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/app/home"
   echo "--- GET /app/dashboards ---"
   curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/app/dashboards"
-  echo "--- GET /s/grcico-com/app/dashboards ---"
-  curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/s/grcico-com/app/dashboards"
-  echo "--- GET /s/tkt-org/app/dashboards ---"
-  curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/s/tkt-org/app/dashboards"
+  echo "--- GET /s/greencircle/app/dashboards ---"
+  curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/s/greencircle/app/dashboards"
+  echo "--- GET /s/tkt/app/dashboards ---"
+  curl -s -b "$jar" -o /dev/null -w 'http=%{http_code} redirect=%{redirect_url}\n' "$KB/s/tkt/app/dashboards"
   echo
 }
 
-login grc_user '<TENANT1_PASSWORD>' 'GREEN CIRCLE TENANT'
+login greencircle_user '<TENANT1_PASSWORD>' 'GREEN CIRCLE TENANT'
 login tkt_user '<TENANT2_PASSWORD>' 'TKT TENANT'
 
 echo "================ NEGATIVE LOGIN TESTS ================"
-curl -s -o /dev/null -w 'grc_user wrong password -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
+curl -s -o /dev/null -w 'greencircle_user wrong password -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
   -X POST "$KB/internal/security/login" \
-  -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"grc_user","password":"wrongpass"}}'
+  -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"greencircle_user","password":"wrongpass"}}'
 curl -s -o /dev/null -w 'unknown user -> http=%{http_code}\n' -H "$X" -H 'Content-Type: application/json' \
   -X POST "$KB/internal/security/login" \
   -d '{"providerType":"basic","providerName":"basic","currentURL":"/","params":{"username":"nosuchuser","password":"whatever"}}'

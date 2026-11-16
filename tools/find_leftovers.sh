@@ -23,8 +23,8 @@ done
 echo "=== indices (not data streams) matching tkt ==="
 curl -s --max-time 30 -u "$ADMIN" "$ES/_cat/indices/*tkt*?h=index,docs.count,store.size" | head -40
 
-echo "=== tkt-org dashboards ==="
-curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/tkt-org/api/saved_objects/_find?type=dashboard&per_page=100" \
+echo "=== tkt dashboards ==="
+curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard&per_page=100" \
   | python3 -c "
 import sys,json
 d=json.load(sys.stdin)
@@ -33,8 +33,8 @@ for o in d.get('saved_objects',[]):
     print('  ',o['id'],'|',o.get('attributes',{}).get('title'),'| updated',o.get('updated_at'))
 " 2>/dev/null
 
-echo "=== grcico-com dashboards ==="
-curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/grcico-com/api/saved_objects/_find?type=dashboard&per_page=100" \
+echo "=== greencircle dashboards ==="
+curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard&per_page=100" \
   | python3 -c "
 import sys,json
 d=json.load(sys.stdin)

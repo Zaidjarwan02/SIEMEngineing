@@ -19,14 +19,14 @@ echo "=== kibana indices ==="
 curl -s --max-time 30 -u "$ADMIN" "$ES/_cat/indices/.kibana*?h=index,health,docs.count,store.size" | head -20
 
 echo "=== admin _find per space (status + body head) ==="
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo "--- $sp ---"
   curl -s --max-time 60 -u "$ADMIN" -H "$X" -w '\nHTTP %{http_code}\n' \
     "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1" | head -c 400; echo
 done
 
 echo "=== prebuilt status per space ==="
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "$sp: "
   curl -s --max-time 60 -u "$ADMIN" -H "$X" "$KB/s/$sp/internal/detection_engine/prebuilt_rules/status" | head -c 300; echo
 done

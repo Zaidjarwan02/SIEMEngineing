@@ -9,28 +9,34 @@ Kibana UI layer.
 ## Isolation model: space + namespace + role
 
 ```
-                        ┌─────────────────────────────────────────────┐
-                        │              Elasticsearch                   │
-                        │              cluster grcico.SIEM             │
-                        │                                             │
-  grc_user ──role──►    │  logs-*-greencircle*   metrics-*-greencircle*│
-  (GreenCircle)         │  traces-*-greencircle* synthetics-*-...      │
-                        │  grc-*                                       │
-                        │  .alerts-security.alerts-grcico-com*         │
-                        │                                             │
-  tkt_user ──role──►    │  logs-*-tkt*   metrics-*-tkt*                │
-  (tkt)                 │  traces-*-tkt* synthetics-*-tkt*             │
-                        │  tkt-*                                       │
-                        │  .alerts-security.alerts-tkt-org*            │
-                        └─────────────────────────────────────────────┘
+                        ┌───────────────────────────────────────────────────┐
+                        │                   Elasticsearch                   │
+                        │              cluster greencircle.SIEM             │
+                        │                                                   │
+  greencircle_user ────►│  logs-*-greencircle*                              │
+  (Tenant 1)            │  metrics-*-greencircle*                           │
+                        │  traces-*-greencircle*                            │
+                        │  synthetics-*-greencircle*                        │
+                        │  profiling-*-greencircle*                         │
+                        │  greencircle-*                                    │
+                        │  .alerts-security.alerts-greencircle*             │
+                        │                                                   │
+  tkt_user          ───►│  logs-*-tkt*                                      │
+  (Tenant 2)            │  metrics-*-tkt*                                   │
+                        │  traces-*-tkt*                                    │
+                        │  synthetics-*-tkt*                                │
+                        │  profiling-*-tkt*                                 │
+                        │  tkt-*                                            │
+                        │  .alerts-security.alerts-tkt*                     │
+                        └───────────────────────────────────────────────────┘
 
-                        ┌─────────────────────────────────────────────┐
-                        │                 Kibana                       │
-                        │  Space grcico-com  ◄── grc_user (space_all)  │
-                        │  Space tkt-org     ◄── tkt_user  (space_all) │
-                        │  Space default     ◄── both users (space_read)│
-                        │      shared "general" space, read-only       │
-                        └─────────────────────────────────────────────┘
+                        ┌───────────────────────────────────────────────────┐
+                        │                       Kibana                      │
+                        │                                                   │
+                        │  "default"   "All Tenant"  ◄─ read-only (both)    │
+                        │  greencircle "Tenant 1"    ◄─ space_all           │
+                        │  tkt         "Tenant 2"    ◄─ space_all           │
+                        └───────────────────────────────────────────────────┘
 ```
 
 Isolation is enforced in **three independent layers**:
@@ -38,7 +44,7 @@ Isolation is enforced in **three independent layers**:
 1. **Elasticsearch index privileges** — the role only names that tenant's index/data-stream
    patterns. Elasticsearch refuses reads/writes outside them.
 2. **Kibana space privileges** — the role grants `space_all` on exactly one space resource
-   (`space:grcico-com` or `space:tkt-org`) and `space_read` on `space:default`. Kibana hides
+   (`space:greencircle` or `space:tkt`) and `space_read` on `space:default`. Kibana hides
    the other tenant's space entirely; the Default space is visible but read-only.
 3. **Per-space data views** — each tenant space only contains data views whose titles match
    that tenant's namespace, so the UI cannot even offer another tenant's data.
@@ -47,12 +53,12 @@ Isolation is enforced in **three independent layers**:
 
 | Tenant | Space ID | Space name | ES role | User | Index / data-stream patterns |
 |--------|----------|------------|---------|------|------------------------------|
-| GreenCircle | `grcico-com` | greencircle | `GreenCircle` | `grc_user` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `grc-*` |
-| TKT | `tkt-org` | tkt | `tkt` | `tkt_user` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` |
+| Tenant 1 (`greencircle`) | `greencircle` | Tenant 1 | `greencircle` | `greencircle_user` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` |
+| Tenant 2 (`TKT`) | `tkt` | Tenant 2 | `tkt` | `tkt_user` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` |
 
 ## Role definitions (effective)
 
-### `GreenCircle`
+### `greencircle`
 
 ```json
 {
@@ -65,12 +71,12 @@ Isolation is enforced in **three independent layers**:
       "allow_restricted_indices": false
     },
     {
-      "names": ["grc-*"],
+      "names": ["greencircle-*"],
       "privileges": ["all"],
       "allow_restricted_indices": false
     },
     {
-      "names": [".alerts-security.alerts-grcico-com*", ".internal.alerts-security.alerts-grcico-com*"],
+      "names": [".alerts-security.alerts-greencircle*", ".internal.alerts-security.alerts-greencircle*"],
       "privileges": ["all"],
       "allow_restricted_indices": true
     },
@@ -81,10 +87,10 @@ Isolation is enforced in **three independent layers**:
     }
   ],
   "applications": [
-    { "application": "kibana-.kibana", "privileges": ["space_all"],  "resources": ["space:grcico-com"] },
+    { "application": "kibana-.kibana", "privileges": ["space_all"],  "resources": ["space:greencircle"] },
     { "application": "kibana-.kibana", "privileges": ["space_read"], "resources": ["space:default"] }
   ],
-  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space and its alerts."
+  "description": "Tenant 1 (greencircle): full read/write on its greencircle data streams and greencircle-* indices; full UI in space greencircle; read-only in the shared Default space and its alerts."
 }
 ```
 
@@ -106,7 +112,7 @@ Isolation is enforced in **three independent layers**:
       "allow_restricted_indices": false
     },
     {
-      "names": [".alerts-security.alerts-tkt-org*", ".internal.alerts-security.alerts-tkt-org*"],
+      "names": [".alerts-security.alerts-tkt*", ".internal.alerts-security.alerts-tkt*"],
       "privileges": ["all"],
       "allow_restricted_indices": true
     },
@@ -117,10 +123,10 @@ Isolation is enforced in **three independent layers**:
     }
   ],
   "applications": [
-    { "application": "kibana-.kibana", "privileges": ["space_all"],  "resources": ["space:tkt-org"] },
+    { "application": "kibana-.kibana", "privileges": ["space_all"],  "resources": ["space:tkt"] },
     { "application": "kibana-.kibana", "privileges": ["space_read"], "resources": ["space:default"] }
   ],
-  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space and its alerts."
+  "description": "Tenant 2 (TKT): full read/write on its tkt data streams and tkt-* indices; full UI in space tkt; read-only in the shared Default space and its alerts."
 }
 ```
 
@@ -134,12 +140,12 @@ other users. This was verified.
 
 | Space | Data view name | Pattern |
 |-------|----------------|---------|
-| `grcico-com` | GreenCircle Logs | `logs-*-greencircle*` |
-| `grcico-com` | GreenCircle Metrics | `metrics-*-greencircle*` |
-| `grcico-com` | GreenCircle Custom (grc-*) | `grc-*` |
-| `tkt-org` | TKT Logs | `logs-*-tkt*` |
-| `tkt-org` | TKT Metrics | `metrics-*-tkt*` |
-| `tkt-org` | TKT Custom (tkt-*) | `tkt-*` |
+| `greencircle` | greencircle Logs | `logs-*-greencircle*` |
+| `greencircle` | greencircle Metrics | `metrics-*-greencircle*` |
+| `greencircle` | greencircle Custom (greencircle-*) | `greencircle-*` |
+| `tkt` | TKT Logs | `logs-*-tkt*` |
+| `tkt` | TKT Metrics | `metrics-*-tkt*` |
+| `tkt` | TKT Custom (tkt-*) | `tkt-*` |
 
 Legacy unnamed global `logs-*` / `metrics-*` data views were removed from the tenant
 spaces so the UI only offers tenant-scoped patterns.
@@ -148,8 +154,8 @@ spaces so the UI only offers tenant-scoped patterns.
 
 Security detection alerts are stored in space-specific hidden indices:
 
-- GreenCircle: `.alerts-security.alerts-grcico-com*` and `.internal.alerts-security.alerts-grcico-com*`
-- TKT: `.alerts-security.alerts-tkt-org*` and `.internal.alerts-security.alerts-tkt-org*`
+- greencircle: `.alerts-security.alerts-greencircle*` and `.internal.alerts-security.alerts-greencircle*`
+- TKT: `.alerts-security.alerts-tkt*` and `.internal.alerts-security.alerts-tkt*`
 - Default (shared): `.alerts-security.alerts-default*` and `.internal.alerts-security.alerts-default*`
 
 The tenant role can read/write only its own alert indices. Cross-tenant alert access
@@ -179,7 +185,7 @@ and revisit DLS or field-level security.
 - Use Discover, Dashboards, Visualize, Alerting, and detection rules **inside its space**.
 - Read and write documents in its own log/metric/custom namespaces.
 - Create new data streams and plain indices inside its own namespace (verified: auto-creating
-  `logs-newtest-greencircle` returned `201`, creating `grc-plain-new` returned `200`).
+  `logs-newtest-greencircle` returned `201`, creating `greencircle-plain-new` returned `200`).
 - Read and manage its own detection alerts.
 - **Read** the shared Default space: dashboards, the full prebuilt detection-rule set
   (2,062 rules) and other shared saved objects.
@@ -203,7 +209,7 @@ and revisit DLS or field-level security.
 | Single shared cluster and node | No resource isolation between tenants; a noisy tenant can affect others. Mitigate with per-tenant ILM, shard limits, and monitoring. |
 | Basic license | Some advanced security features (e.g., certain rule actions, advanced DLS/FLS workflows) are unavailable. |
 | No ingest-time `tenant` field | Prevents document-level tenancy; namespace isolation is the current control. |
-| Detection rules and alerts are space-scoped | Rules are installed and enabled in `default`, `grcico-com` and `tkt-org` (2,062 each). Alerts land in the alert index of the space where the rule lives. The Default global rule set provides the shared cross-tenant alert view. |
+| Detection rules and alerts are space-scoped | Rules are installed and enabled in `default`, `greencircle` and `tkt` (2,062 each). Alerts land in the alert index of the space where the rule lives. The Default global rule set provides the shared cross-tenant alert view. |
 | Enabled ≠ healthy | Many rules report `partial failure`/`failed` because the expected integration/index is absent, or because a tenant-scoped rule API key cannot read indices outside the tenant namespace. This is expected isolation behavior. |
 | Scheduler load | 6,186 enabled rule instances on one node (2,062 × 3 spaces); rules are staggered and some show `never` until their first scheduled run. |
 | Prebuilt package upgrades | Kibana can auto-install a newer `security_detection_engine` package (this happened during this work: 8.19.36 → 8.19.37). The upgrade removed the tenant-space rule copies. Re-run `tools/dr_sync_space.sh <space> <user:pass>` for both tenant spaces after any package change; see [10-detection-rules.md](10-detection-rules.md). |

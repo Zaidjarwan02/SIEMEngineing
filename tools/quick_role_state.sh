@@ -3,7 +3,7 @@ set +e
 export LC_ALL=C
 ES="http://127.0.0.1:9200"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-for r in GreenCircle tkt; do
+for r in greencircle tkt; do
   echo "=== $r ==="
   curl -s --max-time 10 -u "$ADMIN" "$ES/_security/role/$r" | head -c 1200; echo
 done

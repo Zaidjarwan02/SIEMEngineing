@@ -1,9 +1,9 @@
 POST-ENABLEMENT STATE EVIDENCE
 Captured: 2026-11-12T09:29:08
-Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
+Cluster: greencircle.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
 
 ========== 1. CLUSTER HEALTH ==========
-  cluster_name: grcico.SIEM
+  cluster_name: greencircle.SIEM
   status: yellow
   number_of_nodes: 1
   active_primary_shards: 104
@@ -14,16 +14,16 @@ Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
 ========== 2. LICENSE + PACKAGE ==========
   license: basic / active
   default: installed=2062 total_in_package=2157
-  grcico-com: installed=2062 total_in_package=2157
-  tkt-org: installed=2062 total_in_package=2157
+  greencircle: installed=2062 total_in_package=2157
+  tkt: installed=2062 total_in_package=2157
   security_detection_engine: 8.19.37 / installed
 
 ========== 3. RULE COUNTS / ENABLED / EXECUTION STATUS ==========
   space default: total=2062 enabled=2062 disabled=0
     execution status: {'partial failure': 1772, 'succeeded': 148, 'failed': 142}
-  space grcico-com: total=2062 enabled=2062 disabled=0
+  space greencircle: total=2062 enabled=2062 disabled=0
     execution status: {'partial failure': 1983, 'never': 71, 'failed': 8}
-  space tkt-org: total=2062 enabled=2062 disabled=0
+  space tkt: total=2062 enabled=2062 disabled=0
     execution status: {'never': 958, 'partial failure': 1014, 'failed': 90}
 
 ========== 4. FAILED / PARTIAL FAILURE REASONS (samples) ==========
@@ -40,7 +40,7 @@ Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
          e.g. GitHub API Failed Access Burst
     [47] This rule is attempting to query data from Elasticsearch indices listed in the "Index patterns" section of the rule definition, however no index matching: ["logs-endpoint.events.*"] was found
          e.g. Account or Group Discovery via Built-In Tools
-  --- grcico-com: 1991 failed/partial ---
+  --- greencircle: 1991 failed/partial ---
     [115] This rule's API key is unable to access all indices that match the ["filebeat-*","logs-aws.cloudtrail-*"] pattern. To learn how to update and manage API keys, refer to https://www.elastic.co/guide/en/
          e.g. AWS IAM Login Profile Added to User
     [114] This rule's API key is unable to access all indices that match the ["endgame-*","logs-crowdstrike.fdr*","logs-endpoint.events.process-*","logs-m365_defender.event-*","logs-sentinel_one_cloud_funnel.*"
@@ -53,7 +53,7 @@ Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
          e.g. Modification of the msPKIAccountCredentials
     [58] This rule's API key is unable to access all indices that match the ["auditbeat-*","endgame-*","logs-auditd_manager.auditd-*","logs-crowdstrike.fdr*","logs-endpoint.events.process*","logs-sentinel_one_
          e.g. File Transfer or Listener Established via Netcat
-  --- tkt-org: 1104 failed/partial ---
+  --- tkt: 1104 failed/partial ---
     [65] This rule's API key is unable to access all indices that match the ["filebeat-*","logs-aws.cloudtrail-*"] pattern. To learn how to update and manage API keys, refer to https://www.elastic.co/guide/en/
          e.g. AWS Lambda Function Policy Updated to Allow Public Invocation
     [46] This rule's API key is unable to access all indices that match the ["logs-endpoint.events.process*"] pattern. To learn how to update and manage API keys, refer to https://www.elastic.co/guide/en/kiban
@@ -73,10 +73,10 @@ Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
 ========== 6. ALERT INDICES ==========
   .alerts-security.alerts-default*: HTTP 200 count=2
   .internal.alerts-security.alerts-default*: HTTP 200 count=2
-  .alerts-security.alerts-grcico-com*: HTTP 200 count=0
-  .internal.alerts-security.alerts-grcico-com*: HTTP 200 count=0
-  .alerts-security.alerts-tkt-org*: HTTP 200 count=1
-  .internal.alerts-security.alerts-tkt-org*: HTTP 200 count=1
+  .alerts-security.alerts-greencircle*: HTTP 200 count=0
+  .internal.alerts-security.alerts-greencircle*: HTTP 200 count=0
+  .alerts-security.alerts-tkt*: HTTP 200 count=1
+  .internal.alerts-security.alerts-tkt*: HTTP 200 count=1
 
 ========== 7. DEFAULT ALERT DOCUMENTS ==========
   total: 2
@@ -84,47 +84,47 @@ Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic
   - A scheduled task was created | 92a6faf5-78ec-4e25-bea1-73bacc9b59d9 | 2026-11-12T06:21:44.706Z | sev=low | risk=21 | status=open | spaces=['default']
 
 ========== 8. TENANT ACCESS MATRIX ==========
-  grc_user  default alert index read: HTTP 200
-  grc_user  tkt alert index read (must be 403): HTTP 403
-  grc_user  grc alert index read: HTTP 200
+  greencircle_user  default alert index read: HTTP 200
+  greencircle_user  tkt alert index read (must be 403): HTTP 403
+  greencircle_user  greencircle alert index read: HTTP 200
   tkt_user  default alert index read: HTTP 200
-  tkt_user  grc alert index read (must be 403): HTTP 403
+  tkt_user  greencircle alert index read (must be 403): HTTP 403
   tkt_user  tkt alert index read: HTTP 200
-  grc_user  default alert write (must be 403): HTTP 403
-  grc_user  Kibana default alert search: HTTP 200
-  grc_user  Kibana default alerts page: HTTP 200
+  greencircle_user  default alert write (must be 403): HTTP 403
+  greencircle_user  Kibana default alert search: HTTP 200
+  greencircle_user  Kibana default alerts page: HTTP 200
   tkt_user  default alert write (must be 403): HTTP 403
   tkt_user  Kibana default alert search: HTTP 200
   tkt_user  Kibana default alerts page: HTTP 200
 
 ========== 9. TENANT ROLE DEFINITIONS ==========
-  --- GreenCircle ---
+  --- greencircle ---
     cluster: []
     index: ['logs-*-greencircle*', 'metrics-*-greencircle*', 'traces-*-greencircle*', 'synthetics-*-greencircle*', 'profiling-*-greencircle*'] -> ['all'] (restricted=False)
-    index: ['grc-*'] -> ['all'] (restricted=False)
-    index: ['.alerts-security.alerts-grcico-com*', '.internal.alerts-security.alerts-grcico-com*'] -> ['all'] (restricted=True)
+    index: ['greencircle-*'] -> ['all'] (restricted=False)
+    index: ['.alerts-security.alerts-greencircle*', '.internal.alerts-security.alerts-greencircle*'] -> ['all'] (restricted=True)
     index: ['.alerts-security.alerts-default*', '.internal.alerts-security.alerts-default*'] -> ['read', 'view_index_metadata'] (restricted=True)
-    app: kibana-.kibana ['space_all'] -> ['space:grcico-com']
+    app: kibana-.kibana ['space_all'] -> ['space:greencircle']
     app: kibana-.kibana ['space_read'] -> ['space:default']
   --- tkt ---
     cluster: []
     index: ['logs-*-tkt*', 'metrics-*-tkt*', 'traces-*-tkt*', 'synthetics-*-tkt*', 'profiling-*-tkt*'] -> ['all'] (restricted=False)
     index: ['tkt-*'] -> ['all'] (restricted=False)
-    index: ['.alerts-security.alerts-tkt-org*', '.internal.alerts-security.alerts-tkt-org*'] -> ['all'] (restricted=True)
+    index: ['.alerts-security.alerts-tkt*', '.internal.alerts-security.alerts-tkt*'] -> ['all'] (restricted=True)
     index: ['.alerts-security.alerts-default*', '.internal.alerts-security.alerts-default*'] -> ['read', 'view_index_metadata'] (restricted=True)
-    app: kibana-.kibana ['space_all'] -> ['space:tkt-org']
+    app: kibana-.kibana ['space_all'] -> ['space:tkt']
     app: kibana-.kibana ['space_read'] -> ['space:default']
 
 ========== 10. TENANT SPACE VISIBILITY ==========
-  grc_user: ['default', 'grcico-com']
-  tkt_user: ['default', 'tkt-org']
+  greencircle_user: ['default', 'greencircle']
+  tkt_user: ['default', 'tkt']
 
 ========== 11. RULE OWNERSHIP SAMPLE ==========
-  --- grcico-com ---
-    created_by=grc_user updated_by=grc_user enabled=True | Threat Intel IP Address Indicator Match
-    created_by=grc_user updated_by=grc_user enabled=True | Elastic Defend and Network Security Alerts Correlation
-    created_by=grc_user updated_by=grc_user enabled=True | Multiple Alerts Involving a User
-  --- tkt-org ---
+  --- greencircle ---
+    created_by=greencircle_user updated_by=greencircle_user enabled=True | Threat Intel IP Address Indicator Match
+    created_by=greencircle_user updated_by=greencircle_user enabled=True | Elastic Defend and Network Security Alerts Correlation
+    created_by=greencircle_user updated_by=greencircle_user enabled=True | Multiple Alerts Involving a User
+  --- tkt ---
     created_by=tkt_user updated_by=tkt_user enabled=True | AWS Bedrock Detected Multiple Attempts to use Denied Models by a Single User
     created_by=tkt_user updated_by=tkt_user enabled=True | Potential Persistence via File Modification
     created_by=tkt_user updated_by=tkt_user enabled=True | Process Created with a Duplicated Token

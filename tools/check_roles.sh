@@ -3,7 +3,7 @@ set +e
 export LC_ALL=C
 ES="http://127.0.0.1:9200"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-for r in GreenCircle tkt; do
+for r in greencircle tkt; do
   echo "=== $r ==="
   curl -s --max-time 20 -u "$ADMIN" "$ES/_security/role/$r" | python3 -c "
 import sys,json
@@ -15,9 +15,9 @@ print('  indices:',[i.get('names') for i in d.get('indices',[])])
 " 2>&1
 done
 echo "=== spaces for tenants ==="
-for u in grc_user tkt_user; do
+for u in greencircle_user tkt_user; do
   case "$u" in
-    grc_user) p='<TENANT1_PASSWORD>' ;;
+    greencircle_user) p='<TENANT1_PASSWORD>' ;;
     tkt_user) p='<TENANT2_PASSWORD>' ;;
   esac
   echo -n "$u: "

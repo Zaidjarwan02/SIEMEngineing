@@ -31,7 +31,7 @@ sec "CUSTOM ROLES"
 $C "$ES/_security/role" | python3 -c "
 import sys,json
 d=json.load(sys.stdin)
-for r in ('GreenCircle','tkt'):
+for r in ('greencircle','tkt'):
     if r in d:
         v=d[r]
         print(f'--- {r} ---')
@@ -42,14 +42,14 @@ sec "SPACES"
 $K "$KB/api/spaces/space" | python3 -m json.tool 2>/dev/null
 
 sec "DATA VIEWS PER SPACE"
-for sp in grcico-com tkt-org; do
+for sp in greencircle tkt; do
   echo "--- space $sp ---"
   curl -s --max-time 10 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/data_views" \
     | python3 -c "import sys,json;d=json.load(sys.stdin);[print('  ',v.get('name'),'->',v.get('title')) for v in d.get('data_view',[])]" 2>/dev/null
 done
 
 sec "DETECTION RULES PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   total=$(curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1" \
     | python3 -c "import sys,json;print(json.load(sys.stdin).get('total','?'))" 2>/dev/null)
   enabled=$(curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1&filter=alert.attributes.enabled:true" \
@@ -63,7 +63,7 @@ curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/api/fleet/epm/packages/security_d
   | python3 -c "import sys,json;d=json.load(sys.stdin);i=d.get('item',d);print(i.get('version'),i.get('status'))" 2>/dev/null
 
 sec "DASHBOARDS PER SPACE (should be empty after test cleanup)"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   n=$(curl -s --max-time 10 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/saved_objects/_find?type=dashboard&per_page=1" | python3 -c "import sys,json;print(json.load(sys.stdin).get('total','?'))" 2>/dev/null)
   echo "space $sp dashboards: $n"
 done

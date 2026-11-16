@@ -3,7 +3,7 @@ set +e
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
 X='kbn-xsrf: true'
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo "=== $sp all rules ==="
   curl -s --max-time 180 -u "$ADMIN" -H "$X" \
     "$KB/s/$sp/api/detection_engine/rules/_find?per_page=10000&page=1" \

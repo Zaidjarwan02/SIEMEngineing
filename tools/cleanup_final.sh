@@ -10,7 +10,7 @@ curl -s -u "$ADMIN" "$ES/_cat/shards?v&h=index,shard,prirep,state,unassigned.rea
 
 echo
 echo "=== data views with ids in each tenant space ==="
-for sp in grcico-com tkt-org; do
+for sp in greencircle tkt; do
   echo "--- $sp ---"
   curl -s -u "$ADMIN" -H "$X" "$KB/s/$sp/api/data_views" | python3 -c "
 import sys,json
@@ -21,12 +21,12 @@ for v in d.get('data_view',[]):
 done
 
 echo
-echo "=== delete leftover test index grc-admin-test ==="
-curl -s -u "$ADMIN" -X DELETE "$ES/grc-admin-test"; echo
+echo "=== delete leftover test index greencircle-admin-test ==="
+curl -s -u "$ADMIN" -X DELETE "$ES/greencircle-admin-test"; echo
 
 echo
 echo "=== delete unnamed global logs-*/metrics-* data views inside tenant spaces ==="
-for sp in grcico-com tkt-org; do
+for sp in greencircle tkt; do
   ids=$(curl -s -u "$ADMIN" -H "$X" "$KB/s/$sp/api/data_views" | python3 -c "
 import sys,json
 d=json.load(sys.stdin)
@@ -42,7 +42,7 @@ done
 
 echo
 echo "=== remaining data views ==="
-for sp in grcico-com tkt-org; do
+for sp in greencircle tkt; do
   echo "--- $sp ---"
   curl -s -u "$ADMIN" -H "$X" "$KB/s/$sp/api/data_views" | python3 -c "
 import sys,json

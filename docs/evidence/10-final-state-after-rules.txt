@@ -4,7 +4,7 @@ captured 2026-11-12 from the live cluster
 ========== CLUSTER ==========
 {
     "name": "node-1",
-    "cluster_name": "grcico.SIEM",
+    "cluster_name": "greencircle.SIEM",
     "cluster_uuid": "qLpz5Y1MSxqOucWlV9vndg",
     "version": {
         "number": "8.19.24",
@@ -20,7 +20,7 @@ captured 2026-11-12 from the live cluster
     "tagline": "You Know, for Search"
 }
 {
-  "cluster_name" : "grcico.SIEM",
+  "cluster_name" : "greencircle.SIEM",
   "status" : "yellow",
   "timed_out" : false,
   "number_of_nodes" : 1,
@@ -41,7 +41,7 @@ name   ip            version heap.percent ram.percent cpu disk.avail
 node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
 
 ========== CUSTOM ROLES ==========
---- GreenCircle ---
+--- greencircle ---
 {
   "cluster": [],
   "indices": [
@@ -60,7 +60,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
     },
     {
       "names": [
-        "grc-*"
+        "greencircle-*"
       ],
       "privileges": [
         "all"
@@ -69,8 +69,8 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
     },
     {
       "names": [
-        ".alerts-security.alerts-grcico-com*",
-        ".internal.alerts-security.alerts-grcico-com*"
+        ".alerts-security.alerts-greencircle*",
+        ".internal.alerts-security.alerts-greencircle*"
       ],
       "privileges": [
         "all"
@@ -85,7 +85,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
         "space_all"
       ],
       "resources": [
-        "space:grcico-com"
+        "space:greencircle"
       ]
     },
     {
@@ -98,7 +98,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
       ]
     }
   ],
-  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space."
+  "description": "greencircle tenant: full read/write on greencircle data and greencircle-* only; full UI in space greencircle; read-only in shared Default space."
 }
 --- tkt ---
 {
@@ -128,8 +128,8 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
     },
     {
       "names": [
-        ".alerts-security.alerts-tkt-org*",
-        ".internal.alerts-security.alerts-tkt-org*"
+        ".alerts-security.alerts-tkt*",
+        ".internal.alerts-security.alerts-tkt*"
       ],
       "privileges": [
         "all"
@@ -144,7 +144,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
         "space_all"
       ],
       "resources": [
-        "space:tkt-org"
+        "space:tkt"
       ]
     },
     {
@@ -157,7 +157,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
       ]
     }
   ],
-  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space."
+  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt; read-only in shared Default space."
 }
 
 ========== SPACES ==========
@@ -171,7 +171,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
         "_reserved": true
     },
     {
-        "id": "grcico-com",
+        "id": "greencircle",
         "name": "greencircle",
         "color": "#9170B8",
         "initials": "g",
@@ -180,7 +180,7 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
         "solution": "classic"
     },
     {
-        "id": "tkt-org",
+        "id": "tkt",
         "name": "tkt",
         "color": "#B9A888",
         "initials": "t",
@@ -192,8 +192,8 @@ node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
 
 ========== DETECTION RULES PER SPACE ==========
 space default: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
-space grcico-com: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
-space tkt-org: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space greencircle: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space tkt: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
 installed security_detection_engine version: 8.19.37 installed
 
 MISSING SECTION: DASHBOARDS PER SPACE

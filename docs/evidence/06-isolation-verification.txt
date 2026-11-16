@@ -3,64 +3,64 @@ created data streams: logs-/metrics- test-{greencircle,tkt}
 created one dashboard in each tenant space
 
 =========== 2. ELASTICSEARCH DATA ISOLATION ===========
-PASS  grc_user READ own data stream (expected 200, got 200)
-PASS  grc_user READ other data stream (0 hits) (expected 0, got 0)
-PASS  grc_user WRITE own data stream (expected 201, got 201)
-PASS  grc_user WRITE other data stream (403) (expected 403, got 403)
+PASS  greencircle_user READ own data stream (expected 200, got 200)
+PASS  greencircle_user READ other data stream (0 hits) (expected 0, got 0)
+PASS  greencircle_user WRITE own data stream (expected 201, got 201)
+PASS  greencircle_user WRITE other data stream (403) (expected 403, got 403)
 PASS  tkt_user READ own data stream (expected 200, got 200)
 PASS  tkt_user READ other data stream (0 hits) (expected 0, got 0)
 PASS  tkt_user WRITE own data stream (expected 201, got 201)
 PASS  tkt_user WRITE other data stream (403) (expected 403, got 403)
 
 =========== 3. WILDCARD NAMESPACE ISOLATION (run-scoped hits) ===========
-PASS  grc_user sees own logs (2 run docs) (expected 2, got 2)
-PASS  grc_user sees own metrics (1 run doc) (expected 1, got 1)
-PASS  grc_user sees 0 tkt logs (expected 0, got 0)
-PASS  grc_user sees 0 tkt metrics (expected 0, got 0)
+PASS  greencircle_user sees own logs (2 run docs) (expected 2, got 2)
+PASS  greencircle_user sees own metrics (1 run doc) (expected 1, got 1)
+PASS  greencircle_user sees 0 tkt logs (expected 0, got 0)
+PASS  greencircle_user sees 0 tkt metrics (expected 0, got 0)
 PASS  tkt_user sees own logs (2 run docs) (expected 2, got 2)
 PASS  tkt_user sees own metrics (1 run doc) (expected 1, got 1)
-PASS  tkt_user sees 0 grc logs (expected 0, got 0)
-PASS  tkt_user sees 0 grc metrics (expected 0, got 0)
+PASS  tkt_user sees 0 greencircle logs (expected 0, got 0)
+PASS  tkt_user sees 0 greencircle metrics (expected 0, got 0)
 
 =========== 4. ALERT-INDEX ISOLATION ===========
-PASS  grc_user blocked from tkt alert index (expected 403, got 403)
-PASS  tkt_user blocked from grc alert index (expected 403, got 403)
+PASS  greencircle_user blocked from tkt alert index (expected 403, got 403)
+PASS  tkt_user blocked from greencircle alert index (expected 403, got 403)
 
 =========== 5. KIBANA SPACE LIST VISIBILITY ===========
-grc_user spaces: [{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"grcico-com","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
-tkt_user spaces: [{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"tkt-org","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
-PASS  grc_user sees shared default space
-PASS  grc_user does not see tkt space
+greencircle_user spaces: [{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"greencircle","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+tkt_user spaces: [{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"tkt","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+PASS  greencircle_user sees shared default space
+PASS  greencircle_user does not see tkt space
 PASS  tkt_user sees shared default space
-PASS  tkt_user does not see grc space
+PASS  tkt_user does not see greencircle space
 
 =========== 6. KIBANA CROSS-SPACE SAVED OBJECTS ===========
-PASS  grc_user sees own dashboards (>0) (expected yes, got yes)
-PASS  grc_user sees 0 tkt dashboards (expected 0, got 0)
-PASS  grc_user can READ shared default space (expected 200, got 200)
-PASS  grc_user sees shared default dashboards (>0) (expected yes, got yes)
+PASS  greencircle_user sees own dashboards (>0) (expected yes, got yes)
+PASS  greencircle_user sees 0 tkt dashboards (expected 0, got 0)
+PASS  greencircle_user can READ shared default space (expected 200, got 200)
+PASS  greencircle_user sees shared default dashboards (>0) (expected yes, got yes)
 PASS  tkt_user sees own dashboards (>0) (expected yes, got yes)
-PASS  tkt_user sees 0 grc dashboards (expected 0, got 0)
+PASS  tkt_user sees 0 greencircle dashboards (expected 0, got 0)
 PASS  tkt_user can READ shared default space (expected 200, got 200)
 PASS  tkt_user sees shared default dashboards (>0) (expected yes, got yes)
 
 =========== 7. KIBANA CROSS-SPACE WRITE / DIRECT ACCESS ===========
-PASS  grc_user create dashboard in own space (expected 200, got 200)
-PASS  grc_user blocked creating dashboard in tkt space (expected 403, got 403)
-PASS  grc_user blocked creating dashboard in default space (expected 403, got 403)
+PASS  greencircle_user create dashboard in own space (expected 200, got 200)
+PASS  greencircle_user blocked creating dashboard in tkt space (expected 403, got 403)
+PASS  greencircle_user blocked creating dashboard in default space (expected 403, got 403)
 PASS  tkt_user create dashboard in own space (expected 200, got 200)
-PASS  tkt_user blocked creating dashboard in grc space (expected 403, got 403)
+PASS  tkt_user blocked creating dashboard in greencircle space (expected 403, got 403)
 PASS  tkt_user blocked creating dashboard in default space (expected 403, got 403)
-PASS  grc_user direct GET of known tkt object (expected 403, got 403)
-PASS  grc_user direct DELETE of known tkt object (expected 403, got 403)
-PASS  grc_user cannot UPDATE shared default object (expected 403, got 403)
-PASS  grc_user cannot DELETE shared default object (expected 403, got 403)
+PASS  greencircle_user direct GET of known tkt object (expected 403, got 403)
+PASS  greencircle_user direct DELETE of known tkt object (expected 403, got 403)
+PASS  greencircle_user cannot UPDATE shared default object (expected 403, got 403)
+PASS  greencircle_user cannot DELETE shared default object (expected 403, got 403)
 PASS  tkt_user cannot DELETE shared default object (expected 403, got 403)
 
 =========== 8. PRIVILEGE ESCALATION CHECKS ===========
-PASS  grc_user cannot read security users (expected 403, got 403)
-PASS  grc_user cannot read cluster health (expected 403, got 403)
-PASS  grc_user cannot create index outside its namespace (expected 403, got 403)
+PASS  greencircle_user cannot read security users (expected 403, got 403)
+PASS  greencircle_user cannot read cluster health (expected 403, got 403)
+PASS  greencircle_user cannot create index outside its namespace (expected 403, got 403)
 PASS  tkt_user cannot read security users (expected 403, got 403)
 PASS  tkt_user cannot read cluster health (expected 403, got 403)
 PASS  tkt_user cannot create index outside its namespace (expected 403, got 403)

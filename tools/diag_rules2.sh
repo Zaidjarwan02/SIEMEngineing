@@ -7,7 +7,7 @@ ADMIN="elastic:<ADMIN_PASSWORD>"
 J='Content-Type: application/json'; X='kbn-xsrf: true'
 
 echo "=== count security-rule by namespaces term ==="
-for ns in default grcico-com tkt-org; do
+for ns in default greencircle tkt; do
   echo -n "  namespaces=$ns: "
   curl -s --max-time 30 -u "$ADMIN" -H "$J" -X POST "$ES/.kibana_security_solution_8.19.24_001/_count" \
     -d "{\"query\":{\"term\":{\"namespaces\":\"$ns\"}}}" | head -c 150; echo
@@ -40,7 +40,7 @@ print(' aggs:',json.dumps(d.get('aggregations',{}))[:600])
 " 2>&1
 
 echo "=== admin _find per space with explicit filter ==="
-for sp in grcico-com tkt-org; do
+for sp in greencircle tkt; do
   echo -n "  $sp (no filter): "
   curl -s --max-time 30 -u "$ADMIN" -H "$X" "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1" \
     | python3 -c "import sys,json;d=json.load(sys.stdin);print('total',d.get('total'),'err',d.get('message'))" 2>&1

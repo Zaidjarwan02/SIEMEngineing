@@ -30,8 +30,8 @@ Phases 1–6 were performed on **2026-11-11**; phases 7–9 on **2026-11-12**.
 | 2.3 | Roles, spaces, users baseline | `tools/es_roles.sh` | `docs/evidence/03-roles-spaces-baseline.txt` |
 | 2.4 | Fleet, detection, heap baseline | `tools/es_fleet.sh` | `docs/evidence/04-fleet-detection-baseline.txt` |
 
-Key findings: ES/Kibana 8.19.24, Basic license, cluster `grcico.SIEM`, spaces `default` /
-`grcico-com` / `tkt-org`, roles `GreenCircle` / `tkt` with **overly broad `logs-*` /
+Key findings: ES/Kibana 8.19.24, Basic license, cluster `greencircle.SIEM`, spaces `default` /
+`greencircle` / `tkt`, roles `greencircle` / `tkt` with **overly broad `logs-*` /
 `metrics-*` privileges**, no tenant users, Kibana encryption keys missing.
 
 ## Phase 3 — Fix Kibana encryption keys
@@ -48,11 +48,11 @@ Script: `tools/fix_kibana_keys.sh`.
 
 | # | Action | Detail |
 |---|--------|--------|
-| 4.1 | Rewrote role `GreenCircle` | `all` on `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `grc-*`; `all` on its own alert indices; `space_all` on `space:grcico-com`; no cluster privileges |
-| 4.2 | Rewrote role `tkt` | Same model with `tkt` namespace and `space:tkt-org` |
-| 4.3 | Created user `grc_user` | Role `GreenCircle`; metadata `tenant=greencircle` |
+| 4.1 | Rewrote role `greencircle` | `all` on `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*`; `all` on its own alert indices; `space_all` on `space:greencircle`; no cluster privileges |
+| 4.2 | Rewrote role `tkt` | Same model with `tkt` namespace and `space:tkt` |
+| 4.3 | Created user `greencircle_user` | Role `greencircle`; metadata `tenant=greencircle` |
 | 4.4 | Created user `tkt_user` | Role `tkt`; metadata `tenant=tkt` |
-| 4.5 | Created per-space data views | GreenCircle Logs/Metrics/Custom; TKT Logs/Metrics/Custom |
+| 4.5 | Created per-space data views | greencircle Logs/Metrics/Custom; TKT Logs/Metrics/Custom |
 
 Script: `tools/provision_tenants.sh`.
 Output: `docs/evidence/05-provisioning-output.txt`.
@@ -61,9 +61,9 @@ Output: `docs/evidence/05-provisioning-output.txt`.
 
 | | Before | After |
 |---|--------|-------|
-| GreenCircle indices | `logs-*`, `metrics-*` (all tenants) | `*-greencircle*`, `grc-*`, own alert indices only |
+| greencircle indices | `logs-*`, `metrics-*` (all tenants) | `*-greencircle*`, `greencircle-*`, own alert indices only |
 | tkt indices | `logs-*`, `metrics-*` (all tenants) | `*-tkt*`, `tkt-*`, own alert indices only |
-| Users | none | `grc_user`, `tkt_user` |
+| Users | none | `greencircle_user`, `tkt_user` |
 | Data views | global `logs-*` / `metrics-*` | tenant-scoped per space |
 
 Fleet policies and existing spaces were left unchanged.
@@ -92,8 +92,8 @@ and additionally checks that direct GET/DELETE of a known foreign object returns
 
 | # | Action | Detail |
 |---|--------|--------|
-| 6.1 | Deleted leftover test index | `grc-admin-test` (created during an early failed test) |
-| 6.2 | Removed unnamed global data views | `logs-*` and `metrics-*` inside `grcico-com` and `tkt-org` |
+| 6.1 | Deleted leftover test index | `greencircle-admin-test` (created during an early failed test) |
+| 6.2 | Removed unnamed global data views | `logs-*` and `metrics-*` inside `greencircle` and `tkt` |
 | 6.3 | Removed all verification artifacts | Test data streams, test indices, test dashboards |
 | 6.4 | Confirmed clean state | Cluster **green**, 48 shards, 0 unassigned; each tenant space has exactly 3 named data views; 0 tenant dashboards |
 
@@ -107,8 +107,8 @@ Final snapshot: `docs/evidence/08-final-state-snapshot.txt`.
 | 7.2 | Cloned the source repo for reference | `github.com/elastic/detection-rules` → `%TEMP%\dr-repo` on Windows (2,348 TOML rules) |
 | 7.3 | Installed the package | `POST /api/fleet/epm/packages/security_detection_engine {"force":true}` — 2,128 rules, 2,033 installable on Basic |
 | 7.4 | Installed rules into Default | `POST /internal/detection_engine/prebuilt_rules/installation/_perform {"mode":"ALL_RULES"}` — 2,033/2,033 in 109 s |
-| 7.5 | Installed rules into tenant spaces **as the tenant users** | `grc_user` → `grcico-com`, `tkt_user` → `tkt-org`; keeps rule API keys tenant-scoped |
-| 7.6 | Removed duplicates | An interrupted first `grcico-com` install left 253 duplicate `rule_id`s; `tools/dr_dedup.sh` removed them → 2,033 unique |
+| 7.5 | Installed rules into tenant spaces **as the tenant users** | `greencircle_user` → `greencircle`, `tkt_user` → `tkt`; keeps rule API keys tenant-scoped |
+| 7.6 | Removed duplicates | An interrupted first `greencircle` install left 253 duplicate `rule_id`s; `tools/dr_dedup.sh` removed them → 2,033 unique |
 | 7.7 | Set a uniform disabled baseline | Disabled the auto-enabled immutable `Endpoint Security (Elastic Defend)` rule in all three spaces → 0 enabled |
 | 7.8 | Verified rule isolation | `tools/dr_verify_isolation.sh` — 9/9 at the time (own `200`, cross-space `403`) |
 
@@ -124,7 +124,7 @@ while tenant data stays isolated.
 
 | # | Action | Detail |
 |---|--------|--------|
-| 8.1 | Added `space_read` on `space:default` | To both `GreenCircle` and `tkt` roles; `space_all` on the own space unchanged |
+| 8.1 | Added `space_read` on `space:default` | To both `greencircle` and `tkt` roles; `space_all` on the own space unchanged |
 | 8.2 | Verified read access | Both tenants see `default` + own space; can read Default dashboards and the 2,062 shared rules |
 | 8.3 | Verified write denial | Creating/updating/deleting in Default → `403` for both tenants |
 | 8.4 | Verified cross-tenant isolation unchanged | Other tenant's space still `403`; other tenant's data still `0` hits / `403` |
@@ -147,7 +147,7 @@ be reused; `tools/restore_roles_default_shared.sh` is the supported path.
 |---|--------|--------|
 | 9.1 | Detected rule loss | Verification showed 0 rules in both tenant spaces and 1 enabled rule in Default |
 | 9.2 | Root cause | Kibana auto-installed `security_detection_engine` **8.19.37** at 05:23 UTC (from 8.19.36). The upgrade removed tenant-space rule copies and re-enabled the immutable Endpoint rule |
-| 9.3 | Resynced all spaces | `tools/dr_sync_space.sh` — install missing + upgrade outdated + disable all enabled. Result: **2,062 rules, 0 enabled** in `default`, `grcico-com`, `tkt-org` |
+| 9.3 | Resynced all spaces | `tools/dr_sync_space.sh` — install missing + upgrade outdated + disable all enabled. Result: **2,062 rules, 0 enabled** in `default`, `greencircle`, `tkt` |
 | 9.4 | Re-verified | `tools/dr_verify_isolation.sh` — **12/12**; `tools/verify_isolation_final.sh` — **47/47** |
 | 9.5 | Captured post-change state | `docs/evidence/09-system-audit-after-rules.txt`, `docs/evidence/10-final-state-after-rules.txt`, `docs/evidence/11-detection-rules-verification.txt` |
 
@@ -161,10 +161,10 @@ Default space showing all tenants' alerts, and documented new-tenant steps.
 | 10.1 | Discovered the bulk-action API | `POST /s/<space>/api/detection_engine/rules/_bulk_action` supports `{"action":"enable","ids":[...]}`; max **100 ids** per request |
 | 10.2 | Verified tenant enablement | A tenant user can enable a rule; Kibana creates the tenant-scoped API key automatically (API keys 51 → 52) |
 | 10.3 | Enabled Default rules | 2,062/2,062 in `default` as `elastic`; 21 batches, zero failures, ~126 s |
-| 10.4 | Enabled tenant rules | 2,062/2,062 in `grcico-com` as `grc_user` (~141 s) and `tkt-org` as `tkt_user` (~138 s); zero batch failures |
+| 10.4 | Enabled tenant rules | 2,062/2,062 in `greencircle` as `greencircle_user` (~141 s) and `tkt` as `tkt_user` (~138 s); zero batch failures |
 | 10.5 | Granted shared Default alert read | Added `read` + `view_index_metadata` on `.alerts-security.alerts-default*` and `.internal.alerts-security.alerts-default*` to both roles; tenants can view, not write |
 | 10.6 | Verified alert visibility | Both tenants can search/read Default alerts (`200`), cannot write them (`403`); cross-tenant alert indices remain `403`; the attempted acknowledgement updated 0 docs and the alert stayed `open` |
-| 10.7 | Captured state | 6,236 API keys; Default alert index 2 alerts; `tkt-org` 1 alert; execution status/failure reasons sampled |
+| 10.7 | Captured state | 6,236 API keys; Default alert index 2 alerts; `tkt` 1 alert; execution status/failure reasons sampled |
 | 10.8 | Extended verification | `tools/verify_isolation_final.sh` → **53/53**; `tools/dr_verify_isolation.sh` → **15/15**; login suite unchanged |
 | 10.9 | Added new-tenant runbook | [11-add-new-tenant.md](11-add-new-tenant.md) with role JSON, space/user/data-view/rule/verify steps |
 
@@ -221,7 +221,7 @@ This folder: README, 01–10, credentials file, and `evidence/`.
 
 ## Not changed
 
-- Fleet agent policies (`grcico`, `tkt`, `Agent policy 1`) — left as-is.
+- Fleet agent policies (`greencircle`, `tkt`, `Agent policy 1`) — left as-is.
 - Existing spaces and their display names.
 - Pre-existing `default` space content (40 dashboards) — now readable by tenants, still admin-writable only.
 - Elasticsearch/Kibana versions.

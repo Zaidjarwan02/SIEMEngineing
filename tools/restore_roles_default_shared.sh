@@ -16,7 +16,7 @@ J='Content-Type: application/json'
 X='kbn-xsrf: true'
 sec() { printf '\n\n========== %s ==========\n' "$1"; }
 
-sec "1. PUT canonical role GreenCircle (+ space_read on default)"
+sec "1. PUT canonical role greencircle (+ space_read on default)"
 cat > /tmp/role_greencircle_restore.json <<'EOF'
 {
   "cluster": [],
@@ -33,14 +33,14 @@ cat > /tmp/role_greencircle_restore.json <<'EOF'
       "allow_restricted_indices": false
     },
     {
-      "names": ["grc-*"],
+      "names": ["greencircle-*"],
       "privileges": ["all"],
       "allow_restricted_indices": false
     },
     {
       "names": [
-        ".alerts-security.alerts-grcico-com*",
-        ".internal.alerts-security.alerts-grcico-com*"
+        ".alerts-security.alerts-greencircle*",
+        ".internal.alerts-security.alerts-greencircle*"
       ],
       "privileges": ["all"],
       "allow_restricted_indices": true
@@ -58,7 +58,7 @@ cat > /tmp/role_greencircle_restore.json <<'EOF'
     {
       "application": "kibana-.kibana",
       "privileges": ["space_all"],
-      "resources": ["space:grcico-com"]
+      "resources": ["space:greencircle"]
     },
     {
       "application": "kibana-.kibana",
@@ -66,10 +66,10 @@ cat > /tmp/role_greencircle_restore.json <<'EOF'
       "resources": ["space:default"]
     }
   ],
-  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space and its alerts."
+  "description": "Tenant 1 (greencircle): full read/write on its greencircle data streams and greencircle-* indices; full UI in space greencircle; read-only in the shared Default space and its alerts."
 }
 EOF
-curl -s --max-time 30 -u "$ADMIN" -H "$J" -X PUT "$ES/_security/role/GreenCircle" \
+curl -s --max-time 30 -u "$ADMIN" -H "$J" -X PUT "$ES/_security/role/greencircle" \
   -d @/tmp/role_greencircle_restore.json | head -c 400; echo
 
 sec "2. PUT canonical role tkt (+ space_read on default)"
@@ -95,8 +95,8 @@ cat > /tmp/role_tkt_restore.json <<'EOF'
     },
     {
       "names": [
-        ".alerts-security.alerts-tkt-org*",
-        ".internal.alerts-security.alerts-tkt-org*"
+        ".alerts-security.alerts-tkt*",
+        ".internal.alerts-security.alerts-tkt*"
       ],
       "privileges": ["all"],
       "allow_restricted_indices": true
@@ -114,7 +114,7 @@ cat > /tmp/role_tkt_restore.json <<'EOF'
     {
       "application": "kibana-.kibana",
       "privileges": ["space_all"],
-      "resources": ["space:tkt-org"]
+      "resources": ["space:tkt"]
     },
     {
       "application": "kibana-.kibana",
@@ -122,14 +122,14 @@ cat > /tmp/role_tkt_restore.json <<'EOF'
       "resources": ["space:default"]
     }
   ],
-  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space and its alerts."
+  "description": "Tenant 2 (TKT): full read/write on its tkt data streams and tkt-* indices; full UI in space tkt; read-only in the shared Default space and its alerts."
 }
 EOF
 curl -s --max-time 30 -u "$ADMIN" -H "$J" -X PUT "$ES/_security/role/tkt" \
   -d @/tmp/role_tkt_restore.json | head -c 400; echo
 
 sec "3. VERIFY role definitions (unwrapped)"
-for r in GreenCircle tkt; do
+for r in greencircle tkt; do
   echo "--- $r ---"
   curl -s --max-time 30 -u "$ADMIN" "$ES/_security/role/$r" | python3 -c "
 import sys,json
@@ -144,7 +144,7 @@ for a in d.get('applications',[]):
 done
 
 sec "4. SPACE VISIBILITY PER TENANT"
-for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u spaces: "
   curl -s --max-time 30 -u "$c" -H "$X" "$KB/api/spaces/space" \
@@ -152,7 +152,7 @@ for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
 done
 
 sec "5. DEFAULT SPACE READ (should be 200, shared)"
-for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u GET default saved objects: "
   curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" \
@@ -160,7 +160,7 @@ for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
 done
 
 sec "6. DEFAULT SPACE WRITE (should be 403, read-only)"
-for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
+for pair in "greencircle_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u POST dashboard into default: "
   curl -s -o /tmp/dw_$u.json -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" -H "$J" \
@@ -170,7 +170,7 @@ for pair in "grc_user:<TENANT1_PASSWORD>" "tkt_user:<TENANT2_PASSWORD>"; do
 done
 
 sec "7. OWN SPACE WRITE (should be 200, full access)"
-for pair in "grc_user:<TENANT1_PASSWORD>:grcico-com" "tkt_user:<TENANT2_PASSWORD>:tkt-org"; do
+for pair in "greencircle_user:<TENANT1_PASSWORD>:greencircle" "tkt_user:<TENANT2_PASSWORD>:tkt"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2); sp=$(echo "$pair" | cut -d: -f3)
   echo -n "$u POST dashboard into $sp: "
   curl -s -o /tmp/ow_$u.json -w '%{http_code}\n' --max-time 30 -u "$c" -H "$X" -H "$J" \
@@ -183,11 +183,11 @@ for pair in "grc_user:<TENANT1_PASSWORD>:grcico-com" "tkt_user:<TENANT2_PASSWORD
 done
 
 sec "8. CROSS-TENANT STILL BLOCKED (should be 403)"
-echo -n "grc_user -> tkt-org saved objects: "
-curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "grc_user:<TENANT1_PASSWORD>" -H "$X" \
-  "$KB/s/tkt-org/api/saved_objects/_find?type=dashboard&per_page=1"
-echo -n "tkt_user -> grcico-com saved objects: "
+echo -n "greencircle_user -> tkt saved objects: "
+curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "greencircle_user:<TENANT1_PASSWORD>" -H "$X" \
+  "$KB/s/tkt/api/saved_objects/_find?type=dashboard&per_page=1"
+echo -n "tkt_user -> greencircle saved objects: "
 curl -s -o /dev/null -w '%{http_code}\n' --max-time 30 -u "tkt_user:<TENANT2_PASSWORD>" -H "$X" \
-  "$KB/s/grcico-com/api/saved_objects/_find?type=dashboard&per_page=1"
+  "$KB/s/greencircle/api/saved_objects/_find?type=dashboard&per_page=1"
 
 sec "END"

@@ -9,7 +9,7 @@ set +e
 export LC_ALL=C
 ES="http://127.0.0.1:9200"; KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-GRC="grc_user:<TENANT1_PASSWORD>"
+TENANT1="greencircle_user:<TENANT1_PASSWORD>"
 TKT="tkt_user:<TENANT2_PASSWORD>"
 J='Content-Type: application/json'
 X='kbn-xsrf: true'
@@ -28,42 +28,42 @@ echo "created logs-/metrics- test indices for both tenants"
 
 echo
 echo "=========== ELASTICSEARCH: WILDCARD NAMESPACE ISOLATION ==========="
-res 200 "$(code -u "$GRC" "$ES/logs-*-greencircle*/_search")" "grc_user searches own logs namespace"
-res 403 "$(code -u "$GRC" "$ES/logs-*-tkt*/_search")"          "grc_user blocked from tkt logs namespace"
-res 403 "$(code -u "$GRC" "$ES/metrics-*-tkt*/_search")"       "grc_user blocked from tkt metrics namespace"
-res 403 "$(code -u "$GRC" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "grc_user blocked when mixing both namespaces"
+res 200 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*/_search")" "greencircle_user searches own logs namespace"
+res 403 "$(code -u "$TENANT1" "$ES/logs-*-tkt*/_search")"          "greencircle_user blocked from tkt logs namespace"
+res 403 "$(code -u "$TENANT1" "$ES/metrics-*-tkt*/_search")"       "greencircle_user blocked from tkt metrics namespace"
+res 403 "$(code -u "$TENANT1" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "greencircle_user blocked when mixing both namespaces"
 res 200 "$(code -u "$TKT" "$ES/logs-*-tkt*/_search")"          "tkt_user searches own logs namespace"
-res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*/_search")"  "tkt_user blocked from grc logs namespace"
-res 403 "$(code -u "$TKT" "$ES/metrics-*-greencircle*/_search")" "tkt_user blocked from grc metrics namespace"
+res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*/_search")"  "tkt_user blocked from greencircle logs namespace"
+res 403 "$(code -u "$TKT" "$ES/metrics-*-greencircle*/_search")" "tkt_user blocked from greencircle metrics namespace"
 res 403 "$(code -u "$TKT" "$ES/logs-*-greencircle*,logs-*-tkt*/_search")" "tkt_user blocked when mixing both namespaces"
 
 echo
 echo "=========== ELASTICSEARCH: CROSS-TENANT DOC CONTENT ==========="
-G=$(body -u "$GRC" "$ES/logs-*-tkt*/_search?q=SECRET")
+G=$(body -u "$TENANT1" "$ES/logs-*-tkt*/_search?q=SECRET")
 T=$(body -u "$TKT" "$ES/logs-*-greencircle*/_search?q=SECRET")
-echo "grc_user tkt query result: $(echo "$G" | head -c 200)"
-echo "tkt_user grc query result: $(echo "$T" | head -c 200)"
-echo "$G" | grep -q 'logs-test-tkt' && { echo "FAIL  grc_user saw tkt document"; FAIL=$((FAIL+1)); } || { echo "PASS  grc_user saw no tkt document"; PASS=$((PASS+1)); }
-echo "$T" | grep -q 'logs-test-greencircle' && { echo "FAIL  tkt_user saw grc document"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user saw no grc document"; PASS=$((PASS+1)); }
+echo "greencircle_user tkt query result: $(echo "$G" | head -c 200)"
+echo "tkt_user greencircle query result: $(echo "$T" | head -c 200)"
+echo "$G" | grep -q 'logs-test-tkt' && { echo "FAIL  greencircle_user saw tkt document"; FAIL=$((FAIL+1)); } || { echo "PASS  greencircle_user saw no tkt document"; PASS=$((PASS+1)); }
+echo "$T" | grep -q 'logs-test-greencircle' && { echo "FAIL  tkt_user saw greencircle document"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user saw no greencircle document"; PASS=$((PASS+1)); }
 
 echo
 echo "=========== KIBANA: SPACE-SCOPED SAVED OBJECT ACCESS ==========="
 # Listing dashboards in a space requires privileges in that space.
-res 200 "$(code -u "$GRC" -H "$X" "$KB/s/grcico-com/api/saved_objects/_find?type=dashboard")" "grc_user lists saved objects in own space"
-res 403 "$(code -u "$GRC" -H "$X" "$KB/s/tkt-org/api/saved_objects/_find?type=dashboard")" "grc_user blocked from tkt space saved objects"
-res 403 "$(code -u "$GRC" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "grc_user blocked from default space saved objects"
-res 200 "$(code -u "$TKT" -H "$X" "$KB/s/tkt-org/api/saved_objects/_find?type=dashboard")" "tkt_user lists saved objects in own space"
-res 403 "$(code -u "$TKT" -H "$X" "$KB/s/grcico-com/api/saved_objects/_find?type=dashboard")" "tkt_user blocked from grc space saved objects"
+res 200 "$(code -u "$TENANT1" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "greencircle_user lists saved objects in own space"
+res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "greencircle_user blocked from tkt space saved objects"
+res 403 "$(code -u "$TENANT1" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "greencircle_user blocked from default space saved objects"
+res 200 "$(code -u "$TKT" -H "$X" "$KB/s/tkt/api/saved_objects/_find?type=dashboard")" "tkt_user lists saved objects in own space"
+res 403 "$(code -u "$TKT" -H "$X" "$KB/s/greencircle/api/saved_objects/_find?type=dashboard")" "tkt_user blocked from greencircle space saved objects"
 res 403 "$(code -u "$TKT" -H "$X" "$KB/s/default/api/saved_objects/_find?type=dashboard")" "tkt_user blocked from default space saved objects"
 
 echo
 echo "=========== KIBANA: SPACE LIST VISIBILITY ==========="
-GS=$(body -u "$GRC" -H "$X" "$KB/api/spaces/space")
+GS=$(body -u "$TENANT1" -H "$X" "$KB/api/spaces/space")
 TS=$(body -u "$TKT" -H "$X" "$KB/api/spaces/space")
-echo "grc_user spaces: $GS"
+echo "greencircle_user spaces: $GS"
 echo "tkt_user spaces: $TS"
-echo "$GS" | grep -q '"id":"tkt-org"' && { echo "FAIL  grc_user sees tkt space"; FAIL=$((FAIL+1)); } || { echo "PASS  grc_user does not see tkt space"; PASS=$((PASS+1)); }
-echo "$TS" | grep -q '"id":"grcico-com"' && { echo "FAIL  tkt_user sees grc space"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user does not see grc space"; PASS=$((PASS+1)); }
+echo "$GS" | grep -q '"id":"tkt"' && { echo "FAIL  greencircle_user sees tkt space"; FAIL=$((FAIL+1)); } || { echo "PASS  greencircle_user does not see tkt space"; PASS=$((PASS+1)); }
+echo "$TS" | grep -q '"id":"greencircle"' && { echo "FAIL  tkt_user sees greencircle space"; FAIL=$((FAIL+1)); } || { echo "PASS  tkt_user does not see greencircle space"; PASS=$((PASS+1)); }
 
 echo
 echo "=========== CLEANUP ==========="

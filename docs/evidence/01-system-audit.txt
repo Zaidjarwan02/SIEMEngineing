@@ -440,7 +440,7 @@ Nov 11 09:35:44 ubuntu kernel: vmwgfx 0000:00:02.0: [drm] *ERROR* Please switch 
 [2026-11-11T09:37:15.967+0000][1994][info ][gc,cpu      ] GC(14) User=0.13s Sys=0.00s Real=0.05s
 [2026-11-11T09:37:15.967+0000][1994][info ][safepoint   ] Safepoint "G1CollectForAllocation", Time since last: 13275064550 ns, Reaching safepoint: 34689 ns, At safepoint: 41489223 ns, Leaving safepoint: 57348 ns, Total: 41581260 ns, Threads: 0 runnable, 94 total
 
-==> /var/log/elasticsearch/grcico.SIEM.log <==
+==> /var/log/elasticsearch/greencircle.SIEM.log <==
 [2026-11-11T09:36:42,524][INFO ][o.e.x.d.l.DeprecationIndexingComponent] [node-1] deprecation component started
 [2026-11-11T09:36:42,606][INFO ][o.e.n.j.JdkPosixCLibrary ] [node-1] Sending 28 bytes to socket
 [2026-11-11T09:36:42,650][INFO ][o.e.t.TransportService   ] [node-1] publish_address {192.168.1.212:9300}, bound_addresses {[::]:9300}

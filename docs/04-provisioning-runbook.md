@@ -32,12 +32,12 @@ random keys to `/etc/kibana/kibana.yml` and restarts Kibana).
 
 Decide these four values **before** creating anything:
 
-| Field | Example (GreenCircle) | Rule |
+| Field | Example (greencircle) | Rule |
 |-------|-----------------------|------|
-| Space ID | `grcico-com` | Must already exist (or create it) |
+| Space ID | `greencircle` | Must already exist (or create it) |
 | Data namespace | `greencircle` | Used as the suffix of Fleet data streams (`logs-<dataset>-greencircle`) |
-| Role name | `GreenCircle` | |
-| Username | `grc_user` | |
+| Role name | `greencircle` | |
+| Username | `greencircle_user` | |
 
 > The data namespace must be the **last segment** of every data-stream name. Fleet writes
 > `logs-<dataset>-<namespace>` and `metrics-<dataset>-<namespace>`, so the role pattern
@@ -222,7 +222,7 @@ curl -s -o /dev/null -w '%{http_code}\n' -u 'newtenant_user:PASSWORD' \
 
 ```bash
 curl -s -u "$U" -H 'Content-Type: application/json' \
-  -X POST "$ES/_security/user/grc_user/_password" \
+  -X POST "$ES/_security/user/greencircle_user/_password" \
   -d '{"password":"NEW_STRONG_PASSWORD"}'
 ```
 
@@ -248,18 +248,18 @@ KB=http://127.0.0.1:5601
 
 # 1. disable the user (keeps an audit trail)
 curl -s -u "$U" -H 'Content-Type: application/json' \
-  -X PUT "$ES/_security/user/grc_user" -d '{"enabled":false}'
+  -X PUT "$ES/_security/user/greencircle_user" -d '{"enabled":false}'
 
 # 2. remove the role (after the user is disabled)
-curl -s -u "$U" -X DELETE "$ES/_security/role/GreenCircle"
+curl -s -u "$U" -X DELETE "$ES/_security/role/greencircle"
 
 # 3. delete the space (this deletes its saved objects)
-curl -s -u "$U" -H 'kbn-xsrf: true' -X DELETE "$KB/api/spaces/space/grcico-com"
+curl -s -u "$U" -H 'kbn-xsrf: true' -X DELETE "$KB/api/spaces/space/greencircle"
 
 # 4. (optional, destructive) delete the tenant's data
 curl -s -u "$U" -X DELETE "$ES/logs-*-greencircle*"
 curl -s -u "$U" -X DELETE "$ES/metrics-*-greencircle*"
-curl -s -u "$U" -X DELETE "$ES/grc-*"
+curl -s -u "$U" -X DELETE "$ES/greencircle-*"
 ```
 
 Always take a snapshot before deleting data.

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Provision multi-tenant access for the Elastic MSSP test cluster.
-#   Tenant 1: GreenCircle  -> space grcico-com, data namespace greencircle
-#   Tenant 2: TKT          -> space tkt-org,    data namespace tkt
+#   Tenant 1: greencircle  -> space greencircle, data namespace greencircle
+#   Tenant 2: TKT          -> space tkt,    data namespace tkt
 # Each tenant role gets full read/write ONLY on its own data namespace and
 # full Kibana access ONLY inside its own space.
 set -e
@@ -30,14 +30,14 @@ cat > /tmp/role_greencircle.json <<'EOF'
       "allow_restricted_indices": false
     },
     {
-      "names": ["grc-*"],
+      "names": ["greencircle-*"],
       "privileges": ["all"],
       "allow_restricted_indices": false
     },
     {
       "names": [
-        ".alerts-security.alerts-grcico-com*",
-        ".internal.alerts-security.alerts-grcico-com*"
+        ".alerts-security.alerts-greencircle*",
+        ".internal.alerts-security.alerts-greencircle*"
       ],
       "privileges": ["all"],
       "allow_restricted_indices": true
@@ -47,10 +47,10 @@ cat > /tmp/role_greencircle.json <<'EOF'
     {
       "application": "kibana-.kibana",
       "privileges": ["space_all"],
-      "resources": ["space:grcico-com"]
+      "resources": ["space:greencircle"]
     }
   ],
-  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; UI access limited to space grcico-com."
+  "description": "Tenant 1 (greencircle): full read/write on its greencircle data streams and greencircle-* indices; UI access limited to space greencircle."
 }
 EOF
 
@@ -76,8 +76,8 @@ cat > /tmp/role_tkt.json <<'EOF'
     },
     {
       "names": [
-        ".alerts-security.alerts-tkt-org*",
-        ".internal.alerts-security.alerts-tkt-org*"
+        ".alerts-security.alerts-tkt*",
+        ".internal.alerts-security.alerts-tkt*"
       ],
       "privileges": ["all"],
       "allow_restricted_indices": true
@@ -87,25 +87,25 @@ cat > /tmp/role_tkt.json <<'EOF'
     {
       "application": "kibana-.kibana",
       "privileges": ["space_all"],
-      "resources": ["space:tkt-org"]
+      "resources": ["space:tkt"]
     }
   ],
-  "description": "TKT tenant: full read/write on tkt data and tkt-* only; UI access limited to space tkt-org."
+  "description": "Tenant 2 (TKT): full read/write on its tkt data streams and tkt-* indices; UI access limited to space tkt."
 }
 EOF
 
-echo -n "GreenCircle: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/role/GreenCircle" -d @/tmp/role_greencircle.json; echo
+echo -n "greencircle: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/role/greencircle" -d @/tmp/role_greencircle.json; echo
 echo -n "tkt:         "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/role/tkt" -d @/tmp/role_tkt.json; echo
 
 echo
 echo "### 2. Users"
 
-cat > /tmp/user_grc.json <<'EOF'
+cat > /tmp/user_greencircle.json <<'EOF'
 {
   "password": "<TENANT1_PASSWORD>",
-  "roles": ["GreenCircle"],
-  "full_name": "GreenCircle Tenant User",
-  "email": "grc_user@greencircle.local",
+  "roles": ["greencircle"],
+  "full_name": "greencircle Tenant User",
+  "email": "greencircle_user@greencircle.local",
   "metadata": {"tenant": "greencircle", "managed_by": "mssp-provisioning"}
 }
 EOF
@@ -119,7 +119,7 @@ cat > /tmp/user_tkt.json <<'EOF'
 }
 EOF
 
-echo -n "grc_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/grc_user" -d @/tmp/user_grc.json; echo
+echo -n "greencircle_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/greencircle_user" -d @/tmp/user_greencircle.json; echo
 echo -n "tkt_user: "; curl -s -u "$U" -H "$J" -X PUT "$ES/_security/user/tkt_user" -d @/tmp/user_tkt.json; echo
 
 echo
@@ -134,27 +134,27 @@ mkview() {
   echo
 }
 
-mkview grcico-com 'logs-*-greencircle*'   'GreenCircle Logs'
-mkview grcico-com 'metrics-*-greencircle*' 'GreenCircle Metrics'
-mkview grcico-com 'grc-*'                  'GreenCircle Custom (grc-*)'
-mkview tkt-org    'logs-*-tkt*'            'TKT Logs'
-mkview tkt-org    'metrics-*-tkt*'         'TKT Metrics'
-mkview tkt-org    'tkt-*'                  'TKT Custom (tkt-*)'
+mkview greencircle 'logs-*-greencircle*'   'greencircle Logs'
+mkview greencircle 'metrics-*-greencircle*' 'greencircle Metrics'
+mkview greencircle 'greencircle-*'                  'greencircle Custom (greencircle-*)'
+mkview tkt    'logs-*-tkt*'            'TKT Logs'
+mkview tkt    'metrics-*-tkt*'         'TKT Metrics'
+mkview tkt    'tkt-*'                  'TKT Custom (tkt-*)'
 
 echo
 echo "### 4. Verify role definitions"
-curl -s -u "$U" "$ES/_security/role/GreenCircle" | python3 -m json.tool
+curl -s -u "$U" "$ES/_security/role/greencircle" | python3 -m json.tool
 curl -s -u "$U" "$ES/_security/role/tkt" | python3 -m json.tool
 
 echo
 echo "### 5. Verify users"
-curl -s -u "$U" "$ES/_security/user/grc_user" | python3 -m json.tool
+curl -s -u "$U" "$ES/_security/user/greencircle_user" | python3 -m json.tool
 curl -s -u "$U" "$ES/_security/user/tkt_user" | python3 -m json.tool
 
 echo
 echo "### 6. Verify spaces visible to each user"
-echo "--- grc_user spaces ---"
-curl -s -u "grc_user:<TENANT1_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
+echo "--- greencircle_user spaces ---"
+curl -s -u "greencircle_user:<TENANT1_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
 echo "--- tkt_user spaces ---"
 curl -s -u "tkt_user:<TENANT2_PASSWORD>" -H "$X" "$KB/api/spaces/space"; echo
 

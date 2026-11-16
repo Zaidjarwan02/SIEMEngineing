@@ -8,7 +8,7 @@ documentation set.
 |------|---------------|----------|----------|
 | `evidence/01-system-audit.txt` | `tools/audit.sh` | 2026-11-11 | Host identity, CPU/RAM/disk, network, users, packages, services, ports, ES/Kibana API, security posture, logs, cron |
 | `evidence/02-elastic-discovery.txt` | `tools/es_discover.sh` | 2026-11-11 | ES root, cluster health, nodes, license, indices, data streams, templates, users, roles, role mappings, API keys, snapshots, spaces, config, JVM heap, certs |
-| `evidence/03-roles-spaces-baseline.txt` | `tools/es_roles.sh` | 2026-11-11 | Baseline `GreenCircle`/`tkt` role definitions, users (none), spaces, features, saved objects, ES/Kibana logs |
+| `evidence/03-roles-spaces-baseline.txt` | `tools/es_roles.sh` | 2026-11-11 | Baseline `greencircle`/`tkt` role definitions, users (none), spaces, features, saved objects, ES/Kibana logs |
 | `evidence/04-fleet-detection-baseline.txt` | `tools/es_fleet.sh` | 2026-11-11 | Fleet policies/enrollment/outputs/settings, detection rules/status, alert indices, heap, Kibana keystore, encryption-key presence, per-space index patterns |
 | `evidence/05-provisioning-output.txt` | `tools/provision_tenants.sh` | 2026-11-11 | Role/user/data-view creation responses, final role/user definitions, per-user space visibility |
 | `evidence/06-isolation-verification.txt` | `tools/verify_isolation_final.sh` | 2026-11-12 | **53/53** isolation assertions with expected vs actual values |

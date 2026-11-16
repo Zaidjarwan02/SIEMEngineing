@@ -14,9 +14,9 @@ import urllib.request
 ES = "http://192.168.1.212:9200"
 KB = "http://192.168.1.212:5601"
 ADMIN = ("elastic", "<ADMIN_PASSWORD>")
-GRC = ("grc_user", "<TENANT1_PASSWORD>")
+TENANT1 = ("greencircle_user", "<TENANT1_PASSWORD>")
 TKT = ("tkt_user", "<TENANT2_PASSWORD>")
-SPACES = ("default", "grcico-com", "tkt-org")
+SPACES = ("default", "greencircle", "tkt")
 OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "evidence",
                    "12-rules-enabled-state.txt")
 
@@ -64,7 +64,7 @@ def status_only(base, path, auth=ADMIN, body=None, timeout=120):
 
 out("POST-ENABLEMENT STATE EVIDENCE")
 out("Captured: " + datetime.datetime.now().isoformat(timespec="seconds"))
-out("Cluster: grcico.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic")
+out("Cluster: greencircle.SIEM / node-1 / Elasticsearch+Kibana 8.19.24 / Basic")
 out("")
 
 out("========== 1. CLUSTER HEALTH ==========")
@@ -132,8 +132,8 @@ out("")
 
 out("========== 6. ALERT INDICES ==========")
 for pat in (".alerts-security.alerts-default*", ".internal.alerts-security.alerts-default*",
-            ".alerts-security.alerts-grcico-com*", ".internal.alerts-security.alerts-grcico-com*",
-            ".alerts-security.alerts-tkt-org*", ".internal.alerts-security.alerts-tkt-org*"):
+            ".alerts-security.alerts-greencircle*", ".internal.alerts-security.alerts-greencircle*",
+            ".alerts-security.alerts-tkt*", ".internal.alerts-security.alerts-tkt*"):
     code, d = call(ES, f"/{pat}/_count")
     out(f"  {pat}: HTTP {code} count={d.get('count')}")
 out("")
@@ -156,16 +156,16 @@ out("")
 
 out("========== 8. TENANT ACCESS MATRIX ==========")
 matrix = [
-    ("grc_user", GRC, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
-    ("grc_user", GRC, "tkt alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-tkt-org-000001/_search"),
-    ("grc_user", GRC, "grc alert index read", ES, "/.internal.alerts-security.alerts-grcico-com-000001/_search"),
+    ("greencircle_user", TENANT1, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
+    ("greencircle_user", TENANT1, "tkt alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
+    ("greencircle_user", TENANT1, "greencircle alert index read", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
     ("tkt_user", TKT, "default alert index read", ES, "/.internal.alerts-security.alerts-default-000001/_search"),
-    ("tkt_user", TKT, "grc alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-grcico-com-000001/_search"),
-    ("tkt_user", TKT, "tkt alert index read", ES, "/.internal.alerts-security.alerts-tkt-org-000001/_search"),
+    ("tkt_user", TKT, "greencircle alert index read (must be 403)", ES, "/.internal.alerts-security.alerts-greencircle-000001/_search"),
+    ("tkt_user", TKT, "tkt alert index read", ES, "/.internal.alerts-security.alerts-tkt-000001/_search"),
 ]
 for user, auth, label, base, path in matrix:
     out(f"  {user:9s} {label}: HTTP {status_only(base, path, auth)}")
-for user, auth in (("grc_user", GRC), ("tkt_user", TKT)):
+for user, auth in (("greencircle_user", TENANT1), ("tkt_user", TKT)):
     out(f"  {user:9s} default alert write (must be 403): HTTP "
         f"{status_only(ES, '/.alerts-security.alerts-default/_doc?refresh=true', auth, {'test': 'evidence'})}")
     out(f"  {user:9s} Kibana default alert search: HTTP "
@@ -175,7 +175,7 @@ for user, auth in (("grc_user", GRC), ("tkt_user", TKT)):
 out("")
 
 out("========== 9. TENANT ROLE DEFINITIONS ==========")
-for role in ("GreenCircle", "tkt"):
+for role in ("greencircle", "tkt"):
     _, w = call(ES, f"/_security/role/{role}")
     d = w.get(role, {})
     out(f"  --- {role} ---")
@@ -188,13 +188,13 @@ for role in ("GreenCircle", "tkt"):
 out("")
 
 out("========== 10. TENANT SPACE VISIBILITY ==========")
-for user, auth in (("grc_user", GRC), ("tkt_user", TKT)):
+for user, auth in (("greencircle_user", TENANT1), ("tkt_user", TKT)):
     _, d = call(KB, "/api/spaces/space", auth)
     out(f"  {user}: {sorted(s['id'] for s in d) if isinstance(d, list) else d}")
 out("")
 
 out("========== 11. RULE OWNERSHIP SAMPLE ==========")
-for sp in ("grcico-com", "tkt-org"):
+for sp in ("greencircle", "tkt"):
     out(f"  --- {sp} ---")
     for r in all_rules[sp][:3]:
         out(f"    created_by={r.get('created_by')} updated_by={r.get('updated_by')} "

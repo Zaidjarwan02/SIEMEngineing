@@ -46,7 +46,7 @@ sec "SPACES (raw)"
 $K "$KB/api/spaces/space"
 echo
 sec "INDEX PATTERNS PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo "--- space $sp ---"
   curl -s --max-time 10 -u "$U" -H kbn-xsrf:true "$KB/s/$sp/api/saved_objects/_find?type=index-pattern&per_page=100" | head -c 2000
   echo

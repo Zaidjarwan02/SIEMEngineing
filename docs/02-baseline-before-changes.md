@@ -12,8 +12,8 @@ This is the state of the SIEM **before** tenant accounts were provisioned. Raw e
 | Space ID | Display name | Notes |
 |----------|--------------|-------|
 | `default` | Default | Built-in space, reserved |
-| `grcico-com` | greencircle | GreenCircle tenant space |
-| `tkt-org` | tkt | TKT tenant space |
+| `greencircle` | Tenant 1 | greencircle tenant space |
+| `tkt` | Tenant 2 | TKT tenant space |
 
 ### Elasticsearch roles
 
@@ -21,13 +21,13 @@ Both tenant roles existed but were **dangerously broad**:
 
 ```json
 {
-  "GreenCircle": {
+  "greencircle": {
     "cluster": [],
     "indices": [
       { "names": ["logs-*", "metrics-*"], "privileges": ["all"], "allow_restricted_indices": false }
     ],
     "applications": [
-      { "application": "kibana-.kibana", "privileges": ["space_all"], "resources": ["space:grcico-com"] }
+      { "application": "kibana-.kibana", "privileges": ["space_all"], "resources": ["space:greencircle"] }
     ]
   },
   "tkt": {
@@ -36,7 +36,7 @@ Both tenant roles existed but were **dangerously broad**:
       { "names": ["logs-*", "metrics-*"], "privileges": ["all"], "allow_restricted_indices": false }
     ],
     "applications": [
-      { "application": "kibana-.kibana", "privileges": ["space_all"], "resources": ["space:tkt-org"] }
+      { "application": "kibana-.kibana", "privileges": ["space_all"], "resources": ["space:tkt"] }
     ]
   }
 }
@@ -56,7 +56,7 @@ No tenant users existed. The only users were the built-in service accounts
 
 | Agent policy | Namespace | Agents |
 |--------------|-----------|--------|
-| `grcico` | `greencircle` | 1 (`GC-LD-002`, offline) |
+| `greencircle` | `greencircle` | 1 (`GC-LD-002`, offline) |
 | `tkt` | `tkt` | 0 |
 | `Agent policy 1` | `default` | 0 |
 

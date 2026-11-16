@@ -58,7 +58,7 @@ Port `8220` (Fleet Server) was **not** listening during the audit.
 | Elasticsearch | 8.19.24 | deb |
 | Kibana | 8.19.24 | deb |
 | License | Basic | active, no expiry |
-| Cluster name | `grcico.SIEM` | |
+| Cluster name | `greencircle.SIEM` | |
 | Cluster UUID | `qLpz5Y1MSxqOucWlV9vndg` | |
 | Node | `node-1` | single node |
 

@@ -4,7 +4,7 @@ set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
-GRC="grc_user:<TENANT1_PASSWORD>"
+TENANT1="greencircle_user:<TENANT1_PASSWORD>"
 TKT="tkt_user:<TENANT2_PASSWORD>"
 J='Content-Type: application/json'
 X='kbn-xsrf: true'
@@ -37,28 +37,28 @@ print('summary:',d.get('summary'))
 " 2>/dev/null || head -c 500 "/tmp/inst_$sp.json"
 }
 
-sec "BEFORE: grcico-com"
-status grcico-com; count grcico-com
+sec "BEFORE: greencircle"
+status greencircle; count greencircle
 
-sec "INSTALL grcico-com AS grc_user"
-install_as "$GRC" grcico-com "GreenCircle"
+sec "INSTALL greencircle AS greencircle_user"
+install_as "$TENANT1" greencircle "greencircle"
 
-sec "AFTER: grcico-com"
-status grcico-com; count grcico-com
+sec "AFTER: greencircle"
+status greencircle; count greencircle
 
-sec "INSTALL tkt-org AS tkt_user"
-install_as "$TKT" tkt-org "TKT"
+sec "INSTALL tkt AS tkt_user"
+install_as "$TKT" tkt "TKT"
 
-sec "AFTER: tkt-org"
-status tkt-org; count tkt-org
+sec "AFTER: tkt"
+status tkt; count tkt
 
 sec "RULE COUNTS ALL SPACES"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "space $sp: "; count "$sp"
 done
 
 sec "ENABLED RULES PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo -n "space $sp enabled: "
   curl -s --max-time 60 -u "$ADMIN" -H "$X" \
     "$KB/s/$sp/api/detection_engine/rules/_find?per_page=1&filter=alert.attributes.enabled:true" \

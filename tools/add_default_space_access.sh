@@ -33,11 +33,11 @@ PY
 }
 
 sec "UPDATE ROLES"
-update_role GreenCircle grcico-com
-update_role tkt tkt-org
+update_role greencircle greencircle
+update_role tkt tkt
 
 sec "EFFECTIVE ROLE APPLICATIONS"
-for r in GreenCircle tkt; do
+for r in greencircle tkt; do
   echo "--- $r ---"
   curl -s -u "$ADMIN" "$ES/_security/role/$r" | python3 -c "
 import sys,json
@@ -50,8 +50,8 @@ print('  indices:',[i.get('names') for i in d.get('indices',[])])
 done
 
 sec "TENANT SPACE VISIBILITY"
-GRC="grc_user:<TENANT1_PASSWORD>"; TKT="tkt_user:<TENANT2_PASSWORD>"
-for pair in "grc_user:$GRC" "tkt_user:$TKT"; do
+TENANT1="greencircle_user:<TENANT1_PASSWORD>"; TKT="tkt_user:<TENANT2_PASSWORD>"
+for pair in "greencircle_user:$TENANT1" "tkt_user:$TKT"; do
   u=$(echo "$pair" | cut -d: -f1); c=$(echo "$pair" | cut -d: -f2)
   echo -n "$u spaces: "
   curl -s --max-time 30 -u "$c" -H 'kbn-xsrf: true' "http://127.0.0.1:5601/api/spaces/space" \

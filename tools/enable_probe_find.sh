@@ -7,7 +7,7 @@ X='kbn-xsrf: true'
 
 echo "=== _find with fields + stable sort (5 rules) ==="
 curl -s --max-time 60 -u "$ADMIN" -H "$X" \
-  "$KB/s/grcico-com/api/detection_engine/rules/_find?per_page=5&page=1&sort_field=rule_id&sort_order=asc&fields=id,rule_id,enabled,name" \
+  "$KB/s/greencircle/api/detection_engine/rules/_find?per_page=5&page=1&sort_field=rule_id&sort_order=asc&fields=id,rule_id,enabled,name" \
   -o /tmp/find_fields.json -w 'http=%{http_code} bytes=%{size_download}\n'
 python3 - <<'PY'
 import json
@@ -24,7 +24,7 @@ echo "=== page 1 vs page 2 first id (sort stability) ==="
 for p in 1 2; do
   echo -n "page $p: "
   curl -s --max-time 60 -u "$ADMIN" -H "$X" \
-    "$KB/s/grcico-com/api/detection_engine/rules/_find?per_page=5&page=$p&sort_field=rule_id&sort_order=asc&fields=id,rule_id" \
+    "$KB/s/greencircle/api/detection_engine/rules/_find?per_page=5&page=$p&sort_field=rule_id&sort_order=asc&fields=id,rule_id" \
     | python3 -c "import sys,json;d=json.load(sys.stdin);print([r.get('rule_id') for r in d.get('data',[])])" 2>/dev/null
 done
 

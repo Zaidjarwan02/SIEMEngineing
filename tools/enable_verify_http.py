@@ -8,7 +8,7 @@ import urllib.request
 ES = "http://192.168.1.212:9200"
 KB = "http://192.168.1.212:5601"
 ADMIN = ("elastic", "<ADMIN_PASSWORD>")
-SPACES = ["default", "grcico-com", "tkt-org"]
+SPACES = ["default", "greencircle", "tkt"]
 
 
 def call(base, path, auth=ADMIN, body=None, timeout=300):
@@ -40,10 +40,10 @@ print("\n=== ALERT INDEX COUNTS (admin) ===")
 for pat in [
     ".alerts-security.alerts-default*",
     ".internal.alerts-security.alerts-default*",
-    ".alerts-security.alerts-grcico-com*",
-    ".internal.alerts-security.alerts-grcico-com*",
-    ".alerts-security.alerts-tkt-org*",
-    ".internal.alerts-security.alerts-tkt-org*",
+    ".alerts-security.alerts-greencircle*",
+    ".internal.alerts-security.alerts-greencircle*",
+    ".alerts-security.alerts-tkt*",
+    ".internal.alerts-security.alerts-tkt*",
 ]:
     try:
         d = call(ES, f"/{pat}/_count")

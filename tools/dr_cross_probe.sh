@@ -2,7 +2,7 @@
 set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
-GRC="grc_user:<TENANT1_PASSWORD>"
+TENANT1="greencircle_user:<TENANT1_PASSWORD>"
 TKT="tkt_user:<TENANT2_PASSWORD>"
 X='kbn-xsrf: true'
 probe() {
@@ -14,8 +14,8 @@ probe() {
   head -c 500 /tmp/cross_${name}_${sp}.json; echo
   echo
 }
-probe grc "$GRC" tkt-org
-probe grc "$GRC" default
-probe tkt "$TKT" grcico-com
+probe greencircle "$TENANT1" tkt
+probe greencircle "$TENANT1" default
+probe tkt "$TKT" greencircle
 probe tkt "$TKT" default
 echo DONE

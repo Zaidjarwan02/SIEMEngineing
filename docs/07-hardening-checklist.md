@@ -189,7 +189,7 @@ on disk usage.
 
 ## 8. Fleet Server port 8220 is closed and the only agent is offline — **Medium**
 
-**Evidence:** port 8220 not listening; Fleet agent `GC-LD-002` on policy `grcico` is
+**Evidence:** port 8220 not listening; Fleet agent `GC-LD-002` on policy `greencircle` is
 `offline`.
 
 **Fix:**

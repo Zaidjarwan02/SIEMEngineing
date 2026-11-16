@@ -3,7 +3,7 @@
 ========== ELASTICSEARCH ROOT ==========
 {
   "name" : "node-1",
-  "cluster_name" : "grcico.SIEM",
+  "cluster_name" : "greencircle.SIEM",
   "cluster_uuid" : "qLpz5Y1MSxqOucWlV9vndg",
   "version" : {
     "number" : "8.19.24",
@@ -22,7 +22,7 @@
 
 ========== CLUSTER HEALTH ==========
 {
-  "cluster_name" : "grcico.SIEM",
+  "cluster_name" : "greencircle.SIEM",
   "status" : "green",
   "timed_out" : false,
   "number_of_nodes" : 1,
@@ -56,7 +56,7 @@ node-1 192.168.1.212 8.19.24            7          97  15    1.89     74.3gb
     "issue_date_in_millis" : 1794136648340,
     "max_nodes" : 1000,
     "max_resource_units" : null,
-    "issued_to" : "grcico.SIEM",
+    "issued_to" : "greencircle.SIEM",
     "issuer" : "elasticsearch",
     "start_date_in_millis" : -1
   }
@@ -555,7 +555,7 @@ green  open   .internal.alerts-transform.health.alerts-default-000001           
 
 
 ========== SECURITY ROLES (names) ==========
-GreenCircle
+greencircle
 apm_system
 apm_user
 beats_admin
@@ -999,7 +999,7 @@ watcher_user
     },
     {
       "id" : "0XKSv6EBZ9_Rwre48ETk",
-      "name" : "grcico (30d2ab57-ca45-46bc-9687-b9d7c56cf193)",
+      "name" : "greencircle (30d2ab57-ca45-46bc-9687-b9d7c56cf193)",
       "type" : "rest",
       "creation" : 1794215440613,
       "expiration" : 1794820240613,
@@ -1893,7 +1893,7 @@ watcher_user
 {"page":1,"per_page":100,"total":2,"saved_objects":[{"type":"index-pattern","id":"logs-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"logs-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:25.598Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkwOSw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0},{"type":"index-pattern","id":"metrics-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"metrics-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:26.272Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkxMCw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0}]}
 
 ========== ELASTICSEARCH.YML (effective, no secrets) ==========
-cluster.name: grcico.SIEM
+cluster.name: greencircle.SIEM
 node.name: node-1
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch

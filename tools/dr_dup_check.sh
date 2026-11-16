@@ -8,7 +8,7 @@ X='kbn-xsrf: true'
 sec() { printf '\n\n========== %s ==========\n' "$1"; }
 
 sec "DUPLICATE ANALYSIS PER SPACE"
-for sp in default grcico-com tkt-org; do
+for sp in default greencircle tkt; do
   echo "--- space $sp ---"
   rm -f /tmp/rules_$sp.json
   curl -s --max-time 300 -u "$ADMIN" -H "$X" \

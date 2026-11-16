@@ -17,8 +17,8 @@ This is the day-to-day guide for people logging in as a tenant user. Passwords l
 
 | Tenant | Username | Accessible spaces |
 |--------|----------|-------------------|
-| GreenCircle | `grc_user` | `grcico-com` (full) + `default` (read-only) |
-| TKT | `tkt_user` | `tkt-org` (full) + `default` (read-only) |
+| Tenant 1 (`greencircle`) | `greencircle_user` | `greencircle` (full) + `default` (read-only) |
+| Tenant 2 (`TKT`) | `tkt_user` | `tkt` (full) + `default` (read-only) |
 
 ## Logging in
 
@@ -86,13 +86,13 @@ accounts. The expected role grants are `space_all` on exactly one tenant space a
 
 ### Available data views
 
-**GreenCircle (`grcico-com`)**
+**greencircle (`greencircle`)**
 
-- `GreenCircle Logs` → `logs-*-greencircle*`
-- `GreenCircle Metrics` → `metrics-*-greencircle*`
-- `GreenCircle Custom (grc-*)` → `grc-*`
+- `greencircle Logs` → `logs-*-greencircle*`
+- `greencircle Metrics` → `metrics-*-greencircle*`
+- `greencircle Custom (greencircle-*)` → `greencircle-*`
 
-**TKT (`tkt-org`)**
+**TKT (`tkt`)**
 
 - `TKT Logs` → `logs-*-tkt*`
 - `TKT Metrics` → `metrics-*-tkt*`
@@ -138,7 +138,7 @@ Ask the administrator to run:
 
 ```bash
 curl -s -u 'elastic:<admin-password>' -H 'Content-Type: application/json' \
-  -X POST 'http://127.0.0.1:9200/_security/user/grc_user/_password' \
+  -X POST 'http://127.0.0.1:9200/_security/user/greencircle_user/_password' \
   -d '{"password":"NEW_PASSWORD"}'
 ```
 
@@ -164,7 +164,7 @@ logs-<dataset>-<namespace>
 metrics-<dataset>-<namespace>
 ```
 
-For GreenCircle the namespace is `greencircle`; for TKT it is `tkt`. If a data view shows
+For greencircle the namespace is `greencircle`; for TKT it is `tkt`. If a data view shows
 no results, the agent may not be enrolled or may be writing to a different namespace.
 Check with the administrator.
 

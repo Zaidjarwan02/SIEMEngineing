@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Remove duplicate prebuilt rules in grcico-com (keep one per rule_id).
+# Remove duplicate prebuilt rules in greencircle (keep one per rule_id).
 set +e
 export LC_ALL=C
 KB="http://127.0.0.1:5601"
 ADMIN="elastic:<ADMIN_PASSWORD>"
 X='kbn-xsrf: true'
-SP="grcico-com"
+SP="greencircle"
 
 echo "=== fetching rules in $SP ==="
 curl -s --max-time 300 -u "$ADMIN" -H "$X" \

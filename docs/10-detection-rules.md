@@ -9,8 +9,8 @@ installed in **all three Kibana spaces**:
 | Space | Rules installed | Created by | Enabled |
 |-------|-----------------|------------|---------|
 | `default` (shared general) | 2,062 | `elastic` | **2,062** |
-| `grcico-com` (GreenCircle) | 2,062 | `grc_user` | **2,062** |
-| `tkt-org` (TKT) | 2,062 | `tkt_user` | **2,062** |
+| `greencircle` (Tenant 1) | 2,062 | `greencircle_user` | **2,062** |
+| `tkt` (TKT) | 2,062 | `tkt_user` | **2,062** |
 
 Package: `security_detection_engine` **v8.19.37** (license `basic`).
 Package total: 2,157 rules; **2,062 installable on the Basic license** (95 require a
@@ -36,13 +36,13 @@ and rules in **Default + tenant spaces**:
 
 - **Default** — one shared rule set, readable by both tenants via `space_read`. Tenants
   cannot create, edit, disable or delete these rules (`403` verified).
-- **`grcico-com` / `tkt-org`** — a tenant-scoped copy in each space so a tenant can
+- **`greencircle` / `tkt`** — a tenant-scoped copy in each space so a tenant can
   manage its own detections without touching shared content. Each copy was installed
   **as the tenant user**, so every rule's API key is scoped to that tenant's role and
   namespace. A tenant editing its own rule cannot make it query another tenant's data.
 
 Installing the tenant copies as `elastic` would have produced rules whose API keys can
-read every index; that is why the install was done as `grc_user` / `tkt_user`.
+read every index; that is why the install was done as `greencircle_user` / `tkt_user`.
 
 ## Enabled state: all 2,062 rules in every space
 
@@ -51,8 +51,8 @@ All 2,062 rules in all three spaces are **enabled**:
 | Space | Enabled | API key owner | Alert index |
 |-------|---------|---------------|-------------|
 | `default` | 2,062 / 2,062 | `elastic` (global) | `.alerts-security.alerts-default*` |
-| `grcico-com` | 2,062 / 2,062 | `grc_user` (tenant-scoped) | `.alerts-security.alerts-grcico-com*` |
-| `tkt-org` | 2,062 / 2,062 | `tkt_user` (tenant-scoped) | `.alerts-security.alerts-tkt-org*` |
+| `greencircle` | 2,062 / 2,062 | `greencircle_user` (tenant-scoped) | `.alerts-security.alerts-greencircle*` |
+| `tkt` | 2,062 / 2,062 | `tkt_user` (tenant-scoped) | `.alerts-security.alerts-tkt*` |
 
 Total detection-engine API keys after enablement: **6,236**.
 
@@ -64,8 +64,8 @@ automatically:
 
 ```bash
 python tools/enable_all_rules_http.py default
-python tools/enable_all_rules_http.py grcico-com
-python tools/enable_all_rules_http.py tkt-org
+python tools/enable_all_rules_http.py greencircle
+python tools/enable_all_rules_http.py tkt
 ```
 
 It fetches only the disabled rules (`filter=alert.attributes.enabled:false`),
@@ -79,8 +79,8 @@ enabled count. The API also accepts a query form:
 Individual rules can still be toggled in the UI or with:
 
 ```bash
-curl -u "grc_user:<password>" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' \
-  -X PATCH "http://192.168.1.212:5601/s/grcico-com/api/detection_engine/rules" \
+curl -u "greencircle_user:<password>" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' \
+  -X PATCH "http://192.168.1.212:5601/s/greencircle/api/detection_engine/rules" \
   -d '{"rule_id":"<rule_id>","enabled":true}'
 ```
 
@@ -142,7 +142,7 @@ and ~130–140 s to enable 2,062 rules in one space.
 During this work Kibana **auto-installed `security_detection_engine` 8.19.37** (from
 8.19.36) at 2026-11-12 05:23 UTC. That package upgrade:
 
-- removed the prebuilt rule copies from `grcico-com` and `tkt-org` (they dropped to 0), and
+- removed the prebuilt rule copies from `greencircle` and `tkt` (they dropped to 0), and
 - re-enabled the immutable Endpoint Security rule in `default`.
 
 All three spaces were resynced to 2,062 rules and then re-enabled. Because Kibana can
@@ -158,9 +158,9 @@ If a tenant space shows 0 rules, re-run:
 
 ```bash
 python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
-  "bash /tmp/dr_sync_space.sh grcico-com grc_user:<password>"
+  "bash /tmp/dr_sync_space.sh greencircle greencircle_user:<password>"
 python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
-  "bash /tmp/dr_sync_space.sh tkt-org tkt_user:<password>"
+  "bash /tmp/dr_sync_space.sh tkt tkt_user:<password>"
 ```
 
 ## Verification
@@ -169,7 +169,7 @@ python tools/remote_exec.py tools/dr_sync_space.sh /tmp/dr_sync_space.sh \
 
 - 2,062 rules in each space; **2,062 enabled in each space**.
 - Tenant-space rules show `created_by` = the tenant user.
-- `grc_user` / `tkt_user` can query their own space rules (`200`).
+- `greencircle_user` / `tkt_user` can query their own space rules (`200`).
 - Cross-tenant rule queries are `403`.
 - Tenants can read the shared Default rule set (`200`, 2,062 rules).
 - A tenant cannot fetch a foreign rule through the Default space (`404`) and cannot
@@ -194,7 +194,7 @@ The Default space is the shared, read-only alert view for every tenant:
   another tenant's alert index return `403`; wildcard reads return `0` hits.
 
 At the time of capture the Default alert index held **2 alerts** and the
-`tkt-org` alert index held **1 alert** generated by the tenant-scoped rule set.
+`tkt` alert index held **1 alert** generated by the tenant-scoped rule set.
 
 ## Limitations and risks
 
@@ -204,6 +204,6 @@ At the time of capture the Default alert index held **2 alerts** and the
 | Rule churn | Package auto-upgrades can reset counts/enabled state — re-run the sync, enablement and verification after upgrades. |
 | Enabled ≠ healthy | Many rules report `partial failure`/`failed` because the matching integration or index is absent, or because a tenant-scoped API key cannot read another tenant's index. This is expected on the lab. |
 | Scheduler load | 6,186 enabled rule instances (2,062 × 3 spaces) on one node. Rules are staggered; some show `never` until their first run. This is not an isolation failure. |
-| Alert indices | Alerts are space-scoped: `.alerts-security.alerts-grcico-com*`, `.alerts-security.alerts-tkt-org*`, and the Default alert index. Tenants cannot read each other's alert indices. |
+| Alert indices | Alerts are space-scoped: `.alerts-security.alerts-greencircle*`, `.alerts-security.alerts-tkt*`, and the Default alert index. Tenants cannot read each other's alert indices. |
 | Default alert volume | The Default global rule set duplicates detection work already done by tenant-space copies. Duplicate computation is accepted in this lab for the shared view. |
 | Rule actions | Advanced actions (e.g., some third-party connectors) may require a higher license or additional Fleet setup. |

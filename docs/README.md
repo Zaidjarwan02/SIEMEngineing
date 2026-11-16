@@ -2,7 +2,7 @@
 
 **Environment:** test VM `192.168.1.212` (Ubuntu 26.04.1 LTS, VirtualBox)
 **Stack:** Elasticsearch 8.19.24 + Kibana 8.19.24, Basic license
-**Cluster:** `grcico.SIEM`
+**Cluster:** `greencircle.SIEM`
 **Status:** Tenant isolation implemented and verified — **53 / 53 isolation checks** and **15 / 15 detection-rule checks** pass. All 2,062 prebuilt detection rules are enabled in each of the three spaces.
 **Last verified:** 2026-11-12
 
@@ -35,8 +35,8 @@ security gaps that still need attention before this could be considered producti
 
 | Tenant | Kibana Space | Data namespace | Role | User |
 |--------|--------------|----------------|------|------|
-| GreenCircle | `grcico-com` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `grc-*` | `GreenCircle` | `grc_user` |
-| TKT | `tkt-org` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` | `tkt` | `tkt_user` |
+| Tenant 1 (`greencircle`) | `greencircle` | `logs-*-greencircle*`, `metrics-*-greencircle*`, `traces-*-greencircle*`, `synthetics-*-greencircle*`, `profiling-*-greencircle*`, `greencircle-*` | `greencircle` | `greencircle_user` |
+| Tenant 2 (`TKT`) | `tkt` | `logs-*-tkt*`, `metrics-*-tkt*`, `traces-*-tkt*`, `synthetics-*-tkt*`, `profiling-*-tkt*`, `tkt-*` | `tkt` | `tkt_user` |
 
 Each tenant user has **full read/write inside its own namespace** and **no visibility of the
 other tenant** — verified at both the Elasticsearch data layer and the Kibana UI layer.

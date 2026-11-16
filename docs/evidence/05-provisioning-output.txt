@@ -1,22 +1,22 @@
 ### 1. Roles
-GreenCircle: {"role":{"created":false}}
+greencircle: {"role":{"created":false}}
 tkt:         {"role":{"created":false}}
 
 ### 2. Users
-grc_user: {"created":true}
+greencircle_user: {"created":true}
 tkt_user: {"created":true}
 
 ### 3. Data views per space
-grcico-com     GreenCircle Logs             -> {"data_view":{"id":"5704fb21-bd59-4aca-8b48-3613db451ff8","version":"WzkxNiw3XQ==","title":"logs-*-greencircle*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"GreenCircle Logs","allowHidden":false,"fields":{},"name
-grcico-com     GreenCircle Metrics          -> {"data_view":{"id":"e6c8f5b7-13d0-49b6-89b1-19d1bf07a82c","version":"WzkxNyw3XQ==","title":"metrics-*-greencircle*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"GreenCircle Metrics","allowHidden":false,"fields":{}
-grcico-com     GreenCircle Custom (grc-*)   -> {"data_view":{"id":"b8a920e8-38a6-4060-9980-868df5e95973","version":"WzkxOCw3XQ==","title":"grc-*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"GreenCircle Custom (grc-*)","allowHidden":false,"fields":{},"namespac
-tkt-org        TKT Logs                     -> {"data_view":{"id":"09d9bcaa-f7ed-484e-83ef-3af5f1be9eaf","version":"WzkxOSw3XQ==","title":"logs-*-tkt*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Logs","allowHidden":false,"fields":{},"namespaces":["tkt-or
-tkt-org        TKT Metrics                  -> {"data_view":{"id":"f7887218-4ab8-4497-b8fa-9d09440a16b1","version":"WzkyMCw3XQ==","title":"metrics-*-tkt*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Metrics","allowHidden":false,"fields":{},"namespaces":["
-tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a-411a-8d30-3e3417a797ce","version":"WzkyMSw3XQ==","title":"tkt-*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Custom (tkt-*)","allowHidden":false,"fields":{},"namespaces":["tk
+greencircle     greencircle Logs             -> {"data_view":{"id":"5704fb21-bd59-4aca-8b48-3613db451ff8","version":"WzkxNiw3XQ==","title":"logs-*-greencircle*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"greencircle Logs","allowHidden":false,"fields":{},"name
+greencircle     greencircle Metrics          -> {"data_view":{"id":"e6c8f5b7-13d0-49b6-89b1-19d1bf07a82c","version":"WzkxNyw3XQ==","title":"metrics-*-greencircle*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"greencircle Metrics","allowHidden":false,"fields":{}
+greencircle     greencircle Custom (greencircle-*)   -> {"data_view":{"id":"b8a920e8-38a6-4060-9980-868df5e95973","version":"WzkxOCw3XQ==","title":"greencircle-*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"greencircle Custom (greencircle-*)","allowHidden":false,"fields":{},"namespac
+tkt        TKT Logs                     -> {"data_view":{"id":"09d9bcaa-f7ed-484e-83ef-3af5f1be9eaf","version":"WzkxOSw3XQ==","title":"logs-*-tkt*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Logs","allowHidden":false,"fields":{},"namespaces":["tkt-or
+tkt        TKT Metrics                  -> {"data_view":{"id":"f7887218-4ab8-4497-b8fa-9d09440a16b1","version":"WzkyMCw3XQ==","title":"metrics-*-tkt*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Metrics","allowHidden":false,"fields":{},"namespaces":["
+tkt        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a-411a-8d30-3e3417a797ce","version":"WzkyMSw3XQ==","title":"tkt-*","timeFieldName":"@timestamp","sourceFilters":[],"fieldFormats":{},"runtimeFieldMap":{},"fieldAttrs":{},"allowNoIndex":false,"name":"TKT Custom (tkt-*)","allowHidden":false,"fields":{},"namespaces":["tk
 
 ### 4. Verify role definitions
 {
-    "GreenCircle": {
+    "greencircle": {
         "cluster": [],
         "indices": [
             {
@@ -34,7 +34,7 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
             },
             {
                 "names": [
-                    "grc-*"
+                    "greencircle-*"
                 ],
                 "privileges": [
                     "all"
@@ -43,8 +43,8 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
             },
             {
                 "names": [
-                    ".alerts-security.alerts-grcico-com*",
-                    ".internal.alerts-security.alerts-grcico-com*"
+                    ".alerts-security.alerts-greencircle*",
+                    ".internal.alerts-security.alerts-greencircle*"
                 ],
                 "privileges": [
                     "all"
@@ -59,7 +59,7 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
                     "space_all"
                 ],
                 "resources": [
-                    "space:grcico-com"
+                    "space:greencircle"
                 ]
             }
         ],
@@ -68,7 +68,7 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
         "transient_metadata": {
             "enabled": true
         },
-        "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; UI access limited to space grcico-com."
+        "description": "greencircle tenant: full read/write on greencircle data and greencircle-* only; UI access limited to space greencircle."
     }
 }
 {
@@ -99,8 +99,8 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
             },
             {
                 "names": [
-                    ".alerts-security.alerts-tkt-org*",
-                    ".internal.alerts-security.alerts-tkt-org*"
+                    ".alerts-security.alerts-tkt*",
+                    ".internal.alerts-security.alerts-tkt*"
                 ],
                 "privileges": [
                     "all"
@@ -115,7 +115,7 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
                     "space_all"
                 ],
                 "resources": [
-                    "space:tkt-org"
+                    "space:tkt"
                 ]
             }
         ],
@@ -124,19 +124,19 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
         "transient_metadata": {
             "enabled": true
         },
-        "description": "TKT tenant: full read/write on tkt data and tkt-* only; UI access limited to space tkt-org."
+        "description": "TKT tenant: full read/write on tkt data and tkt-* only; UI access limited to space tkt."
     }
 }
 
 ### 5. Verify users
 {
-    "grc_user": {
-        "username": "grc_user",
+    "greencircle_user": {
+        "username": "greencircle_user",
         "roles": [
-            "GreenCircle"
+            "greencircle"
         ],
-        "full_name": "GreenCircle Tenant User",
-        "email": "grc_user@greencircle.local",
+        "full_name": "greencircle Tenant User",
+        "email": "greencircle_user@greencircle.local",
         "metadata": {
             "managed_by": "mssp-provisioning",
             "tenant": "greencircle"
@@ -161,10 +161,10 @@ tkt-org        TKT Custom (tkt-*)           -> {"data_view":{"id":"e3faad4b-f51a
 }
 
 ### 6. Verify spaces visible to each user
---- grc_user spaces ---
-[{"id":"grcico-com","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+--- greencircle_user spaces ---
+[{"id":"greencircle","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
 --- tkt_user spaces ---
-[{"id":"tkt-org","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+[{"id":"tkt","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
 
 ### 7. Detection engine (should now be 200)
 {"page":1,"perPage":1,"total":0,"data":[]}

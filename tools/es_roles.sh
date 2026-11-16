@@ -6,13 +6,13 @@ U="elastic:<ADMIN_PASSWORD>"
 C="curl -s --max-time 10 -u $U"
 sec() { printf '\n\n========== %s ==========\n' "$1"; }
 
-sec "ROLE GreenCircle"
-$C "$ES/_security/role/GreenCircle?pretty"
+sec "ROLE greencircle"
+$C "$ES/_security/role/greencircle?pretty"
 sec "ROLE tkt"
 $C "$ES/_security/role/tkt?pretty"
 
-sec "USER grc_user"
-$C "$ES/_security/user/grc_user?pretty"
+sec "USER greencircle_user"
+$C "$ES/_security/user/greencircle_user?pretty"
 sec "USER tkt_user"
 $C "$ES/_security/user/tkt_user?pretty"
 
@@ -27,7 +27,7 @@ curl -s --max-time 10 -u "$U" -H 'kbn-xsrf: true' "$KB/api/saved_objects/_find?p
 echo
 sec "ELASTICSEARCH LOG (main, last 60)"
 ls /var/log/elasticsearch/
-tail -n 60 /var/log/elasticsearch/grcico.SIEM.log 2>/dev/null || tail -n 60 /var/log/elasticsearch/*.log 2>/dev/null | grep -v '^==>'
+tail -n 60 /var/log/elasticsearch/greencircle.SIEM.log 2>/dev/null || tail -n 60 /var/log/elasticsearch/*.log 2>/dev/null | grep -v '^==>'
 sec "KIBANA LOG errors (last 30)"
 grep -iE '"level":"(error|fatal)"|error' /var/log/kibana/kibana.log 2>/dev/null | tail -n 30
 sec "END"

@@ -35,10 +35,10 @@ Scripts:
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user reads own data stream | 200 | 200 | PASS |
-| grc_user reads other data stream | 0 hits | 0 | PASS |
-| grc_user writes own data stream | 201 | 201 | PASS |
-| grc_user writes other data stream | 403 | 403 | PASS |
+| greencircle_user reads own data stream | 200 | 200 | PASS |
+| greencircle_user reads other data stream | 0 hits | 0 | PASS |
+| greencircle_user writes own data stream | 201 | 201 | PASS |
+| greencircle_user writes other data stream | 403 | 403 | PASS |
 | tkt_user reads own data stream | 200 | 200 | PASS |
 | tkt_user reads other data stream | 0 hits | 0 | PASS |
 | tkt_user writes own data stream | 201 | 201 | PASS |
@@ -50,14 +50,14 @@ Counts are filtered by a per-run `run_id`, so they are exact regardless of exist
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user sees own logs | 2 run docs | 2 | PASS |
-| grc_user sees own metrics | 1 run doc | 1 | PASS |
-| grc_user sees tkt logs | 0 | 0 | PASS |
-| grc_user sees tkt metrics | 0 | 0 | PASS |
+| greencircle_user sees own logs | 2 run docs | 2 | PASS |
+| greencircle_user sees own metrics | 1 run doc | 1 | PASS |
+| greencircle_user sees tkt logs | 0 | 0 | PASS |
+| greencircle_user sees tkt metrics | 0 | 0 | PASS |
 | tkt_user sees own logs | 2 run docs | 2 | PASS |
 | tkt_user sees own metrics | 1 run doc | 1 | PASS |
-| tkt_user sees grc logs | 0 | 0 | PASS |
-| tkt_user sees grc metrics | 0 | 0 | PASS |
+| tkt_user sees greencircle logs | 0 | 0 | PASS |
+| tkt_user sees greencircle metrics | 0 | 0 | PASS |
 
 > **Why 0 hits instead of 403:** Elasticsearch resolves a wildcard to the concrete indices
 > the user is allowed to see. Unauthorized indices are silently dropped from the resolved
@@ -68,13 +68,13 @@ Counts are filtered by a per-run `run_id`, so they are exact regardless of exist
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user blocked from tkt alert index | 403 | 403 | PASS |
-| tkt_user blocked from grc alert index | 403 | 403 | PASS |
-| grc_user reads shared Default alerts | 200 | 200 | PASS |
+| greencircle_user blocked from tkt alert index | 403 | 403 | PASS |
+| tkt_user blocked from greencircle alert index | 403 | 403 | PASS |
+| greencircle_user reads shared Default alerts | 200 | 200 | PASS |
 | tkt_user reads shared Default alerts | 200 | 200 | PASS |
-| grc_user writes shared Default alerts | 403 | 403 | PASS |
+| greencircle_user writes shared Default alerts | 403 | 403 | PASS |
 | tkt_user writes shared Default alerts | 403 | 403 | PASS |
-| grc_user searches Default alerts in Kibana | 200 | 200 | PASS |
+| greencircle_user searches Default alerts in Kibana | 200 | 200 | PASS |
 | tkt_user searches Default alerts in Kibana | 200 | 200 | PASS |
 
 ### 4. Kibana space-list visibility (4 checks)
@@ -84,28 +84,28 @@ tenant's space.
 
 | Test | Result |
 |------|--------|
-| grc_user sees shared `default` | PASS |
-| grc_user does not see `tkt-org` | PASS |
+| greencircle_user sees shared `default` | PASS |
+| greencircle_user does not see `tkt` | PASS |
 | tkt_user sees shared `default` | PASS |
-| tkt_user does not see `grcico-com` | PASS |
+| tkt_user does not see `greencircle` | PASS |
 
 Actual responses:
 
 ```json
-grc_user: [{"id":"default", ...}, {"id":"grcico-com", "name":"greencircle", ...}]
-tkt_user: [{"id":"default", ...}, {"id":"tkt-org",    "name":"tkt", ...}]
+greencircle_user: [{"id":"default", ...}, {"id":"greencircle", "name":"greencircle", ...}]
+tkt_user: [{"id":"default", ...}, {"id":"tkt",    "name":"tkt", ...}]
 ```
 
 ### 5. Kibana cross-space saved objects (8 checks)
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user sees own dashboards | > 0 | yes | PASS |
-| grc_user sees tkt dashboards | 0 | 0 | PASS |
-| grc_user can read shared Default space | 200 | 200 | PASS |
-| grc_user sees shared Default dashboards | > 0 | yes | PASS |
+| greencircle_user sees own dashboards | > 0 | yes | PASS |
+| greencircle_user sees tkt dashboards | 0 | 0 | PASS |
+| greencircle_user can read shared Default space | 200 | 200 | PASS |
+| greencircle_user sees shared Default dashboards | > 0 | yes | PASS |
 | tkt_user sees own dashboards | > 0 | yes | PASS |
-| tkt_user sees grc dashboards | 0 | 0 | PASS |
+| tkt_user sees greencircle dashboards | 0 | 0 | PASS |
 | tkt_user can read shared Default space | 200 | 200 | PASS |
 | tkt_user sees shared Default dashboards | > 0 | yes | PASS |
 
@@ -117,16 +117,16 @@ tkt_user: [{"id":"default", ...}, {"id":"tkt-org",    "name":"tkt", ...}]
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user creates dashboard in own space | 200 | 200 | PASS |
-| grc_user creates dashboard in tkt space | 403 | 403 | PASS |
-| grc_user creates dashboard in default space | 403 | 403 | PASS |
+| greencircle_user creates dashboard in own space | 200 | 200 | PASS |
+| greencircle_user creates dashboard in tkt space | 403 | 403 | PASS |
+| greencircle_user creates dashboard in default space | 403 | 403 | PASS |
 | tkt_user creates dashboard in own space | 200 | 200 | PASS |
-| tkt_user creates dashboard in grc space | 403 | 403 | PASS |
+| tkt_user creates dashboard in greencircle space | 403 | 403 | PASS |
 | tkt_user creates dashboard in default space | 403 | 403 | PASS |
-| grc_user direct GET of a known tkt object | 403 | 403 | PASS |
-| grc_user direct DELETE of a known tkt object | 403 | 403 | PASS |
-| grc_user updates a shared Default object | 403 | 403 | PASS |
-| grc_user deletes a shared Default object | 403 | 403 | PASS |
+| greencircle_user direct GET of a known tkt object | 403 | 403 | PASS |
+| greencircle_user direct DELETE of a known tkt object | 403 | 403 | PASS |
+| greencircle_user updates a shared Default object | 403 | 403 | PASS |
+| greencircle_user deletes a shared Default object | 403 | 403 | PASS |
 | tkt_user deletes a shared Default object | 403 | 403 | PASS |
 
 The Default-space write checks use a disposable dashboard created by `elastic` and removed
@@ -136,9 +136,9 @@ by `elastic` after the assertions, so no shared content is touched.
 
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
-| grc_user reads security users | 403 | 403 | PASS |
-| grc_user reads cluster health | 403 | 403 | PASS |
-| grc_user creates an index outside its namespace | 403 | 403 | PASS |
+| greencircle_user reads security users | 403 | 403 | PASS |
+| greencircle_user reads cluster health | 403 | 403 | PASS |
+| greencircle_user creates an index outside its namespace | 403 | 403 | PASS |
 | tkt_user reads security users | 403 | 403 | PASS |
 | tkt_user reads cluster health | 403 | 403 | PASS |
 | tkt_user creates an index outside its namespace | 403 | 403 | PASS |
@@ -150,35 +150,35 @@ by `elastic` after the assertions, so no shared content is touched.
 | Test | Expected | Got | Result |
 |------|----------|-----|--------|
 | Default space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
-| `grcico-com` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
-| `tkt-org` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
-| grc_user can query own space rules | 200 | 200 | PASS |
-| grc_user blocked from tkt rules | 403 | 403 | PASS |
-| grc_user can read shared Default rules | 200 | 200 | PASS |
-| grc_user sees shared Default rule set | 2,062 | 2,062 | PASS |
+| `greencircle` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
+| `tkt` space has all 2,062 rules enabled | 2,062 | 2,062 | PASS |
+| greencircle_user can query own space rules | 200 | 200 | PASS |
+| greencircle_user blocked from tkt rules | 403 | 403 | PASS |
+| greencircle_user can read shared Default rules | 200 | 200 | PASS |
+| greencircle_user sees shared Default rule set | 2,062 | 2,062 | PASS |
 | tkt_user can query own space rules | 200 | 200 | PASS |
-| tkt_user blocked from grc rules | 403 | 403 | PASS |
+| tkt_user blocked from greencircle rules | 403 | 403 | PASS |
 | tkt_user can read shared Default rules | 200 | 200 | PASS |
 | tkt_user sees shared Default rule set | 2,062 | 2,062 | PASS |
-| grc_user direct GET of a tkt rule | 403 | 403 | PASS |
-| grc_user direct DELETE of a tkt rule | 403 | 403 | PASS |
-| grc_user cannot fetch a tkt rule via Default | 404 | 404 | PASS |
-| grc_user cannot create a rule in shared Default | 403 | 403 | PASS |
+| greencircle_user direct GET of a tkt rule | 403 | 403 | PASS |
+| greencircle_user direct DELETE of a tkt rule | 403 | 403 | PASS |
+| greencircle_user cannot fetch a tkt rule via Default | 404 | 404 | PASS |
+| greencircle_user cannot create a rule in shared Default | 403 | 403 | PASS |
 
 ## Login-flow verification
 
 The real Kibana login API was exercised with each user's credentials (not just Basic auth
 on Elasticsearch):
 
-| Check | grc_user | tkt_user |
+| Check | greencircle_user | tkt_user |
 |-------|----------|----------|
 | `POST /internal/security/login` | `200 {"location":"/"}` | `200 {"location":"/"}` |
 | `GET /` redirect | `/spaces/space_selector` | `/spaces/space_selector` |
-| `GET /api/spaces/space` | `default` + `grcico-com` | `default` + `tkt-org` |
+| `GET /api/spaces/space` | `default` + `greencircle` | `default` + `tkt` |
 | `GET /app/home` (Default) | 200 | 200 |
 | `GET /app/dashboards` (Default) | 200 | 200 |
-| `GET /s/grcico-com/app/dashboards` | 200 | 403 |
-| `GET /s/tkt-org/app/dashboards` | 403 | 200 |
+| `GET /s/greencircle/app/dashboards` | 200 | 403 |
+| `GET /s/tkt/app/dashboards` | 403 | 200 |
 
 Because each user can now access **two** spaces, Kibana redirects `/` to the **space
 selector** instead of auto-entering a single space. Each user picks Default (shared) or
@@ -188,7 +188,7 @@ their own space. Access to the other tenant's space remains `403`.
 
 | Test | Result |
 |------|--------|
-| `grc_user` with wrong password | `401` |
+| `greencircle_user` with wrong password | `401` |
 | unknown user | `401` |
 
 ## Final state after verification
