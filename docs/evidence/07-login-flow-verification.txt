@@ -1,0 +1,42 @@
+================ GREEN CIRCLE TENANT (grc_user) ================
+--- login POST ---
+http=200
+{"location":"/"}
+--- GET / ---
+http=302 redirect=http://127.0.0.1:5601/spaces/space_selector
+--- GET /api/security/me ---
+{"statusCode":404,"error":"Not Found","message":"Not Found"}
+--- GET /api/spaces/space ---
+[{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"grcico-com","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+--- GET /app/home ---
+http=200 redirect=
+--- GET /app/dashboards ---
+http=200 redirect=
+--- GET /s/grcico-com/app/dashboards ---
+http=200 redirect=
+--- GET /s/tkt-org/app/dashboards ---
+http=403 redirect=
+
+================ TKT TENANT (tkt_user) ================
+--- login POST ---
+http=200
+{"location":"/"}
+--- GET / ---
+http=302 redirect=http://127.0.0.1:5601/spaces/space_selector
+--- GET /api/security/me ---
+{"statusCode":404,"error":"Not Found","message":"Not Found"}
+--- GET /api/spaces/space ---
+[{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"tkt-org","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+--- GET /app/home ---
+http=200 redirect=
+--- GET /app/dashboards ---
+http=200 redirect=
+--- GET /s/grcico-com/app/dashboards ---
+http=403 redirect=
+--- GET /s/tkt-org/app/dashboards ---
+http=200 redirect=
+
+================ NEGATIVE LOGIN TESTS ================
+grc_user wrong password -> http=401
+unknown user -> http=401
+done

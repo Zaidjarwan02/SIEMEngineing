@@ -1,0 +1,570 @@
+
+
+========== IDENTITY ==========
+ Static hostname: ubuntu
+       Icon name: computer-vm
+         Chassis: vm ≡ƒû┤
+      Machine ID: 01e540661ee5452499a3022888fefb2d
+         Boot ID: 982fc703e833481c84b67fd192006dd3
+    Product UUID: b5f22745-269d-924a-a4f6-0c05117e7e63
+  Virtualization: oracle
+Operating System: Ubuntu 26.04.1 LTS
+          Kernel: Linux 7.0.0-43-generic
+    Architecture: x86-64
+ Hardware Vendor: innotek GmbH
+  Hardware Model: VirtualBox
+ Hardware Serial: VirtualBox-4527f2b5-9d26-4a92-a4f6-0c05117e7e63
+Hardware Version: 1.2
+Firmware Version: VirtualBox
+   Firmware Date: Fri 2006-12-01
+    Firmware Age: 19y 11month 1w 4d
+--- lsb_release ---
+Distributor ID:	Ubuntu
+Description:	Ubuntu 26.04.1 LTS
+Release:	26.04
+Codename:	resolute
+--- uname ---
+Linux ubuntu 7.0.0-43-generic #43-Ubuntu SMP PREEMPT_DYNAMIC Fri Oct 23 13:25:25 UTC 2026 x86_64 GNU/Linux
+--- uptime ---
+ 05:43:52 up 2 days, 51 min,  3 users,  load average: 0.93, 1.58, 1.47
+--- date ---
+2026-11-12T05:43:52+00:00
+
+
+========== HARDWARE / RESOURCES ==========
+--- cpu ---
+CPU(s):                                  16
+Model name:                              Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz
+Thread(s) per core:                      1
+Core(s) per socket:                      16
+Socket(s):                               1
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch pti fsgsbase bmi1 avx2 bmi2 invpcid rdseed adx arat md_clear flush_l1d
+Hypervisor vendor:                       KVM
+Virtualization type:                     full
+--- memory ---
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi        20Gi       2.1Gi       149Mi       8.2Gi       9.7Gi
+Swap:             0B          0B          0B
+--- loadavg ---
+0.93 1.58 1.47 1/1326 34493
+
+
+========== DISK ==========
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/sda2      ext4   89G   14G   70G  17% /
+--- lsblk ---
+NAME     SIZE FSTYPE   MOUNTPOINT                          TYPE
+loop0      4K squashfs /snap/bare/5                        loop
+loop1   66.8M squashfs /snap/core24/1587                   loop
+loop2   19.6M squashfs /snap/desktop-security-center/150   loop
+loop3   14.2M squashfs /snap/desktop-security-center/206   loop
+loop4   16.5M squashfs /snap/firmware-updater/226          loop
+loop5  273.7M squashfs /snap/firefox/8107                  loop
+loop6  606.1M squashfs /snap/gnome-46-2404/153             loop
+loop7    395M squashfs /snap/mesa-2404/1165                loop
+loop8   91.7M squashfs /snap/gtk-common-themes/1535        loop
+loop9   18.8M squashfs /snap/prompting-client/204          loop
+loop10  18.4M squashfs /snap/prompting-client/228          loop
+loop11  15.7M squashfs /snap/snap-store/1367               loop
+loop12  49.3M squashfs /snap/snapd/26865                   loop
+loop13   580K squashfs /snap/snapd-desktop-integration/361 loop
+loop14   828K squashfs /snap/snapd-desktop-integration/391 loop
+loop15  32.5M squashfs /snap/snapd/28332                   loop
+sda       90G                                              disk
+|-sda1     1M                                              part
+`-sda2    90G ext4     /                                   part
+sr0     1024M                                              rom
+
+
+========== NETWORK ==========
+--- addresses ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s3           UP             192.168.1.212/24 fe80::a00:27ff:fe17:56d7/64 
+--- routes ---
+default via 192.168.1.1 dev enp0s3 proto dhcp src 192.168.1.212 metric 100 
+192.168.1.0/24 dev enp0s3 proto kernel scope link src 192.168.1.212 metric 100 
+--- dns ---
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+
+Link 2 (enp0s3)
+    Current Scopes: DNS
+         Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 192.168.1.1
+       DNS Servers: 192.168.1.1
+        DNS Domain: lan
+     Default Route: yes
+--- listening tcp/udp ---
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                                 
+udp   UNCONN 0      0            0.0.0.0:5353      0.0.0.0:*    users:(("avahi-daemon",pid=1310,fd=12))                
+udp   UNCONN 0      0         127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=600,fd=18))              
+udp   UNCONN 0      0      127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=600,fd=16))              
+udp   UNCONN 0      0          127.0.0.1:323       0.0.0.0:*    users:(("chronyd",pid=1706,fd=4))                      
+udp   UNCONN 0      0               [::]:5353         [::]:*    users:(("avahi-daemon",pid=1310,fd=13))                
+udp   UNCONN 0      0              [::1]:323          [::]:*    users:(("chronyd",pid=1706,fd=5))                      
+tcp   LISTEN 0      4096       127.0.0.1:8221      0.0.0.0:*    users:(("fleet-server",pid=17310,fd=12))               
+tcp   LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=7663,fd=3),("systemd",pid=1,fd=523))
+tcp   LISTEN 0      4096       127.0.0.1:6789      0.0.0.0:*    users:(("elastic-agent",pid=17267,fd=11))              
+tcp   LISTEN 0      4096       127.0.0.1:6791      0.0.0.0:*    users:(("elastic-agent",pid=17267,fd=12))              
+tcp   LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=600,fd=19))              
+tcp   LISTEN 0      511          0.0.0.0:5601      0.0.0.0:*    users:(("MainThread",pid=24566,fd=22))                 
+tcp   LISTEN 0      4096       127.0.0.1:631       0.0.0.0:*    users:(("cupsd",pid=30044,fd=7))                       
+tcp   LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=600,fd=17))              
+tcp   LISTEN 0      4096               *:8220            *:*    users:(("fleet-server",pid=17310,fd=11))               
+tcp   LISTEN 0      4096               *:9200            *:*    users:(("java",pid=2578,fd=596))                       
+tcp   LISTEN 0      4096               *:9300            *:*    users:(("java",pid=2578,fd=593))                       
+tcp   LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=7663,fd=4),("systemd",pid=1,fd=524))
+tcp   LISTEN 0      4096           [::1]:631          [::]:*    users:(("cupsd",pid=30044,fd=6))                       
+
+
+========== USERS / GROUPS (human accounts) ==========
+user uid=1000 gid=1000 home=/home/user shell=/bin/bash
+--- sudo group ---
+sudo:x:27:user
+--- last logins ---
+
+
+========== INSTALLED ELASTIC / JAVA / DOCKER PACKAGES ==========
+elastic-agent  8.19.24
+elasticsearch  8.19.24
+gir1.2-javascriptcoregtk-4.1:amd64  2.52.6-0ubuntu0.26.04.1
+gpg-agent  2.4.8-4ubuntu3.1
+kibana  8.19.24
+libjavascriptcoregtk-4.1-0:amd64  2.52.6-0ubuntu0.26.04.1
+libjavascriptcoregtk-6.0-1:amd64  2.52.6-0ubuntu0.26.04.1
+libpolkit-agent-1-0:amd64  127-2ubuntu1.1
+spice-vdagent  0.23.0-1ubuntu0.1
+--- snap ---
+Name                       Version                         Rev    Tracking         Publisher    Notes
+bare                       1.0                             5      latest/stable    canonical**  base
+core24                     20260317                        1587   latest/stable    canonical**  base
+desktop-security-center    0+git.4adf2b9                   206    1/stable/ΓÇª       canonical**  -
+firefox                    149.0.2-1                       8107   latest/stable/ΓÇª  mozilla**    -
+firmware-updater           0+git.5645b80                   226    1/stable/ΓÇª       canonical**  -
+gnome-46-2404              0+git.f1cd5fa-sdk0+git.ca9c59c  153    latest/stable/ΓÇª  canonical**  -
+gtk-common-themes          0.1-81-g442e511                 1535   latest/stable/ΓÇª  canonical**  -
+mesa-2404                  25.0.7-snap211                  1165   latest/stable/ΓÇª  canonical**  -
+prompting-client           0+git.dd8c750                   228    1/stable/ΓÇª       canonical**  -
+snap-store                 0+git.10310e85                  1367   2/stable/ΓÇª       canonical**  -
+snapd                      2.78                            28332  latest/stable    canonical**  snapd
+snapd-desktop-integration  0.9                             391    latest/stable/ΓÇª  canonical**  -
+
+
+========== SERVICES ==========
+  accounts-daemon.service       loaded active running Accounts Service
+  avahi-daemon.service          loaded active running Avahi mDNS/DNS-SD Stack
+  chrony.service                loaded active running chrony, an NTP client/server
+  colord.service                loaded active running Manage, Install and Generate Color Profiles
+  cron.service                  loaded active running Regular background program processing daemon
+  cups-browsed.service          loaded active running Make remote CUPS printers available locally
+  cups.service                  loaded active running CUPS Scheduler
+  dbus.service                  loaded active running D-Bus System Message Bus
+  elastic-agent.service         loaded active running Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host.
+  elasticsearch.service         loaded active running Elasticsearch
+  fwupd.service                 loaded active running Firmware update daemon
+  gdm.service                   loaded active running GNOME Display Manager
+  kibana.service                loaded active running Kibana
+  ModemManager.service          loaded active running Modem Manager
+  networkd-dispatcher.service   loaded active running Dispatcher daemon for systemd-networkd
+  NetworkManager.service        loaded active running Network Manager
+  polkit.service                loaded active running Authorization Manager
+  power-profiles-daemon.service loaded active running Power Profiles daemon
+  rsyslog.service               loaded active running System Logging Service
+  rtkit-daemon.service          loaded active running RealtimeKit Scheduling Policy Service
+  snapd.service                 loaded active running Snap Daemon
+  ssh.service                   loaded active running OpenBSD Secure Shell server
+  switcheroo-control.service    loaded active running Switcheroo Control Proxy service
+  systemd-hostnamed.service     loaded active running Hostname Service
+  systemd-journald.service      loaded active running Journal Service
+  systemd-logind.service        loaded active running User Login Management
+  systemd-oomd.service          loaded active running Userspace Out-Of-Memory (OOM) Killer
+  systemd-resolved.service      loaded active running Network Name Resolution
+  systemd-udevd.service         loaded active running Rule-based Manager for Device Events and Files
+  udisks2.service               loaded active running Disk Manager
+  unattended-upgrades.service   loaded active running Unattended Upgrades Shutdown
+  upower.service                loaded active running Daemon for power management
+  user@0.service                loaded active running User Manager for UID 0
+  user@1000.service             loaded active running User Manager for UID 1000
+  wpa_supplicant.service        loaded active running WPA supplicant
+--- unit files of interest ---
+elastic-agent.service                          enabled         enabled
+elasticsearch.service                          enabled         enabled
+kibana.service                                 enabled         enabled
+polkit-agent-helper@.service                   static          -
+spice-vdagent.service                          alias           -
+spice-vdagentd.service                         static          -
+ssh.service                                    disabled        enabled
+sshd-keygen.service                            enabled         enabled
+sshd-unix-local@.service                       alias           -
+sshd.service                                   alias           -
+sshd@.service                                  indirect        enabled
+sssd-ssh.service                               indirect        enabled
+polkit-agent-helper.socket                     enabled         enabled
+spice-vdagentd.socket                          static          -
+ssh.socket                                     enabled         enabled
+sshd-unix-local.socket                         generated       -
+sssd-ssh.socket                                enabled         enabled
+rescue-ssh.target                              static          -
+ssh-access.target                              static          -
+
+
+========== FAILED UNITS ==========
+
+
+========== ELASTIC STACK DIRECTORIES ==========
+PRESENT /etc/elasticsearch
+total 9608
+drwxr-s---   4 root elasticsearch    4096 Nov  9 11:18 .
+drwxr-xr-x 144 root root            12288 Nov 11 06:22 ..
+drwxr-x---   2 root elasticsearch    4096 Nov  8 09:07 certs
+-rw-rw----   1 root elasticsearch    1042 Oct 29 00:09 elasticsearch-plugins.example.yml
+-rw-rw----   1 root elasticsearch     536 Nov  8 09:07 elasticsearch.keystore
+-rw-rw----   1 root elasticsearch    4134 Nov  9 06:31 elasticsearch.yml
+-rw-rw----   1 root elasticsearch    3321 Oct 29 00:09 jvm.options
+drwxr-s---   2 root elasticsearch    4096 Oct 29 00:13 jvm.options.d
+-rw-rw----   1 root elasticsearch   20305 Oct 29 00:09 log4j2.properties
+-rw-r--r--   1 root elasticsearch 9764543 Nov  9 11:31 metricbeat-8.19.24-amd64.deb
+-rw-rw----   1 root elasticsearch     473 Oct 29 00:09 role_mapping.yml
+-rw-rw----   1 root elasticsearch     197 Oct 29 00:09 roles.yml
+-rw-rw----   1 root elasticsearch       0 Nov  8 12:12 users
+-rw-rw----   1 root elasticsearch       0 Nov  8 12:12 users_roles
+PRESENT /usr/share/elasticsearch
+total 2324
+drwxr-xr-x   7 root root    4096 Nov  8 09:06 .
+drwxr-xr-x 249 root root   12288 Nov 10 12:13 ..
+-rw-r--r--   1 root root 2328997 Oct 29 00:08 NOTICE.txt
+-rw-r--r--   1 root root   10119 Oct 29 00:03 README.asciidoc
+drwxr-xr-x   2 root root    4096 Nov  8 09:06 bin
+drwxr-xr-x   9 root root    4096 Nov  8 09:06 jdk
+drwxr-xr-x   8 root root    4096 Nov  8 09:06 lib
+drwxr-xr-x  92 root root    4096 Nov  8 09:06 modules
+drwxr-xr-x   2 root root    4096 Oct 29 00:13 plugins
+PRESENT /var/lib/elasticsearch
+total 32
+drwxr-s---   5 elasticsearch elasticsearch  4096 Nov 12 05:42 .
+drwxr-xr-x  75 root          root           4096 Nov 10 12:13 ..
+drwxr-sr-x   2 elasticsearch elasticsearch 12288 Nov 12 05:40 _state
+drwxr-sr-x 106 elasticsearch elasticsearch  4096 Nov 12 05:40 indices
+-rw-r--r--   1 elasticsearch elasticsearch     0 Nov  8 09:14 node.lock
+-rw-r--r--   1 elasticsearch elasticsearch   116 Nov  8 09:14 nodes
+drwxr-sr-x   2 elasticsearch elasticsearch  4096 Nov 10 04:54 snapshot_cache
+PRESENT /var/log/elasticsearch
+total 2928
+drwxr-s---  2 elasticsearch elasticsearch   4096 Nov 12 01:14 .
+drwxrwxr-x 20 root          syslog          4096 Nov 10 05:19 ..
+-rw-r--r--  1 elasticsearch elasticsearch 533364 Nov 12 05:39 gc.log
+-rw-r--r--  1 elasticsearch elasticsearch  28244 Nov  8 09:15 gc.log.00
+-rw-r--r--  1 elasticsearch elasticsearch  28766 Nov  8 09:16 gc.log.01
+-rw-r--r--  1 elasticsearch elasticsearch  28520 Nov  8 09:20 gc.log.02
+-rw-r--r--  1 elasticsearch elasticsearch  28509 Nov  8 09:22 gc.log.03
+-rw-r--r--  1 elasticsearch elasticsearch  28495 Nov  8 09:25 gc.log.04
+-rw-r--r--  1 elasticsearch elasticsearch  28503 Nov  8 10:40 gc.log.05
+-rw-r--r--  1 elasticsearch elasticsearch  28486 Nov  8 10:45 gc.log.06
+-rw-r--r--  1 elasticsearch elasticsearch  27838 Nov  8 10:46 gc.log.07
+-rw-r--r--  1 elasticsearch elasticsearch  28518 Nov  8 11:00 gc.log.08
+-rw-r--r--  1 elasticsearch elasticsearch  28232 Nov  8 11:01 gc.log.09
+-rw-r--r--  1 elasticsearch elasticsearch  28487 Nov  8 11:05 gc.log.10
+PRESENT /etc/kibana
+total 40
+drwxr-s---   2 root kibana  4096 Nov 11 05:24 .
+drwxr-xr-x 144 root root   12288 Nov 11 06:22 ..
+-rw-rw----   1 root kibana   130 Nov  8 11:25 kibana.keystore
+-rw-rw----   1 root kibana  7934 Nov 11 05:24 kibana.yml
+-rw-rw----   1 root kibana  7826 Nov  8 12:14 kibana.yml.bak.20261111_052001
+-rw-rw-r--   1 root kibana   447 Oct 29 00:16 node.options
+PRESENT /usr/share/kibana
+total 3588
+drwxrwxr-x   8 root root    4096 Nov  8 11:25 .
+drwxr-xr-x 249 root root   12288 Nov 10 12:13 ..
+-rw-rw-r--   1 root root   11510 Oct 29 00:16 .i18nrc.json
+-rw-rw-r--   1 root root      27 Oct 29 00:16 .puppeteerrc
+-rw-rw-r--   1 root root    3860 Oct 29 00:16 LICENSE.txt
+-rw-rw-r--   1 root root 3565480 Oct 29 00:16 NOTICE.txt
+-rw-rw-r--   1 root root    3966 Oct 29 00:16 README.txt
+drwxrwxr-x   2 root root    4096 Nov  8 11:25 bin
+drwxrwxr-x   3 root root    4096 Nov  8 11:24 node
+drwxrwxr-x 834 root root   36864 Nov  8 11:25 node_modules
+-rw-rw-r--   1 root root     781 Oct 29 00:16 package.json
+drwxrwxr-x   2 root root    4096 Oct 29 00:16 plugins
+drwxrwxr-x   4 root root    4096 Nov  8 11:24 src
+drwxrwxr-x   4 root root    4096 Nov  8 11:25 x-pack
+PRESENT /var/lib/kibana
+total 32
+drwxr-s---  7 kibana kibana 4096 Nov 11 05:25 .
+drwxr-xr-x 75 root   root   4096 Nov 10 12:13 ..
+drwx--S---  2 kibana kibana 4096 Nov  9 08:03 chromium-7rAJsy
+drwx--S---  2 kibana kibana 4096 Nov  8 12:15 chromium-8IoEGA
+drwx--S---  2 kibana kibana 4096 Nov 11 05:25 chromium-B0oBWu
+drwx--S---  2 kibana kibana 4096 Nov 10 04:55 chromium-jG83JN
+drwx--S---  2 kibana kibana 4096 Nov  9 05:10 chromium-x1CReJ
+-rw-r--r--  1 kibana kibana   36 Nov  8 11:27 uuid
+PRESENT /var/log/kibana
+total 2728
+drwxr-s---  2 kibana kibana    4096 Nov  8 11:27 .
+drwxrwxr-x 20 root   syslog    4096 Nov 10 05:19 ..
+-rw-r--r--  1 kibana kibana 2779702 Nov 12 05:43 kibana.log
+absent  /etc/logstash
+absent  /usr/share/logstash
+absent  /var/lib/logstash
+absent  /var/log/logstash
+absent  /etc/filebeat
+absent  /var/lib/filebeat
+absent  /etc/metricbeat
+absent  /var/lib/metricbeat
+absent  /etc/auditbeat
+absent  /var/lib/auditbeat
+absent  /etc/packetbeat
+absent  /var/lib/packetbeat
+absent  /opt/elastic
+absent  /opt/elk
+PRESENT /usr/share/elastic-agent
+total 5896
+drwxr-xr-x   3 root root    4096 Nov 10 06:26 .
+drwxr-xr-x 249 root root   12288 Nov 10 12:13 ..
+-rw-r--r--   1 root root      41 Oct 29 02:37 .build_hash.txt
+-rw-r--r--   1 root root    3860 Oct 29 02:35 LICENSE.txt
+-rw-r--r--   1 root root 6000789 Oct 29 02:35 NOTICE.txt
+-rw-r--r--   1 root root     353 Oct 29 02:37 README.md
+drwxr-xr-x   2 root root    4096 Nov 10 06:26 bin
+PRESENT /etc/elastic-agent
+total 76
+drwxr-xr-x   3 root root  4096 Nov 10 06:27 .
+drwxr-xr-x 144 root root 12288 Nov 11 06:22 ..
+-rw-r--r--   1 root root    41 Oct 29 02:37 .elastic-agent.active.commit
+-rw-r--r--   1 root root 17082 Oct 29 02:37 elastic-agent.reference.yml
+-rw-------   1 root root  1739 Nov 10 06:27 elastic-agent.yml
+-rw-------   1 root root 14227 Oct 29 02:37 elastic-agent.yml.2026-11-10T06-27-21.8513.bak
+-rw-------   1 root root  7429 Nov 10 06:27 fleet.enc
+-rw-------   1 root root     0 Nov 10 06:27 fleet.enc.lock
+-rw-------   1 root root   807 Oct 29 02:35 otel.yml
+drwxr-x---   2 root root  4096 Nov 10 06:27 vault
+
+
+========== DOCKER ==========
+docker not installed
+
+
+========== PORTS OF INTEREST (probe) ==========
+OPEN  22
+closed 80
+closed 443
+OPEN  5601
+OPEN  9200
+OPEN  9300
+closed 5044
+closed 5000
+closed 8080
+closed 8443
+closed 3000
+closed 5432
+closed 6379
+OPEN  8220
+closed 9600
+
+
+========== ELASTICSEARCH API ==========
+{"error":{"root_cause":[{"type":"security_exception","reason":"missing authentication credentials for REST request [/]","header":{"WWW-Authenticate":["Basic realm=\"security\", charset=\"UTF-8\"","ApiKey"]}}],"type":"security_exception","reason":"missing authentication credentials for REST request [/]","header":{"WWW-Authenticate":["Basic realm=\"security\", charset=\"UTF-8\"","ApiKey"]}},"status":401}--- cluster health ---
+{
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "security_exception",
+        "reason" : "missing authentication credentials for REST request [/_cluster/health?pretty]",
+        "header" : {
+          "WWW-Authenticate" : [
+            "Basic realm=\"security\", charset=\"UTF-8\"",
+            "ApiKey"
+          ]
+        }
+      }
+    ],
+    "type" : "security_exception",
+    "reason" : "missing authentication credentials for REST request [/_cluster/health?pretty]",
+    "header" : {
+      "WWW-Authenticate" : [
+        "Basic realm=\"security\", charset=\"UTF-8\"",
+        "ApiKey"
+      ]
+    }
+  },
+  "status" : 401
+}
+--- indices ---
+{"error":{"root_cause":[{"type":"security_exception","reason":"missing authentication credentials for REST request [/_cat/indices?v&s=index]","header":{"WWW-Authenticate":["Basic realm=\"security\", charset=\"UTF-8\"","ApiKey"]}}],"type":"security_exception","reason":"missing authentication credentials for REST request [/_cat/indices?v&s=index]","header":{"WWW-Authenticate":["Basic realm=\"security\", charset=\"UTF-8\"","ApiKey"]}},"status":401}
+
+========== KIBANA API ==========
+{"status":{"overall":{"level":"available"}}}
+
+
+========== SECURITY POSTURE ==========
+--- ufw ---
+Status: inactive
+--- apparmor ---
+apparmor module is loaded.
+236 profiles are loaded.
+158 profiles are in enforce mode.
+   /snap/snapd/26865/usr/lib/snapd/snap-confine
+   /snap/snapd/28332/usr/lib/snapd/snap-confine
+   /usr/bin/man
+   /usr/bin/papers
+   /usr/bin/papers-previewer
+   /usr/bin/papers-previewer//sanitized_helper
+   /usr/bin/papers-thumbnailer
+--- sshd effective ---
+port 22
+usepam yes
+permitrootlogin yes
+pubkeyauthentication yes
+passwordauthentication yes
+kbdinteractiveauthentication no
+--- nsswitch ---
+passwd:         files systemd sss
+group:          files systemd sss
+shadow:         files systemd sss
+--- pam sss ---
+/etc/pam.d/gdm-smartcard-sssd-exclusive
+/etc/pam.d/common-account
+/etc/pam.d/common-session
+/etc/pam.d/common-auth
+/etc/pam.d/gdm-smartcard-sssd-or-password
+/etc/pam.d/common-password
+
+
+========== LOGS (recent errors) ==========
+Nov 10 04:52:14 ubuntu kernel: KHO: Failed to reserve lowmem scratch buffer
+Nov 10 04:52:29 ubuntu kernel: vmwgfx 0000:00:02.0: [drm] *ERROR* vmwgfx seems to be running on an unsupported hypervisor.
+Nov 10 04:52:29 ubuntu kernel: vmwgfx 0000:00:02.0: [drm] *ERROR* This configuration is likely broken.
+Nov 10 04:52:29 ubuntu kernel: vmwgfx 0000:00:02.0: [drm] *ERROR* Please switch to a supported graphics device to avoid problems.
+Nov 10 04:53:21 ubuntu gdm-password][3798]: gkr-pam: unable to locate daemon control file
+Nov 10 04:57:36 ubuntu (ubuntu-insights)[7883]: ubuntu-insights-collect.service: Failed to set up mount namespacing: /root/.config: No such file or directory
+Nov 10 04:57:36 ubuntu (ubuntu-insights)[7883]: ubuntu-insights-collect.service: Failed at step NAMESPACE spawning /usr/bin/ubuntu-insights: No such file or directory
+Nov 10 04:57:36 ubuntu systemd[6984]: Failed to start ubuntu-insights-collect.service - "Collect platform report using Ubuntu Insights while respecting consent".
+Nov 10 05:28:38 ubuntu (elastic-agent)[10495]: elastic-agent.service: Failed at step EXEC spawning /usr/bin/elastic-agent: No such file or directory
+Nov 10 05:28:39 ubuntu (elastic-agent)[10656]: elastic-agent.service: Failed at step EXEC spawning /usr/bin/elastic-agent: No such file or directory
+Nov 10 05:28:39 ubuntu (elastic-agent)[10664]: elastic-agent.service: Failed at step EXEC spawning /usr/bin/elastic-agent: No such file or directory
+Nov 10 05:28:40 ubuntu (elastic-agent)[10666]: elastic-agent.service: Failed at step EXEC spawning /usr/bin/elastic-agent: No such file or directory
+Nov 10 05:28:40 ubuntu (elastic-agent)[10668]: elastic-agent.service: Failed at step EXEC spawning /usr/bin/elastic-agent: No such file or directory
+Nov 10 05:28:40 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 05:39:19 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 05:42:54 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 05:42:59 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 05:43:08 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 06:06:13 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 06:06:17 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 06:06:35 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 06:10:49 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+Nov 10 06:25:27 ubuntu systemd[1]: Failed to start elastic-agent.service - Elastic Agent - single, unified way to add monitoring for logs, metrics, and other types of data to a host..
+--- elasticsearch log tail ---
+==> /var/log/elasticsearch/gc.log <==
+[2026-11-12T05:39:43.058+0000][2578][debug][gc,age      ] GC(152) Desired survivor size 612368384 bytes, new threshold 15 (max threshold 15)
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,phases   ] GC(152)   Pre Evacuate Collection Set: 0.82ms
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,phases   ] GC(152)   Merge Heap Roots: 0.91ms
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,phases   ] GC(152)   Evacuate Collection Set: 58.00ms
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,phases   ] GC(152)   Post Evacuate Collection Set: 7.78ms
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,phases   ] GC(152)   Other: 0.28ms
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) Age table:
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   1:   38374304 bytes,   38374304 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   2:   21726488 bytes,   60100792 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   3:   15189640 bytes,   75290432 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   4:     308392 bytes,   75598824 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   5:    2050008 bytes,   77648832 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   6:    7060328 bytes,   84709160 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   7:    9844192 bytes,   94553352 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   8:   21157288 bytes,  115710640 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age   9:   15808352 bytes,  131518992 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  10:    2386616 bytes,  133905608 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  11:    1183768 bytes,  135089376 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  12:    1478536 bytes,  136567912 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  13:    1215192 bytes,  137783104 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  14:    1538616 bytes,  139321720 total
+[2026-11-12T05:39:43.126+0000][2578][trace][gc,age      ] GC(152) - age  15:    1241440 bytes,  140563160 total
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,heap     ] GC(152) Eden regions: 1144->0(1143)
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,heap     ] GC(152) Survivor regions: 17->18(146)
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,heap     ] GC(152) Old regions: 103->103
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,heap     ] GC(152) Humongous regions: 1->1
+[2026-11-12T05:39:43.126+0000][2578][info ][gc,metaspace] GC(152) Metaspace: 240516K(269184K)->240516K(269184K) NonClass: 188345K(208320K)->188345K(208320K) Class: 52171K(60864K)->52171K(60864K)
+[2026-11-12T05:39:43.126+0000][2578][info ][gc          ] GC(152) Pause Young (Normal) (G1 Evacuation Pause) 10111M->969M(15488M) 68.338ms
+[2026-11-12T05:39:43.127+0000][2578][info ][gc,cpu      ] GC(152) User=0.78s Sys=0.00s Real=0.07s
+[2026-11-12T05:39:43.127+0000][2578][info ][safepoint   ] Safepoint "G1CollectForAllocation", Time since last: 293482712012 ns, Reaching safepoint: 139327 ns, At safepoint: 68930765 ns, Leaving safepoint: 102904 ns, Total: 69172996 ns, Threads: 0 runnable, 214 total
+
+==> /var/log/elasticsearch/grcico.SIEM.log <==
+[2026-11-12T05:39:57,609][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-logs-test-greencircle-2026.11.12-000001] from [{"phase":"new","action":"complete","name":"complete"}] to [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] in policy [logs]
+[2026-11-12T05:39:57,837][INFO ][o.e.c.m.MetadataMappingService] [node-1] [.ds-logs-test-greencircle-2026.11.12-000001/0bMA0eNHTwCHrKpYUaJZnw] update_mapping [_doc]
+[2026-11-12T05:39:58,070][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-logs-test-greencircle-2026.11.12-000001] from [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] to [{"phase":"hot","action":"rollover","name":"check-rollover-ready"}] in policy [logs]
+[2026-11-12T05:39:58,314][INFO ][o.e.c.m.MetadataCreateIndexService] [node-1] [.ds-logs-test-tkt-2026.11.12-000001] creating index, cause [initialize_data_stream], templates [provided in request], shards [1]/[1]
+[2026-11-12T05:39:58,316][INFO ][o.e.c.m.MetadataCreateDataStreamService] [node-1] adding data stream [logs-test-tkt] with write index [.ds-logs-test-tkt-2026.11.12-000001], backing indices [], and aliases []
+[2026-11-12T05:39:58,823][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-logs-test-tkt-2026.11.12-000001] from [null] to [{"phase":"new","action":"complete","name":"complete"}] in policy [logs]
+[2026-11-12T05:39:59,318][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-logs-test-tkt-2026.11.12-000001] from [{"phase":"new","action":"complete","name":"complete"}] to [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] in policy [logs]
+[2026-11-12T05:39:59,554][INFO ][o.e.c.m.MetadataMappingService] [node-1] [.ds-logs-test-tkt-2026.11.12-000001/xLI6ifspS5mzMt7-xcZvsQ] update_mapping [_doc]
+[2026-11-12T05:39:59,796][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-logs-test-tkt-2026.11.12-000001] from [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] to [{"phase":"hot","action":"rollover","name":"check-rollover-ready"}] in policy [logs]
+[2026-11-12T05:40:00,042][INFO ][o.e.c.m.MetadataCreateIndexService] [node-1] [.ds-metrics-test-greencircle-2026.11.12-000001] creating index, cause [initialize_data_stream], templates [provided in request], shards [1]/[1]
+[2026-11-12T05:40:00,044][INFO ][o.e.c.m.MetadataCreateDataStreamService] [node-1] adding data stream [metrics-test-greencircle] with write index [.ds-metrics-test-greencircle-2026.11.12-000001], backing indices [], and aliases []
+[2026-11-12T05:40:00,579][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-greencircle-2026.11.12-000001] from [null] to [{"phase":"new","action":"complete","name":"complete"}] in policy [metrics]
+[2026-11-12T05:40:01,044][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-greencircle-2026.11.12-000001] from [{"phase":"new","action":"complete","name":"complete"}] to [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] in policy [metrics]
+[2026-11-12T05:40:01,261][INFO ][o.e.c.m.MetadataMappingService] [node-1] [.ds-metrics-test-greencircle-2026.11.12-000001/CbVmCnAVSJys7wCKIP54Hw] update_mapping [_doc]
+[2026-11-12T05:40:01,498][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-greencircle-2026.11.12-000001] from [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] to [{"phase":"hot","action":"rollover","name":"check-rollover-ready"}] in policy [metrics]
+[2026-11-12T05:40:01,741][INFO ][o.e.c.m.MetadataCreateIndexService] [node-1] [.ds-metrics-test-tkt-2026.11.12-000001] creating index, cause [initialize_data_stream], templates [provided in request], shards [1]/[1]
+[2026-11-12T05:40:01,743][INFO ][o.e.c.m.MetadataCreateDataStreamService] [node-1] adding data stream [metrics-test-tkt] with write index [.ds-metrics-test-tkt-2026.11.12-000001], backing indices [], and aliases []
+[2026-11-12T05:40:02,266][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-tkt-2026.11.12-000001] from [null] to [{"phase":"new","action":"complete","name":"complete"}] in policy [metrics]
+[2026-11-12T05:40:02,790][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-tkt-2026.11.12-000001] from [{"phase":"new","action":"complete","name":"complete"}] to [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] in policy [metrics]
+[2026-11-12T05:40:03,040][INFO ][o.e.c.m.MetadataMappingService] [node-1] [.ds-metrics-test-tkt-2026.11.12-000001/JN5inkWNRievnSSV1R9lnA] update_mapping [_doc]
+[2026-11-12T05:40:03,348][INFO ][o.e.x.i.IndexLifecycleTransition] [node-1] moving index [.ds-metrics-test-tkt-2026.11.12-000001] from [{"phase":"hot","action":"unfollow","name":"branch-check-unfollow-prerequisites"}] to [{"phase":"hot","action":"rollover","name":"check-rollover-ready"}] in policy [metrics]
+[2026-11-12T05:40:11,023][INFO ][o.e.c.m.MetadataDataStreamsService] [node-1] removing data stream [logs-test-greencircle]
+[2026-11-12T05:40:11,024][INFO ][o.e.c.m.MetadataDeleteIndexService] [node-1] [.ds-logs-test-greencircle-2026.11.12-000001/0bMA0eNHTwCHrKpYUaJZnw] deleting index
+[2026-11-12T05:40:11,336][INFO ][o.e.c.m.MetadataDataStreamsService] [node-1] removing data stream [logs-test-tkt]
+[2026-11-12T05:40:11,337][INFO ][o.e.c.m.MetadataDeleteIndexService] [node-1] [.ds-logs-test-tkt-2026.11.12-000001/xLI6ifspS5mzMt7-xcZvsQ] deleting index
+[2026-11-12T05:40:11,648][INFO ][o.e.c.m.MetadataDataStreamsService] [node-1] removing data stream [metrics-test-greencircle]
+[2026-11-12T05:40:11,650][INFO ][o.e.c.m.MetadataDeleteIndexService] [node-1] [.ds-metrics-test-greencircle-2026.11.12-000001/CbVmCnAVSJys7wCKIP54Hw] deleting index
+[2026-11-12T05:40:11,944][INFO ][o.e.c.m.MetadataDataStreamsService] [node-1] removing data stream [metrics-test-tkt]
+[2026-11-12T05:40:11,945][INFO ][o.e.c.m.MetadataDeleteIndexService] [node-1] [.ds-metrics-test-tkt-2026.11.12-000001/JN5inkWNRievnSSV1R9lnA] deleting index
+[2026-11-12T05:40:35,576][WARN ][o.e.x.s.a.RealmsAuthenticator] [node-1] Authentication to realm default_native failed - Password authentication failed for grc_user
+--- kibana log tail ---
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:12.908+00:00","message":"The delete saved object API /api/saved_objects/{type}/{id} is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87298.872667865},"trace":{"id":"d4528b2ba1c1550e8394f1cbd9efef42"},"transaction":{"id":"3a222babbf0d4c50"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:13.932+00:00","message":"The get saved object API /api/saved_objects/_find is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87299.896842663},"trace":{"id":"3f3f1f12a83d38f1ab216fa4a9264d6b"},"transaction":{"id":"a1c7169e4aa7f30e"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:14.029+00:00","message":"The delete saved object API /api/saved_objects/{type}/{id} is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87299.993800357},"trace":{"id":"616a5b551f3d44558d7b03d6f6bf3f8f"},"transaction":{"id":"89b49435b3ebde81"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:14.953+00:00","message":"The delete saved object API /api/saved_objects/{type}/{id} is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87300.916966522},"trace":{"id":"a4d7a2abb78e1b3b85da5458c861a7e2"},"transaction":{"id":"51ecf309dfdd27d2"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:31.941+00:00","message":"Access to uri [/internal/security/login] with method [post] is deprecated","log":{"level":"WARN","logger":"http.server.kbn-internal-api-restricted"},"process":{"pid":24566,"uptime":87317.905487512},"trace":{"id":"7c7464e73022d7cfbe9bf2c573f52a50"},"transaction":{"id":"9eeae9fe1a666e66"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:31.947+00:00","message":"Performing login attempt with \"basic\" provider.","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87317.910951558},"trace":{"id":"7c7464e73022d7cfbe9bf2c573f52a50"},"transaction":{"id":"9eeae9fe1a666e66"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:32.211+00:00","message":"Login attempt with \"basic\" provider succeeded (requires redirect: true).","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87318.175152399},"trace":{"id":"7c7464e73022d7cfbe9bf2c573f52a50"},"transaction":{"id":"9eeae9fe1a666e66"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:33.397+00:00","message":"Access to uri [/internal/security/login] with method [post] is deprecated","log":{"level":"WARN","logger":"http.server.kbn-internal-api-restricted"},"process":{"pid":24566,"uptime":87319.361441887},"trace":{"id":"040b402f0f551a069c719fc2d75710de"},"transaction":{"id":"de191df28527bdc5"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:33.400+00:00","message":"Performing login attempt with \"basic\" provider.","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87319.364440722},"trace":{"id":"040b402f0f551a069c719fc2d75710de"},"transaction":{"id":"de191df28527bdc5"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:34.253+00:00","message":"Login attempt with \"basic\" provider succeeded (requires redirect: true).","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87320.217397684},"trace":{"id":"040b402f0f551a069c719fc2d75710de"},"transaction":{"id":"de191df28527bdc5"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.338+00:00","message":"Access to uri [/internal/security/login] with method [post] is deprecated","log":{"level":"WARN","logger":"http.server.kbn-internal-api-restricted"},"process":{"pid":24566,"uptime":87321.303329349},"trace":{"id":"f32f46127b5a61b6c2c6b567965d153a"},"transaction":{"id":"ce28c460108a17c1"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.343+00:00","message":"Performing login attempt with \"basic\" provider.","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87321.307597503},"trace":{"id":"f32f46127b5a61b6c2c6b567965d153a"},"transaction":{"id":"ce28c460108a17c1"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.583+00:00","message":"Login attempt with \"basic\" provider failed: {\"error\":{\"root_cause\":[{\"type\":\"security_exception\",\"reason\":\"unable to authenticate user [grc_user] for REST request [/_security/_authenticate]\",\"header\":{\"WWW-Authenticate\":[\"Basic realm=\\\"security\\\", charset=\\\"UTF-8\\\"\",\"ApiKey\"]}}],\"type\":\"security_exception\",\"reason\":\"unable to authenticate user [grc_user] for REST request [/_security/_authenticate]\",\"header\":{\"WWW-Authenticate\":[\"Basic realm=\\\"security\\\", charset=\\\"UTF-8\\\"\",\"ApiKey\"]}},\"status\":401}","log":{"level":"ERROR","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87321.547480669},"trace":{"id":"f32f46127b5a61b6c2c6b567965d153a"},"transaction":{"id":"ce28c460108a17c1"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.618+00:00","message":"Access to uri [/internal/security/login] with method [post] is deprecated","log":{"level":"WARN","logger":"http.server.kbn-internal-api-restricted"},"process":{"pid":24566,"uptime":87321.582480568},"trace":{"id":"21ea150daf005d5e3357c2a309f7ba5c"},"transaction":{"id":"db294aa1ccae026e"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.621+00:00","message":"Performing login attempt with \"basic\" provider.","log":{"level":"INFO","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87321.585108699},"trace":{"id":"21ea150daf005d5e3357c2a309f7ba5c"},"transaction":{"id":"db294aa1ccae026e"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:35.629+00:00","message":"Login attempt with \"basic\" provider failed: {\"error\":{\"root_cause\":[{\"type\":\"security_exception\",\"reason\":\"unable to authenticate user [nosuchuser] for REST request [/_security/_authenticate]\",\"header\":{\"WWW-Authenticate\":[\"Basic realm=\\\"security\\\", charset=\\\"UTF-8\\\"\",\"ApiKey\"]}}],\"type\":\"security_exception\",\"reason\":\"unable to authenticate user [nosuchuser] for REST request [/_security/_authenticate]\",\"header\":{\"WWW-Authenticate\":[\"Basic realm=\\\"security\\\", charset=\\\"UTF-8\\\"\",\"ApiKey\"]}},\"status\":401}","log":{"level":"ERROR","logger":"plugins.security.authentication"},"process":{"pid":24566,"uptime":87321.593608039},"trace":{"id":"21ea150daf005d5e3357c2a309f7ba5c"},"transaction":{"id":"db294aa1ccae026e"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:40:50.967+00:00","message":"Fleet Usage: {\"agents_enabled\":true,\"agents\":{\"total_enrolled\":3,\"healthy\":2,\"unhealthy\":0,\"offline\":1,\"inactive\":0,\"unenrolled\":1,\"total_all_statuses\":4,\"updating\":0},\"fleet_server\":{\"total_enrolled\":1,\"healthy\":1,\"unhealthy\":0,\"offline\":0,\"updating\":0,\"inactive\":0,\"unenrolled\":0,\"total_all_statuses\":1,\"num_host_urls\":1},\"license_issued_to\":\"grcico.SIEM\"}","log":{"level":"INFO","logger":"plugins.fleet"},"process":{"pid":24566,"uptime":87336.931743489},"trace":{"id":"83d45ae630110d974e067b6e1f7bc378"},"transaction":{"id":"f2ab590bc4af104b"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:43:44.943+00:00","message":"The get saved object API /api/saved_objects/_find is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87510.908557271},"trace":{"id":"7b0971caa5b568d60e33809ec02dcc7f"},"transaction":{"id":"f17e7c4819776f08"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:43:45.040+00:00","message":"The get saved object API /api/saved_objects/_find is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87511.004603072},"trace":{"id":"ef096164a056bdb75b0f7e046625ed53"},"transaction":{"id":"ed4b526ce9950dda"}}
+{"service":{"node":{"roles":["background_tasks","ui"]}},"ecs":{"version":"8.11.0"},"@timestamp":"2026-11-12T05:43:45.131+00:00","message":"The get saved object API /api/saved_objects/_find is deprecated.","log":{"level":"WARN","logger":"savedobjects-service"},"process":{"pid":24566,"uptime":87511.095120827},"trace":{"id":"8349223796f39f93dc79243dc2e1657f"},"transaction":{"id":"e1fb51c78de882c4"}}
+
+
+========== AUTOSTART / CRON ==========
+total 28
+drwxr-xr-x   2 root root  4096 Apr 23  2026 .
+drwxr-xr-x 144 root root 12288 Nov 11 06:22 ..
+-rw-r--r--   1 root root   102 Nov  5  2025 .placeholder
+-rw-r--r--   1 root root   224 Oct 31  2025 anacron
+-rw-r--r--   1 root root   188 Feb 13  2026 e2scrub_all
+Thu 2026-11-12 05:50:00 UTC     6min Thu 2026-11-12 05:40:15 UTC 3min 41s ago sysstat-collect.timer          sysstat-collect.service
+Thu 2026-11-12 06:26:07 UTC    42min Wed 2026-11-11 06:21:29 UTC      23h ago apt-daily-upgrade.timer        apt-daily-upgrade.service
+Thu 2026-11-12 06:54:06 UTC 1h 10min Thu 2026-11-12 05:01:55 UTC    42min ago fwupd-refresh.timer            fwupd-refresh.service
+Thu 2026-11-12 07:33:21 UTC 1h 49min Wed 2026-11-11 23:34:36 UTC       6h ago anacron.timer                  anacron.service
+Thu 2026-11-12 07:42:20 UTC 1h 58min Wed 2026-11-11 14:34:33 UTC      15h ago motd-news.timer                motd-news.service
+Thu 2026-11-12 08:38:07 UTC 2h 54min Wed 2026-11-11 18:10:09 UTC      11h ago apt-daily.timer                apt-daily.service
+Fri 2026-11-13 00:00:00 UTC      18h Thu 2026-11-12 00:00:23 UTC 5h 43min ago dpkg-db-backup.timer           dpkg-db-backup.service
+Fri 2026-11-13 00:00:00 UTC      18h Thu 2026-11-12 00:00:23 UTC 5h 43min ago sysstat-rotate.timer           sysstat-rotate.service
+Fri 2026-11-13 00:04:34 UTC      18h Thu 2026-11-12 00:45:23 UTC 4h 58min ago logrotate.timer                logrotate.service
+Fri 2026-11-13 00:07:00 UTC      18h Thu 2026-11-12 00:07:02 UTC 5h 36min ago sysstat-summary.timer          sysstat-summary.service
+Fri 2026-11-13 00:15:31 UTC      18h Thu 2026-11-12 03:32:23 UTC 2h 11min ago man-db.timer                   man-db.service
+Fri 2026-11-13 04:57:52 UTC      23h Thu 2026-11-12 04:57:52 UTC    46min ago update-notifier-download.timer update-notifier-download.service
+Fri 2026-11-13 05:07:47 UTC      23h Thu 2026-11-12 05:07:47 UTC    36min ago systemd-tmpfiles-clean.timer   systemd-tmpfiles-clean.service
+Sun 2026-11-15 03:10:32 UTC   2 days Sun 2026-11-08 07:26:02 UTC            - e2scrub_all.timer              e2scrub_all.service
+Mon 2026-11-16 01:06:54 UTC   3 days Mon 2026-11-09 05:44:44 UTC            - fstrim.timer                   fstrim.service
+Wed 2026-11-18 12:48:41 UTC   6 days Sun 2026-11-08 07:26:08 UTC            - update-notifier-motd.timer     update-notifier-motd.service
+
+
+========== END OF AUDIT ==========

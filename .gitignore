@@ -1,0 +1,21 @@
+# Ignore local secrets and generated files
+.env
+.env.*
+*.local
+credentials.local.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and captures
+*.log
+*.out

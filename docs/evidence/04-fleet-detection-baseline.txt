@@ -1,0 +1,89 @@
+
+
+========== FLEET AGENT POLICIES ==========
+{"items":[{"id":"8939936c-ba01-4d0a-81cf-58b0213cce53","version":"WzY1OSw0XQ==","description":"","monitoring_enabled":["logs","metrics","traces"],"inactivity_timeout":1209600,"schema_version":"1.1.1","agents":0,"name":"tkt","namespace":"tkt","is_protected":false,"status":"active","is_managed":false,"revision":3,"updated_at":"2026-11-09T11:15:23.703Z","updated_by":"elastic","unprivileged_agents":0},{"id":"67a3704e-7679-41a2-8231-22763e48b844","version":"WzY1Niw0XQ==","description":"","monitoring_enabled":["logs","metrics","traces"],"inactivity_timeout":1209600,"schema_version":"1.1.1","agents":1,"name":"grcico","namespace":"greencircle","is_protected":false,"status":"active","is_managed":false,"revision":2,"updated_at":"2026-11-09T11:01:16.526Z","updated_by":"system","unprivileged_agents":0},{"id":"dff70e2b-eb75-4a94-b7ea-744bcea9f3f4","version":"WzY1NSw0XQ==","description":"","monitoring_enabled":["logs","metrics","traces"],"inactivity_timeout":1209600,"schema_version":"1.1.1","agents":0,"name":"Agent policy 1","namespace":"default","is_protected":false,"status":"active","is_managed":false,"revision":3,"updated_at":"2026-11-09T11:01:16.525Z","updated_by":"system","unprivileged_agents":0}],"total":3,"page":1,"perPage":100}
+
+
+========== FLEET ENROLLMENT KEYS ==========
+{"list":[{"id":"b586a93c-2c1a-4962-b496-419036a872a1","active":true,"api_key_id":"2HLMv6EBZ9_Rwre41UQ9","api_key":"MkhMTXY2RUJaOV9Sd3JlNDFVUTk6bGptLTZIdDF6YVhqV3N0WTZmVzJFUQ==","name":"Default (b586a93c-2c1a-4962-b496-419036a872a1)","policy_id":"8939936c-ba01-4d0a-81cf-58b0213cce53","namespaces":[],"created_at":"2026-11-09T10:13:55.609Z"},{"id":"eaad3103-8327-44f1-bff9-82afa1352ff8","active":true,"api_key_id":"03KUv6EBZ9_Rwre49UTy","api_key":"MDNLVXY2RUJaOV9Sd3JlNDlVVHk6em9jMUJTRUFGSFlmMHpNOV9laEd5UQ==","name":"Default (eaad3103-8327-44f1-bff9-82afa1352ff8)","policy_id":"67a3704e-7679-41a2-8231-22763e48b844","namespaces":[],"created_at":"2026-11-09T09:12:53.967Z"},{"id":"30d2ab57-ca45-46bc-9687-b9d7c56cf193","active":true,"api_key_id":"0XKSv6EBZ9_Rwre48ETk","api_key":"MFhLU3Y2RUJaOV9Sd3JlNDhFVGs6Nm00TFJ2MXFiUDNiRjRyRFl5YmZ1dw==","name":"grcico (30d2ab57-ca45-46bc-9687-b9d7c56cf193)","policy_id":"dff70e2b-eb75-4a94-b7ea-744bcea9f3f4","namespaces":[],"created_at":"2026-11-09T09:10:41.226Z","expire_at":"2026-11-16T09:10:40.613Z"},{"id":"314d9592-7d29-43e2-8afe-441771c93d86","active":true,"api_key_id":"xXKCv6EBZ9_Rwre4_EQ9","api_key":"eFhLQ3Y2RUJaOV9Sd3JlNF9FUTk6REhxcDNCSzhDSkdOaS12bmtlMW95UQ==","name":"Default (314d9592-7d29-43e2-8afe-441771c93d86)","policy_id":"dff70e2b-eb75-4a94-b7ea-744bcea9f3f4","namespaces":[],"created_at":"2026-11-09T08:53:15.929Z"},{"id":"11240cfb-0d40-483f-9f85-b91f878fe95e","active":false,"api_key_id":"wXJFv6EBZ9_Rwre4LESj","api_key":"d1hKRnY2RUJaOV9Sd3JlNExFU2o6dGd6ZWRHN1AtMzNvb0VySWY2QnRTUQ==","name":"Default (11240cfb-0d40-483f-9f85-b91f878fe95e)","policy_id":"b8f40b0c-72fa-4866-9b68-a1b714f90fbc","namespaces":[],"created_at":"2026-11-09T07:45:45.110Z"},{"id":"83fb906e-70e5-4c7c-830b-3240dd8f433a","active":false,"api_key_id":"fIW8vqEB8-M_kVzSfQkc","api_key":"ZklXOHZxRUI4LU1fa1Z6U2ZRa2M6eE1TcmZYOWR2NXpMakVNVHVtUEY2dw==","name":"Default (83fb906e-70e5-4c7c-830b-3240dd8f433a)","policy_id":"fleet-server-policy","namespaces":[],"created_at":"2026-11-09T05:16:26.749Z"},{"id":"150a100d-2922-43e6-9b20-8e7bea4dcd4a","active":false,"api_key_id":"7P5Ku6EB0ZI8zZu8_eFR","api_key":"N1A1S3U2RUIwWkk4elp1OF9lRlI6LXNmX0V2eTZHd1F2NVFCaExmdUZRZw==","name":"greencircle (150a100d-2922-43e6-9b20-8e7bea4dcd4a)","policy_id":"1ee7f5b7-3a2d-46b5-91a2-cf9c674294bd","namespaces":[],"created_at":"2026-11-08T13:13:36.491Z","expire_at":"2026-11-15T13:13:36.338Z"},{"id":"8d107120-c97a-4785-9a82-537b61e30ef7","active":false,"api_key_id":"6v5Hu6EB0ZI8zZu89-EX","api_key":"NnY1SHU2RUIwWkk4elp1ODktRVg6ZGlUaHlUaUZxV2pzVDVUT1VlemZoQQ==","name":"Default (8d107120-c97a-4785-9a82-537b61e30ef7)","policy_id":"1ee7f5b7-3a2d-46b5-91a2-cf9c674294bd","namespaces":[],"created_at":"2026-11-08T13:10:18.273Z"},{"id":"22c45e8f-191d-47fc-a064-8eb818397beb","active":false,"api_key_id":"6P5Eu6EB0ZI8zZu8f-Et","api_key":"NlA1RXU2RUIwWkk4elp1OGYtRXQ6M1RCdFRIeWFEcUttNWZMVDZnelRyUQ==","name":"Default (22c45e8f-191d-47fc-a064-8eb818397beb)","policy_id":"19ff561c-7a6b-46ac-b2c5-6cfd7
+
+
+========== FLEET OUTPUTS ==========
+{"items":[{"name":"default","is_default":true,"is_default_monitoring":true,"type":"elasticsearch","hosts":["http://192.168.1.212:9200"],"preset":"balanced","config_yaml":"","ca_trusted_fingerprint":"","id":"fleet-default-output"}],"page":1,"perPage":10000,"total":1}
+
+
+========== FLEET SERVER HOSTS ==========
+{"items":[{"id":"7b0f9cbd-3b94-46f0-a3b3-2b5471204eae","name":"fleet","host_urls":["https://192.168.1.212:8220"],"is_default":true,"is_preconfigured":false}],"page":1,"perPage":10000,"total":1}
+
+
+========== FLEET SETTINGS ==========
+{"item":{"id":"fleet-default-settings","version":"WzY0Nyw0XQ==","prerelease_integrations_enabled":false,"secret_storage_requirements_met":true,"fleet_server_hosts":["https://192.168.1.212:8220"],"preconfigured_fields":[]}}
+
+
+========== DETECTION RULES ==========
+{"message":"Unable to create actions client because the Encrypted Saved Objects plugin is missing encryption key. Please set xpack.encryptedSavedObjects.encryptionKey in the kibana.yml or use the bin/kibana-encryption-keys command.","status_code":500}
+
+
+========== DETECTION ENGINE STATUS ==========
+{"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+
+========== ALERT INDICES ==========
+index                                                              docs.count store.size
+.internal.alerts-transform.health.alerts-default-000001                     0       249b
+.internal.alerts-observability.logs.alerts-default-000001                   0       249b
+.internal.alerts-observability.uptime.alerts-default-000001                 0       249b
+.internal.alerts-ml.anomaly-detection.alerts-default-000001                 0       249b
+.internal.alerts-observability.slo.alerts-default-000001                    0       249b
+.internal.alerts-default.alerts-default-000001                              0       249b
+.internal.alerts-observability.apm.alerts-default-000001                    0       249b
+.internal.alerts-streams.alerts-default-000001                              0       249b
+.internal.alerts-security.attack.discovery.alerts-default-000001            0       249b
+.internal.alerts-observability.metrics.alerts-default-000001                0       249b
+.internal.alerts-ml.anomaly-detection-health.alerts-default-000001          0       249b
+.internal.alerts-observability.threshold.alerts-default-000001              0       249b
+.internal.alerts-security.alerts-default-000001                             0       249b
+.internal.alerts-dataset.quality.alerts-default-000001                      0       249b
+.internal.alerts-stack.alerts-default-000001                                0       249b
+
+
+========== ES HEAP OPTIONS ==========
+--- elasticsearch process ---
+    PID   RSS CMD
+   1517 112540 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.script=/usr/share/elasticsearch/bin/elasticsearch -Dcli.libs=lib/tools/server-cli -Des.path.home=/usr/share/elasticsearch -Des.path.conf=/etc/elasticsearch -Des.distribution.type=deb -Des.java.type=bundled JDK -cp /usr/share/elasticsearch/lib/*:/usr/share/elasticsearch/lib/cli-launcher/* org.elasticsearch.launcher.CliToolLauncher -p /run/elasticsearch/elasticsearch.pid --quiet
+   1994 5418644 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.negative.ttl=10 -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Dlog4j2.formatMsgNoLookups=true -Djava.locale.providers=CLDR -Dorg.apache.lucene.vectorization.upperJavaFeatureVersion=27 -Des.path.home=/usr/share/elasticsearch -Des.distribution.type=deb -Des.java.type=bundled JDK --enable-native-access=org.elasticsearch.nativeaccess,org.apache.lucene.core --enable-native-access=ALL-UNNAMED --illegal-native-access=deny -XX:ReplayDataFile=/var/log/elasticsearch/replay_pid%p.log -XX:+EnableDynamicAgentLoading -Djdk.attach.allowAttachSelf=true --patch-module=java.base=/usr/share/elasticsearch/lib/entitlement-bridge/elasticsearch-entitlement-bridge-8.19.24.jar --add-exports=java.base/org.elasticsearch.entitlement.bridge=org.elasticsearch.entitlement,java.logging,java.net.http,java.naming,jdk.net,jdk.zipfs,jdk.management.agent -XX:+UseG1GC -Djava.io.tmpdir=/tmp/elasticsearch-7436568271367807041 --add-modules=jdk.incubator.vector -Dorg.apache.lucene.store.MMapDirectory.sharedArenaMaxPermits=1 -XX:+HeapDumpOnOutOfMemoryError -XX:+ExitOnOutOfMemoryError -XX:ErrorFile=hs_err_pid%p.log -Xlog:gc*,gc+age=trace,safepoint:file=gc.log:utctime,level,pid,tags:filecount=32,filesize=64m -Xms4664m -Xmx4664m -XX:MaxDirectMemorySize=2445279232 -XX:G1HeapRegionSize=4m -XX:G1IHOP=30 -XX:G1ReservePercent=15 --module-path /usr/share/elasticsearch/lib --add-modules=jdk.net --add-modules=jdk.management.agent --add-modules=ALL-MODULE-PATH -m org.elasticsearch.server/org.elasticsearch.bootstrap.Elasticsearch
+--- kibana process ---
+   1522 753568 /usr/share/kibana/bin/../node/glibc-217/bin/node /usr/share/kibana/bin/../node_modules/@kbn/cli/kibana/dist
+--- top mem ---
+    PID COMMAND         %MEM %CPU
+   1994 java            56.1 80.8
+   1522 MainThread       7.8 33.2
+   1884 gnome-shell      2.6  2.9
+   1517 java             1.1  4.5
+   1111 snapd            0.5  0.5
+   2343 xdg-desktop-por  0.4  0.2
+   2091 gjs              0.3  0.1
+
+
+========== KIBANA KEYSTORE ==========
+
+
+
+========== ENCRYPTION KEYS IN CONFIG ==========
+none configured
+
+
+========== SPACES (raw) ==========
+[{"id":"default","name":"Default","description":"This is your default space!","color":"#00bfb3","disabledFeatures":[],"_reserved":true},{"id":"grcico-com","name":"greencircle","color":"#9170B8","initials":"g","imageUrl":"","disabledFeatures":[],"solution":"classic"},{"id":"tkt-org","name":"tkt","color":"#B9A888","initials":"t","imageUrl":"","disabledFeatures":[],"solution":"classic"}]
+
+
+========== INDEX PATTERNS PER SPACE ==========
+--- space default ---
+{"page":1,"per_page":100,"total":2,"saved_objects":[{"type":"index-pattern","id":"logs-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"logs-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:25.598Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkwOSw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0},{"type":"index-pattern","id":"metrics-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"metrics-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:26.272Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkxMCw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0}]}
+--- space grcico-com ---
+{"page":1,"per_page":100,"total":2,"saved_objects":[{"type":"index-pattern","id":"logs-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"logs-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:25.598Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkwOSw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0},{"type":"index-pattern","id":"metrics-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"metrics-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:26.272Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkxMCw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0}]}
+--- space tkt-org ---
+{"page":1,"per_page":100,"total":2,"saved_objects":[{"type":"index-pattern","id":"logs-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"logs-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:25.598Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkwOSw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0},{"type":"index-pattern","id":"metrics-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"metrics-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:26.272Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkxMCw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0}]}
+
+
+========== END ==========

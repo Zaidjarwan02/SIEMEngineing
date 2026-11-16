@@ -1,0 +1,1964 @@
+
+
+========== ELASTICSEARCH ROOT ==========
+{
+  "name" : "node-1",
+  "cluster_name" : "grcico.SIEM",
+  "cluster_uuid" : "qLpz5Y1MSxqOucWlV9vndg",
+  "version" : {
+    "number" : "8.19.24",
+    "build_flavor" : "default",
+    "build_type" : "deb",
+    "build_hash" : "908773e3c727faf1e4b109d60b84cdb74484743f",
+    "build_date" : "2026-10-29T00:06:27.871743251Z",
+    "build_snapshot" : false,
+    "lucene_version" : "9.12.2",
+    "minimum_wire_compatibility_version" : "7.17.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+
+========== CLUSTER HEALTH ==========
+{
+  "cluster_name" : "grcico.SIEM",
+  "status" : "green",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 48,
+  "active_shards" : 48,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 0,
+  "unassigned_primary_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 100.0
+}
+
+
+========== NODES ==========
+name   ip            version heap.percent ram.percent cpu load_1m disk.avail
+node-1 192.168.1.212 8.19.24            7          97  15    1.89     74.3gb
+
+
+========== LICENSE ==========
+{
+  "license" : {
+    "status" : "active",
+    "uid" : "e6ab06d4-8025-4a17-8150-7701f929f847",
+    "type" : "basic",
+    "issue_date" : "2026-11-08T11:17:28.340Z",
+    "issue_date_in_millis" : 1794136648340,
+    "max_nodes" : 1000,
+    "max_resource_units" : null,
+    "issued_to" : "grcico.SIEM",
+    "issuer" : "elasticsearch",
+    "start_date_in_millis" : -1
+  }
+}
+
+
+========== AUTHENTICATED USER ==========
+{
+  "username" : "elastic",
+  "roles" : [
+    "superuser"
+  ],
+  "full_name" : null,
+  "email" : null,
+  "metadata" : {
+    "_reserved" : true
+  },
+  "enabled" : true,
+  "authentication_realm" : {
+    "name" : "reserved",
+    "type" : "reserved"
+  },
+  "lookup_realm" : {
+    "name" : "reserved",
+    "type" : "reserved"
+  },
+  "authentication_type" : "realm"
+}
+
+
+========== INDICES ==========
+health status index                                                              uuid                   pri rep docs.count store.size
+green  open   .ds-.fleet-actions-results-2026.11.09-000001                       _IGWzpOHRTa-u_qtLT6AIw   1   0          1      5.2kb
+green  open   .ds-metrics-fleet_server.agent_status-default-2026.11.09-000001    eAOwHDZfRVu9w2H1RKiuLA   1   0        160    169.8kb
+green  open   .ds-metrics-fleet_server.agent_versions-default-2026.11.09-000001  bjK0Yl6ORNWZEN7R2VuM3A   1   0        160    118.9kb
+green  open   .internal.alerts-dataset.quality.alerts-default-000001             oF0fru6YSbSRNCpz2_K97A   1   0          0       249b
+green  open   .internal.alerts-default.alerts-default-000001                     7LcKPEETTK2Lucskn-GxiA   1   0          0       249b
+green  open   .internal.alerts-ml.anomaly-detection-health.alerts-default-000001 VQyUe_OkRM2_mrQRsNXKQA   1   0          0       249b
+green  open   .internal.alerts-ml.anomaly-detection.alerts-default-000001        NjjvDlfoSEmEXIclrEBdCw   1   0          0       249b
+green  open   .internal.alerts-observability.apm.alerts-default-000001           e7F6l03eRCC1LpgxNLz0og   1   0          0       249b
+green  open   .internal.alerts-observability.logs.alerts-default-000001          lVvkDGsgTk-3caT3gFtr_Q   1   0          0       249b
+green  open   .internal.alerts-observability.metrics.alerts-default-000001       2c3TQpvqS3uOHVNaTCABQA   1   0          0       249b
+green  open   .internal.alerts-observability.slo.alerts-default-000001           H-EBewDrRMKSFVKb16_YLQ   1   0          0       249b
+green  open   .internal.alerts-observability.threshold.alerts-default-000001     ahjAoes_SzulFdEHzx4xDw   1   0          0       249b
+green  open   .internal.alerts-observability.uptime.alerts-default-000001        stOkMJZvSgeT5BDRm3-3Pg   1   0          0       249b
+green  open   .internal.alerts-security.alerts-default-000001                    xeTThfOVTy-JdM87WCM87g   1   0          0       249b
+green  open   .internal.alerts-security.attack.discovery.alerts-default-000001   FSTMEzUJQFqX_w2KIDI00w   1   0          0       249b
+green  open   .internal.alerts-stack.alerts-default-000001                       sEb1eU5DTf2LVCavZIJaHg   1   0          0       249b
+green  open   .internal.alerts-streams.alerts-default-000001                     grF1zGd1TNOaWxDBKprUaQ   1   0          0       249b
+green  open   .internal.alerts-transform.health.alerts-default-000001            8SFB415FTDuEt6f7DLidWw   1   0          0       249b
+
+
+========== DATA STREAMS ==========
+{
+  "data_streams" : [
+    {
+      "name" : ".fleet-actions-results",
+      "timestamp_field" : {
+        "name" : "@timestamp"
+      },
+      "indices" : [
+        {
+          "index_name" : ".ds-.fleet-actions-results-2026.11.09-000001",
+          "index_uuid" : "_IGWzpOHRTa-u_qtLT6AIw",
+          "managed_by" : "Index Lifecycle Management",
+          "prefer_ilm" : true,
+          "ilm_policy" : ".fleet-actions-results-ilm-policy",
+          "index_mode" : "standard"
+        }
+      ],
+      "generation" : 1,
+      "status" : "GREEN",
+      "template" : ".fleet-actions-results",
+      "ilm_policy" : ".fleet-actions-results-ilm-policy",
+      "next_generation_managed_by" : "Index Lifecycle Management",
+      "prefer_ilm" : true,
+      "hidden" : true,
+      "system" : true,
+      "allow_custom_routing" : false,
+      "replicated" : false,
+      "rollover_on_write" : false,
+      "index_mode" : "standard",
+      "settings" : { },
+      "failure_store" : {
+        "enabled" : false,
+        "rollover_on_write" : true,
+        "indices" : [ ]
+      }
+    },
+    {
+      "name" : "metrics-fleet_server.agent_status-default",
+      "timestamp_field" : {
+        "name" : "@timestamp"
+      },
+      "indices" : [
+        {
+          "index_name" : ".ds-metrics-fleet_server.agent_status-default-2026.11.09-000001",
+          "index_uuid" : "eAOwHDZfRVu9w2H1RKiuLA",
+          "managed_by" : "Index Lifecycle Management",
+          "prefer_ilm" : true,
+          "ilm_policy" : "metrics",
+          "index_mode" : "time_series"
+        }
+      ],
+      "generation" : 1,
+      "_meta" : {
+        "package" : {
+          "name" : "fleet_server"
+        },
+        "managed_by" : "fleet",
+        "managed" : true
+      },
+      "status" : "GREEN",
+      "template" : "metrics-fleet_server.agent_status",
+      "ilm_policy" : "metrics",
+      "next_generation_managed_by" : "Index Lifecycle Management",
+      "prefer_ilm" : true,
+      "hidden" : false,
+      "system" : false,
+      "allow_custom_routing" : false,
+      "replicated" : false,
+      "rollover_on_write" : false,
+      "index_mode" : "time_series",
+      "time_series" : {
+        "temporal_ranges" : [
+          {
+            "start" : "2026-11-09T06:59:44.000Z",
+            "end" : "2026-11-11T10:03:02.000Z"
+          }
+        ]
+      },
+      "settings" : { },
+      "failure_store" : {
+        "enabled" : false,
+        "rollover_on_write" : true,
+        "indices" : [ ]
+      }
+    },
+    {
+      "name" : "metrics-fleet_server.agent_versions-default",
+      "timestamp_field" : {
+        "name" : "@timestamp"
+      },
+      "indices" : [
+        {
+          "index_name" : ".ds-metrics-fleet_server.agent_versions-default-2026.11.09-000001",
+          "index_uuid" : "bjK0Yl6ORNWZEN7R2VuM3A",
+          "managed_by" : "Index Lifecycle Management",
+          "prefer_ilm" : true,
+          "ilm_policy" : "metrics",
+          "index_mode" : "time_series"
+        }
+      ],
+      "generation" : 1,
+      "_meta" : {
+        "package" : {
+          "name" : "fleet_server"
+        },
+        "managed_by" : "fleet",
+        "managed" : true
+      },
+      "status" : "GREEN",
+      "template" : "metrics-fleet_server.agent_versions",
+      "ilm_policy" : "metrics",
+      "next_generation_managed_by" : "Index Lifecycle Management",
+      "prefer_ilm" : true,
+      "hidden" : false,
+      "system" : false,
+      "allow_custom_routing" : false,
+      "replicated" : false,
+      "rollover_on_write" : false,
+      "index_mode" : "time_series",
+      "time_series" : {
+        "temporal_ranges" : [
+          {
+            "start" : "2026-11-09T06:59:45.000Z",
+            "end" : "2026-11-11T10:03:02.000Z"
+          }
+        ]
+      },
+      "settings" : { },
+      "failure_store" : {
+        "enabled" : false,
+        "rollover_on_write" : true,
+        "indices" : [ ]
+      }
+    }
+  ]
+}
+
+
+========== TEMPLATES ==========
+{
+  "index_templates" : [
+    {
+      "name" : "logs-apm.error@template",
+      "index_template" : {
+        "index_patterns" : [
+          "logs-apm.error-*"
+        ],
+        "template" : {
+          "settings" : {
+            "index" : {
+              "default_pipeline" : "logs-apm.error@default-pipeline",
+              "final_pipeline" : "logs-apm@pipeline"
+            }
+          },
+          "mappings" : {
+            "properties" : {
+              "processor.event" : {
+                "type" : "constant_keyword",
+                "value" : "error"
+              }
+            }
+          }
+        },
+        "composed_of" : [
+          "logs@mappings",
+          "apm@mappings",
+          "apm@settings",
+          "apm-10d@lifecycle",
+          "logs-apm@settings",
+          "logs-apm.error@mappings",
+          "logs-apm.error-fallback@ilm",
+          "logs@custom",
+          "logs-apm.error@custom",
+          "ecs@mappings"
+        ],
+        "priority" : 210,
+        "version" : 32,
+        "_meta" : {
+          "managed" : true,
+          "description" : "Index template for logs-apm.error-*"
+        },
+        "data_stream" : {
+          "hidden" : false,
+          "allow_custom_routing" : false
+        },
+        "allow_auto_create" : true,
+        "ignore_missing_component_templates" : [
+          "logs@custom",
+          "logs-apm.error@custom",
+          "logs-apm.error-fallback@ilm"
+        ]
+      }
+    },
+    {
+      "name" : "metrics-apm.service_destination.1m@template",
+      "index_template" : {
+        "index_patterns" : [
+          "metrics-apm.service_destination.1m-*"
+        ],
+        "template" : {
+          "settings" : {
+            "index" : {
+              "default_pipeline" : "metrics-apm.service_destination@default-pipeline",
+              "final_pipeline" : "metrics-apm@pipeline"
+            }
+          },
+          "mappings" : {
+            "properties" : {
+              "metricset.interval" : {
+                "type" : "constant_keyword",
+                "value" : "1m"
+              }
+            }
+          }
+        },
+        "composed_of" : [
+          "metrics@mappings",
+          "apm@mappings",
+          "apm@settings",
+          "apm-90d@lifecycle",
+          "metrics-apm@mappings",
+          "metrics-apm@settings",
+          "metrics-apm.service_destination@mappings",
+          "metrics-apm.service_destination.1m-fallback@ilm",
+          "metrics@custom",
+          "metrics-apm.service_destination.1m@custom",
+          "ecs@mappings"
+        ],
+        "priority" : 210,
+        "version" : 32,
+        "_meta" : {
+          "managed" : true,
+          "description" : "Index template for metrics-apm.service_destination.1m-*"
+        },
+        "data_stream" : {
+          "hidden" : false,
+          "allow_custom_routing" : false
+        },
+        "allow_auto_create" : true,
+        "ignore_missing_component_templates" : [
+          "metrics@custom",
+          "metrics-apm.service_destination.1m@custom",
+
+{
+  "component_templates" : [
+    {
+      "name" : ".kibana_locks-component",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "dynamic" : false,
+            "properties" : {
+              "createdAt" : {
+                "type" : "date"
+              },
+              "metadata" : {
+                "enabled" : false
+              },
+              "expiresAt" : {
+                "type" : "date"
+              },
+              "token" : {
+                "type" : "keyword"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name" : ".fleet_agent_id_verification-1",
+      "component_template" : {
+        "template" : {
+          "settings" : {
+            "index" : {
+              "final_pipeline" : ".fleet_final_pipeline-1"
+            }
+          },
+          "mappings" : {
+            "properties" : {
+              "event" : {
+                "properties" : {
+                  "agent_id_status" : {
+                    "ignore_above" : 1024,
+                    "type" : "keyword"
+                  },
+                  "ingested" : {
+                    "format" : "strict_date_time_no_millis||strict_date_optional_time||epoch_millis",
+                    "ignore_malformed" : false,
+                    "type" : "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_meta" : {
+          "managed_by" : "fleet",
+          "managed" : true
+        }
+      }
+    },
+    {
+      "name" : "elastic-connectors-mappings",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "_meta" : {
+              "pipeline" : {
+                "default_name" : "ent-search-generic-ingestion",
+                "default_extract_binary_content" : true,
+                "default_run_ml_inference" : true,
+                "default_reduce_whitespace" : true
+              },
+              "version" : 3
+            },
+            "dynamic" : "false",
+            "properties" : {
+              "last_seen" : {
+                "type" : "date"
+              },
+              "configuration" : {
+                "type" : "object"
+              },
+              "description" : {
+                "type" : "text"
+              },
+              "language" : {
+                "type" : "keyword"
+              },
+              "error" : {
+                "type" : "keyword"
+              },
+              "sync_cursor" : {
+                "type" : "object"
+              },
+              "features" : {
+                "properties" : {
+                  "incremental_sync" : {
+                    "properties" : {
+                      "enabled" : {
+                        "type" : "boolean"
+                      }
+                    }
+                  },
+                  "filtering_rules" : {
+                    "type" : "boolean"
+                  },
+                  "sync_rules" : {
+                    "properties" : {
+                      "adv
+
+========== SECURITY USERS ==========
+{
+  "elastic" : {
+    "username" : "elastic",
+    "roles" : [
+      "superuser"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  },
+  "kibana" : {
+    "username" : "kibana",
+    "roles" : [
+      "kibana_system"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_deprecated_reason" : "Please use the [kibana_system] user instead.",
+      "_reserved" : true,
+      "_deprecated" : true
+    },
+    "enabled" : true
+  },
+  "kibana_system" : {
+    "username" : "kibana_system",
+    "roles" : [
+      "kibana_system"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  },
+  "logstash_system" : {
+    "username" : "logstash_system",
+    "roles" : [
+      "logstash_system"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  },
+  "beats_system" : {
+    "username" : "beats_system",
+    "roles" : [
+      "beats_system"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  },
+  "apm_system" : {
+    "username" : "apm_system",
+    "roles" : [
+      "apm_system"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  },
+  "remote_monitoring_user" : {
+    "username" : "remote_monitoring_user",
+    "roles" : [
+      "remote_monitoring_collector",
+      "remote_monitoring_agent"
+    ],
+    "full_name" : null,
+    "email" : null,
+    "metadata" : {
+      "_reserved" : true
+    },
+    "enabled" : true
+  }
+}
+
+
+========== SECURITY ROLES (names) ==========
+GreenCircle
+apm_system
+apm_user
+beats_admin
+beats_system
+data_frame_transforms_admin
+data_frame_transforms_user
+editor
+enrich_user
+inference_admin
+inference_user
+ingest_admin
+kibana_admin
+kibana_system
+kibana_user
+logstash_admin
+logstash_system
+machine_learning_admin
+machine_learning_user
+monitoring_user
+remote_monitoring_agent
+remote_monitoring_collector
+reporting_user
+rollup_admin
+rollup_user
+snapshot_user
+superuser
+tkt
+transform_admin
+transform_user
+transport_client
+viewer
+watcher_admin
+watcher_user
+
+
+========== SECURITY ROLE MAPPINGS ==========
+{ }
+
+
+========== API KEYS ==========
+{
+  "api_keys" : [
+    {
+      "id" : "5f5Bu6EB0ZI8zZu8g-E0",
+      "name" : "Default (63be88ae-00d1-434e-9515-47a4c9e30f2c)",
+      "type" : "rest",
+      "creation" : 1794142995269,
+      "invalidated" : true,
+      "invalidation" : 1794143584408,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "959b91d6-1480-4a83-a1eb-2c428282ec4f",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "6P5Eu6EB0ZI8zZu8f-Et",
+      "name" : "Default (22c45e8f-191d-47fc-a064-8eb818397beb)",
+      "type" : "rest",
+      "creation" : 1794143190830,
+      "invalidated" : true,
+      "invalidation" : 1794143589418,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "19ff561c-7a6b-46ac-b2c5-6cfd70ec7412",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "uXLhvqEBZ9_Rwre41kSS",
+      "name" : "standalone_agent-dc4a88c0ad4b93d9efa0d04cc7237a59",
+      "type" : "rest",
+      "creation" : 1794203834017,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "u3LivqEBZ9_Rwre4ckTf",
+      "name" : "standalone_agent-4c1abcc936460f8baa9bd1485a4c2aea",
+      "type" : "rest",
+      "creation" : 1794203874016,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "vXLwvqEBZ9_Rwre4EkR6",
+      "name" : "standalone_agent-dbbd039b46e3b2f69fe7f35488dff7cf",
+      "type" : "rest",
+      "creation" : 1794204766842,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "v3LwvqEBZ9_Rwre4_0TB",
+      "name" : "standalone_agent-3c704e6b85a76d9f46ca87a48ce41e56",
+      "type" : "rest",
+      "creation" : 1794204827586,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "7P5Ku6EB0ZI8zZu8_eFR",
+      "name" : "greencircle (150a100d-2922-43e6-9b20-8e7bea4dcd4a)",
+      "type" : "rest",
+      "creation" : 1794143616338,
+      "expiration" : 1794748416338,
+      "invalidated" : true,
+      "invalidation" : 1794214289261,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "1ee7f5b7-3a2d-46b5-91a2-cf9c674294bd",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "6v5Hu6EB0ZI8zZu89-EX",
+      "name" : "Default (8d107120-c97a-4785-9a82-537b61e30ef7)",
+      "type" : "rest",
+      "creation" : 1794143418136,
+      "invalidated" : true,
+      "invalidation" : 1794214291245,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "1ee7f5b7-3a2d-46b5-91a2-cf9c674294bd",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "wXJFv6EBZ9_Rwre4LESj",
+      "name" : "Default (11240cfb-0d40-483f-9f85-b91f878fe95e)",
+      "type" : "rest",
+      "creation" : 1794210344099,
+      "invalidated" : true,
+      "invalidation" : 1794214283230,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "b8f40b0c-72fa-4866-9b68-a1b714f90fbc",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "fIW8vqEB8-M_kVzSfQkc",
+      "name" : "Default (83fb906e-70e5-4c7c-830b-3240dd8f433a)",
+      "type" : "rest",
+      "creation" : 1794201386319,
+      "invalidated" : true,
+      "invalidation" : 1794214277199,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "fleet-server-policy",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "0XKSv6EBZ9_Rwre48ETk",
+      "name" : "grcico (30d2ab57-ca45-46bc-9687-b9d7c56cf193)",
+      "type" : "rest",
+      "creation" : 1794215440613,
+      "expiration" : 1794820240613,
+      "invalidated" : false,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "dff70e2b-eb75-4a94-b7ea-744bcea9f3f4",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "xXKCv6EBZ9_Rwre4_EQ9",
+      "name" : "Default (314d9592-7d29-43e2-8afe-441771c93d86)",
+      "type" : "rest",
+      "creation" : 1794214394942,
+      "invalidated" : false,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "dff70e2b-eb75-4a94-b7ea-744bcea9f3f4",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "03KUv6EBZ9_Rwre49UTy",
+      "name" : "Default (eaad3103-8327-44f1-bff9-82afa1352ff8)",
+      "type" : "rest",
+      "creation" : 1794215572980,
+      "invalidated" : false,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "67a3704e-7679-41a2-8231-22763e48b844",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "z3KJv6EBZ9_Rwre4PkQC",
+      "name" : "bb628938-7d66-4e6c-b51c-185402bbfcee:default",
+      "type" : "rest",
+      "creation" : 1794214804995,
+      "invalidated" : false,
+      "username" : "elastic/fleet-server",
+      "realm" : "_service_account",
+      "realm_type" : "_service_account",
+      "metadata" : {
+        "output_name" : "default",
+        "agent_id" : "bb628938-7d66-4e6c-b51c-185402bbfcee",
+        "managed_by" : "fleet-server",
+        "managed" : true,
+        "type" : "output"
+      },
+      "role_descriptors" : {
+        "8e4ec3f5-fc8f-46c5-a500-d3c3610765c8" : {
+          "cluster" : [ ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-system.auth-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.syslog-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.auth-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.syslog-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.application-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.security-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-system.system-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.cpu-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.diskio-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.filesystem-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.fsstat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.load-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.memory-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.network-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.process-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.process.summary-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.socket_summary-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-system.uptime-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        },
+        "_elastic_agent_checks" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [ ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        },
+        "_elastic_agent_monitoring" : {
+          "cluster" : [ ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-elastic_agent.apm_server-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.apm_server-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.auditbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.auditbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.cloud_defend-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.cloudbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.cloudbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.elastic_agent-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.endpoint_security-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.endpoint_security-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.filebeat_input-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.filebeat_input-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.filebeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.filebeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.fleet_server-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.fleet_server-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.heartbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.heartbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.metricbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.metricbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.osquerybeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.osquerybeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.packetbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "metrics-elastic_agent.packetbeat-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.pf_elastic_collector-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.pf_elastic_symbolizer-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.pf_host_agent-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            },
+            {
+              "names" : [
+                "logs-elastic_agent.status_change-greencircle"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "x3KIv6EBZ9_Rwre46kRh",
+      "name" : "bb628938-7d66-4e6c-b51c-185402bbfcee",
+      "type" : "rest",
+      "creation" : 1794214783586,
+      "invalidated" : false,
+      "username" : "elastic/fleet-server",
+      "realm" : "_service_account",
+      "realm_type" : "_service_account",
+      "metadata" : {
+        "agent_id" : "bb628938-7d66-4e6c-b51c-185402bbfcee",
+        "managed_by" : "fleet-server",
+        "managed" : true,
+        "type" : "access"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-access" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "2HLMv6EBZ9_Rwre41UQ9",
+      "name" : "Default (b586a93c-2c1a-4962-b496-419036a872a1)",
+      "type" : "rest",
+      "creation" : 1794219234622,
+      "invalidated" : false,
+      "username" : "kibana_system",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "policy_id" : "8939936c-ba01-4d0a-81cf-58b0213cce53",
+        "managed_by" : "fleet",
+        "managed" : true,
+        "type" : "enroll"
+      },
+      "role_descriptors" : {
+        "fleet-apikey-enroll" : {
+          "cluster" : [ ],
+          "indices" : [ ],
+          "applications" : [
+            {
+              "application" : "fleet",
+              "privileges" : [
+                "no-privileges"
+              ],
+              "resources" : [
+                "*"
+              ]
+            }
+          ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "2nLhv6EBZ9_Rwre4g0T6",
+      "name" : "standalone_agent-1880ff6ffa189ac00eabc890da0da71f",
+      "type" : "rest",
+      "creation" : 1794220590075,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "3HLtv6EBZ9_Rwre4ZUSI",
+      "name" : "standalone_agent-80cc2583e7a8fe0e1d9fcfb12990b045",
+      "type" : "rest",
+      "creation" : 1794221368712,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "3nL7v6EBZ9_Rwre4MkS4",
+      "name" : "standalone_agent-e12689fa7965e90665a3d149d34c67c8",
+      "type" : "rest",
+      "creation" : 1794222273208,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    },
+    {
+      "id" : "4HICwKEBZ9_Rwre4UEQf",
+      "name" : "standalone_agent-a92882cea4ae781ffeedceae8a291c7d",
+      "type" : "rest",
+      "creation" : 1794222739489,
+      "invalidated" : false,
+      "username" : "elastic",
+      "realm" : "reserved",
+      "realm_type" : "reserved",
+      "metadata" : {
+        "managed" : true
+      },
+      "role_descriptors" : {
+        "standalone_agent" : {
+          "cluster" : [
+            "monitor"
+          ],
+          "indices" : [
+            {
+              "names" : [
+                "logs-*-*",
+                "metrics-*-*",
+                "traces-*-*",
+                "synthetics-*-*"
+              ],
+              "privileges" : [
+                "auto_configure",
+                "create_doc"
+              ],
+              "allow_restricted_indices" : false
+            }
+          ],
+          "applications" : [ ],
+          "run_as" : [ ],
+          "metadata" : { },
+          "transient_metadata" : {
+            "enabled" : true
+          }
+        }
+      }
+    }
+  ]
+}
+
+
+========== SNAPSHOT REPOS ==========
+{ }
+
+
+========== KIBANA SPACES ==========
+{"statusCode":400,"error":"Bad Request","message":"[request query.pretty]: definition for this key is missing"}
+
+========== KIBANA STATUS ==========
+{"name":"ubuntu","uuid":"d7b386c1-cd81-4fef-82ba-1fbf35dcc58d","version":{"number":"8.19.24","build_hash":"0b1457c9d35f6712ec48295e19ba12e220787a21","build_number":88629,"build_snapshot":false,"build_flavor":"traditional","build_date":"2026-10-29T00:07:19.751Z"},"status":{"overall":{"level":"available","summary":"All services and plugins are available"},"core":{"elasticsearch":{"level":"available","summary":"Elasticsearch is available","meta":{"warningNodes":[],"incompatibleNodes":[]}},"savedObjects":{"level":"available","summary":"SavedObjects service has completed migrations and is available","meta":{"migratedIndices":{"migrated":0,"skipped":0,"patched":7}}}},"plugins":{"alerting":{"level":"available","summary":"Alerting is (probably) ready","reported":true},"triggersActionsUi":{"level":"available","summary":"All services and plugins are available"},"transform":{"level":"available","summary":"All services and plugins are available"},"stackConnectors":{"level":"available","summary":"All services and plugins are available"},"integrationAssistant":{"level":"available","summary":"All services and plugins are available"},"stackAlerts":{"level":"available","summary":"All services and plugins are available"},"ruleRegistry":{"level":"available","summary":"All services and plugins are available"},"streams":{"level":"available","summary":"All services and plugins are available"},"cases":{"level":"available","summary":"All services and plugins are available"},"timelines":{"level":"available","summary":"All services and plugins are available"},"sessionView":{"level":"available","summary":"All services and plugins are available"},"kubernetesSecurity":{"level":"available","summary":"All services and plugins are available"},"threatIntelligence":{"level":"available","summary":"All services and plugins are available"},"observabilityShared":{"level":"available","summary":"All services and plugins are available"},"metricsDataAccess":{"level":"available","summary":"All services and plugins are available"},"embeddableAlertsTable":{"level":"available","summary":"All services and plugins are available"},"aiops":{"level":"available","summary":"All services and plugins are available"},"links":{"level":"available","summary":"All services and plugins are available"},"discover":{"level":"available","summary":"All services and plugins are available"},"reporting":{"level":"available","summary":"All services and plugins are available"},"canvas":{"level":"available","summary":"All services and plugins are available"},"ml":{"level":"available","summary":"All services and plugins are available"},"searchPlayground":{"level":"available","summary":"All services and plugins are available"},"searchInferenceEndpoints":{"level":"available","summary":"All services and plugins are available"},"searchAssistant":{"level":"available","summary":"All services and plugins are available"},"observabilityAiAssistantManagement":{"level":"available","summary":"All services and plugins are available"},"elasticAssistant":{"level":"available","summary":"All services and plugins are available"},"logsExplorer":{"level":"available","summary":"All services and plugins are available"},"osquery":{"level":"available","summary":"All services and plugins are available"},"monitoring":{"level":"available","summary":"All services and plugins are available"},"logstash":{"level":"available","summary":"All services and plugins are available"},"indexManagement":{"level":"available","summary":"All services and plugins are available"},"rollup":{"level":"available","summary":"All services and plugins are available"},"remoteClusters":{"level":"available","summary":"All services and plugins are available"},"crossClusterReplication":{"level":"available","summary":"All services and plugins are available"},"indexLifecycleManagement":{"level":"available","summary":"All services and plugins are available"},"esql":{"level":"available","summary":"All services and plugins are available"},"enterpriseSearch":{"level":"available","summary":"All services and plugins are available"},"datasetQuality":{"level":"available","summary":"All services and plugins are available"},"streamsApp":{"level":"available","summary":"All services and plugins are available"},"streamsAppWrapper":{"level":"available","summary":"All services and plugins are available"},"dataQuality":{"level":"available","summary":"All services and plugins are available"},"cloudSecurityPosture":{"level":"available","summary":"All services and plugins are available"},"cloudDefend":{"level":"available","summary":"All services and plugins are available"},"securitySolution":{"level":"available","summary":"All services and plugins are available"},"securitySolutionEss":{"level":"available","summary":"All services and plugins are available"},"exploratoryView":{"level":"available","summary":"All services and plugins are available"},"observability":{"level":"available","summary":"All services and plugins are available"},"uptime":{"level":"available","summary":"All services and plugins are available"},"slo":{"level":"available","summary":"All services and plugins are available"},"synthetics":{"level":"available","summary":"All services and plugins are available"},"observabilityLogsExplorer":{"level":"available","summary":"All services and plugins are available"},"observabilityAIAssistantApp":{"level":"available","summary":"All services and plugins are available"},"observabilityOnboarding":{"level":"available","summary":"All services and plugins are available"},"discoverEnhanced":{"level":"available","summary":"All services and plugins are available"},"infra":{"level":"available","summary":"All services and plugins are available"},"apm":{"level":"available","summary":"All services and plugins are available"},"ux":{"level":"available","summary":"All services and plugins are available"},"security":{"level":"available","summary":"All services and plugins are available","reported":true},"telemetry":{"level":"available","summary":"All services and plugins are available"},"licenseManagement":{"level":"available","summary":"All services and plugins are available"},"snapshotRestore":{"level":"available","summary":"All services and plugins are available"},"lists":{"level":"available","summary":"All services and plugins are available"},"files":{"level":"available","summary":"All services and plugins are available"},"filesManagement":{"level":"available","summary":"All services and plugins are available"},"encryptedSavedObjects":{"level":"available","summary":"All services and plugins are available"},"taskManagerDependencies":{"level":"available","summary":"All services and plugins are available"},"entityManager":{"level":"available","summary":"All services and plugins are available"},"cloudLinks":{"level":"available","summary":"All services and plugins are available"},"actions":{"level":"available","summary":"All services and plugins are available"},"notifications":{"level":"available","summary":"All services and plugins are available"},"inference":{"level":"available","summary":"All services and plugins are available"},"observabilityAIAssistant":{"level":"available","summary":"All services and plugins are available"},"llmTasks":{"level":"available","summary":"All services and plugins are available"},"telemetryManagementSection":{"level":"available","summary":"All services and plugins are available"},"savedObjectsTagging":{"level":"available","summary":"All services and plugins are available"},"globalSearchBar":{"level":"available","summary":"All services and plugins are available"},"imageEmbeddable":{"level":"available","summary":"All services and plugins are available"},"fileUpload":{"level":"available","summary":"All services and plugins are available"},"ingestPipelines":{"level":"available","summary":"All services and plugins are available"},"watcher":{"level":"available","summary":"All services and plugins are available"},"eventAnnotation":{"level":"available","summary":"All services and plugins are available"},"expressionXY":{"level":"available","summary":"All services and plugins are available"},"lens":{"level":"available","summary":"All services and plugins are available"},"maps":{"level":"available","summary":"All services and plugins are available"},"dataVisualizer":{"level":"available","summary":"All services and plugins are available"},"eventAnnotationListing":{"level":"available","summary":"All services and plugins are available"},"dashboard":{"level":"available","summary":"All services and plugins are available"},"logsShared":{"level":"available","summary":"All services and plugins are available"},"upgradeAssistant":{"level":"available","summary":"All services and plugins are available"},"apmDataAccess":{"level":"available","summary":"All services and plugins are available"},"fleet":{"level":"available","summary":"Fleet is available","reported":true},"urlForwarding":{"level":"available","summary":"All services are available"},"unifiedHistogram":{"level":"available","summary":"All services are available"},"uiActions":{"level":"available","summary":"All services are available"},"translations":{"level":"available","summary":"All services are available"},"searchNavigation":{"level":"available","summary":"All services are available"},"searchConnectors":{"level":"available","summary":"All services are available"},"screenshotMode":{"level":"available","summary":"All services are available"},"savedObjectsFinder":{"level":"available","summary":"All services are available"},"runtimeFields":{"level":"available","summary":"All services are available"},"noDataPage":{"level":"available","summary":"All services are available"},"monitoringCollection":{"level":"available","summary":"All services are available"},"licenseApiGuard":{"level":"available","summary":"All services are available"},"kibanaUtils":{"level":"available","summary":"All services are available"},"kibanaReact":{"level":"available","summary":"All services are available"},"ftrApis":{"level":"available","summary":"All services are available"},"fieldsMetadata":{"level":"available","summary":"All services are available"},"fieldFormats":{"level":"available","summary":"All services are available"},"expressions":{"level":"available","summary":"All services are available"},"esUiShared":{"level":"available","summary":"All services are available"},"elasticAssistantSharedState":{"level":"available","summary":"All services are available"},"discoverShared":{"level":"available","summary":"All services are available"},"customIntegrations":{"level":"available","summary":"All services are available"},"clientApps":{"level":"available","summary":"All services are available"},"bfetch":{"level":"available","summary":"All services are available"},"devTools":{"level":"available","summary":"All services and plugins are available"},"usageCollection":{"level":"available","summary":"All services and plugins are available"},"telemetryCollectionManager":{"level":"available","summary":"All services and plugins are available"},"telemetryCollectionXpack":{"level":"available","summary":"All services and plugins are available"},"kibanaUsageCollection":{"level":"available","summary":"All services and plugins are available"},"contentManagement":{"level":"available","summary":"All services and plugins are available"},"cloud":{"level":"available","summary":"All services and plugins are available"},"intercepts":{"level":"available","summary":"All services and plugins are available"},"productIntercept":{"level":"available","summary":"All services and plugins are available"},"newsfeed":{"level":"available","summary":"All services and plugins are available"},"share":{"level":"available","summary":"All services and plugins are available"},"inspector":{"level":"available","summary":"All services and plugins are available"},"productDocBase":{"level":"available","summary":"All services and plugins are available"},"mapsEms":{"level":"available","summary":"All services and plugins are available"},"globalSearch":{"level":"available","summary":"All services and plugins are available"},"globalSearchProviders":{"level":"available","summary":"All services and plugins are available"},"features":{"level":"available","summary":"All services and plugins are available"},"guidedOnboarding":{"level":"available","summary":"All services and plugins are available"},"banners":{"level":"available","summary":"All services and plugins are available"},"customBranding":{"level":"available","summary":"All services and plugins are available"},"screenshotting":{"level":"available","summary":"All services and plugins are available"},"dataViews":{"level":"available","summary":"All services and plugins are available"},"home":{"level":"available","summary":"All services and plugins are available"},"searchprofiler":{"level":"available","summary":"All services and plugins are available"},"painlessLab":{"level":"available","summary":"All services and plugins are available"},"management":{"level":"available","summary":"All services and plugins are available"},"spaces":{"level":"available","summary":"All services and plugins are available"},"eventLog":{"level":"available","summary":"All services and plugins are available"},"advancedSettings":{"level":"available","summary":"All services and plugins are available"},"cloudDataMigration":{"level":"available","summary":"All services and plugins are available"},"aiAssistantManagementSelection":{"level":"available","summary":"All services and plugins are available"},"grokdebugger":{"level":"available","summary":"All services and plugins are available"},"data":{"level":"available","summary":"All services and plugins are available"},"savedObjects":{"level":"available","summary":"All services and plugins are available"},"savedObjectsTaggingOss":{"level":"available","summary":"All services and plugins are available"},"savedObjectsManagement":{"level":"available","summary":"All services and plugins are available"},"unifiedSearch":{"level":"available","summary":"All services and plugins are available"},"navigation":{"level":"available","summary":"All services and plugins are available"},"inferenceEndpoint":{"level":"available","summary":"All services and plugins are available"},"graph":{"level":"available","summary":"All services and plugins are available"},"presentationPanel":{"level":"available","summary":"All services and plugins are available"},"embeddable":{"level":"available","summary":"All services and plugins are available"},"unifiedDocViewer":{"level":"available","summary":"All services and plugins are available"},"uiActionsEnhanced":{"level":"available","summary":"All services and plugins are available"},"urlDrilldown":{"level":"available","summary":"All services and plugins are available"},"embeddableEnhanced":{"level":"available","summary":"All services and plugins are available"},"dashboardEnhanced":{"level":"available","summary":"All services and plugins are available"},"savedSearch":{"level":"available","summary":"All services and plugins are available"},"presentationUtil":{"level":"available","summary":"All services and plugins are available"},"controls":{"level":"available","summary":"All services and plugins are available"},"logsDataAccess":{"level":"available","summary":"All services and plugins are available"},"esqlDataGrid":{"level":"available","summary":"All services and plugins are available"},"ecsDataQualityDashboard":{"level":"available","summary":"All services and plugins are available"},"dataViewFieldEditor":{"level":"available","summary":"All services and plugins are available"},"dataViewEditor":{"level":"available","summary":"All services and plugins are available"},"kibanaOverview":{"level":"available","summary":"All services and plugins are available"},"dataViewManagement":{"level":"available","summary":"All services and plugins are available"},"console":{"level":"available","summary":"All services and plugins are available"},"searchSynonyms":{"level":"available","summary":"All services and plugins are available"},"searchQueryRules":{"level":"available","summary":"All services and plugins are available"},"searchNotebooks":{"level":"available","summary":"All services and plugins are available"},"charts":{"level":"available","summary":"All services and plugins are available"},"visualizations":{"level":"available","summary":"All services and plugins are available"},"visTypeXy":{"level":"available","summary":"All services and plugins are available"},"visTypeVislib":{"level":"available","summary":"All services and plugins are available"},"visTypeVega":{"level":"available","summary":"All services and plugins are available"},"visTypeTimeseries":{"level":"available","summary":"All services and plugins are available"},"visTypeTimelion":{"level":"available","summary":"All services and plugins are available"},"visTypeTagcloud":{"level":"available","summary":"All services and plugins are available"},"visTypeTable":{"level":"available","summary":"All services and plugins are available"},"visTypeMetric":{"level":"available","summary":"All services and plugins are available"},"visTypeMarkdown":{"level":"available","summary":"All services and plugins are available"},"visTypeHeatmap":{"level":"available","summary":"All services and plugins are available"},"visDefaultEditor":{"level":"available","summary":"All services and plugins are available"},"inputControlVis":{"level":"available","summary":"All services and plugins are available"},"expressionTagcloud":{"level":"available","summary":"All services and plugins are available"},"expressionPartitionVis":{"level":"available","summary":"All services and plugins are available"},"visTypePie":{"level":"available","summary":"All services and plugins are available"},"expressionMetricVis":{"level":"available","summary":"All services and plugins are available"},"expressionLegacyMetricVis":{"level":"available","summary":"All services and plugins are available"},"expressionHeatmap":{"level":"available","summary":"All services and plugins are available"},"expressionGauge":{"level":"available","summary":"All services and plugins are available"},"visTypeGauge":{"level":"available","summary":"All services and plugins are available"},"apmSourcesAccess":{"level":"available","summary":"All services and plugins are available"},"licensing":{"level":"available","summary":"License fetched","reported":true},"taskManager":{"level":"available","summary":"Task Manager is healthy","reported":true}}},"metrics":{"last_updated":"2026-11-11T09:38:00.036Z","collection_interval_in_millis":5000,"os":{"platform":"linux","platformRelease":"linux-7.0.0-43-generic","load":{"1m":1.89,"5m":1.24,"15m":0.5},"memory":{"total_in_bytes":9886044160,"free_in_bytes":2035879936,"used_in_bytes":7850164224},"uptime_in_millis":142100,"distro":"Ubuntu","distroRelease":"Ubuntu-26.04"},"process":{"memory":{"heap":{"total_in_bytes":814727168,"used_in_bytes":533702216,"size_limit":2348810240},"resident_set_size_in_bytes":1400487936,"array_buffers_in_bytes":41420975,"external_in_bytes":45924841},"pid":1522,"event_loop_delay":173.277183,"event_loop_delay_histogram":{"min":9.150464,"max":173.277183,"mean":18.125866505660376,"exceeds":0,"stddev":22.87103759790657,"fromTimestamp":"2026-11-11T09:37:55.034Z","lastUpdatedAt":"2026-11-11T09:38:00.035Z","percentiles":{"50":10.993663,"75":11.665407,"95":54.132735,"99":139.329535}},"event_loop_utilization":{"active":33.653155999985756,"idle":4967.7888939999975,"utilization":0.006728690578347472},"uptime_in_millis":131420.483077},"processes":[{"memory":{"heap":{"total_in_bytes":814727168,"used_in_bytes":533702216,"size_limit":2348810240},"resident_set_size_in_bytes":1400487936,"array_buffers_in_bytes":41420975,"external_in_bytes":45924841},"pid":1522,"event_loop_delay":173.277183,"event_loop_delay_histogram":{"min":9.150464,"max":173.277183,"mean":18.125866505660376,"exceeds":0,"stddev":22.87103759790657,"fromTimestamp":"2026-11-11T09:37:55.034Z","lastUpdatedAt":"2026-11-11T09:38:00.035Z","percentiles":{"50":10.993663,"75":11.665407,"95":54.132735,"99":139.329535}},"event_loop_utilization":{"active":33.653155999985756,"idle":4967.7888939999975,"utilization":0.006728690578347472},"uptime_in_millis":131420.483077}],"response_times":{"avg_in_millis":0,"max_in_millis":0},"concurrent_connections":0,"requests":{"disconnects":0,"total":0,"statusCodes":{},"status_codes":{}},"elasticsearch_client":{"totalActiveSockets":0,"totalIdleSockets":83,"totalQueuedRequests":0}}}
+
+========== KIBANA SAVED OBJECTS COUNT ==========
+{"page":1,"per_page":100,"total":2,"saved_objects":[{"type":"index-pattern","id":"logs-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"logs-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:25.598Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkwOSw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0},{"type":"index-pattern","id":"metrics-*","namespaces":["*","default"],"attributes":{"timeFieldName":"@timestamp","title":"metrics-*","allowNoIndex":true},"references":[],"managed":true,"migrationVersion":{"index-pattern":"8.0.0"},"updated_at":"2026-11-08T12:52:26.272Z","created_at":"2026-11-08T12:52:25.470Z","version":"WzkxMCw0XQ==","coreMigrationVersion":"8.8.0","typeMigrationVersion":"8.0.0","score":0}]}
+
+========== ELASTICSEARCH.YML (effective, no secrets) ==========
+cluster.name: grcico.SIEM
+node.name: node-1
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+network.host: 192.168.1.212
+http.port: 9200
+xpack.security.enabled: true
+xpack.security.enrollment.enabled: true
+xpack.security.http.ssl:
+  enabled: false
+  keystore.path: certs/http.p12
+xpack.security.transport.ssl:
+  enabled: true
+  verification_mode: certificate
+  keystore.path: certs/transport.p12
+  truststore.path: certs/transport.p12
+cluster.initial_master_nodes: ["ubuntu"]
+http.host: 0.0.0.0
+transport.host: 0.0.0.0
+
+
+========== KIBANA.YML (effective, no secrets) ==========
+server.port: 5601
+server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://localhost:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "<redacted>"
+logging:
+  appenders:
+    file:
+      type: file
+      fileName: /var/log/kibana/kibana.log
+      layout:
+        type: json
+  root:
+    appenders:
+      - default
+      - file
+pid.file: /run/kibana/kibana.pid
+
+
+========== JVM HEAP SETTINGS ==========
+## Node command line options
+## See `node --help` and `node --v8-options` for available options
+## Please note you should specify one option per line
+
+## max size of old space in megabytes
+#--max-old-space-size=4096
+
+## do not terminate process on unhandled promise rejection
+ --unhandled-rejections=warn
+
+## restore < Node 16 default DNS lookup behavior
+--dns-result-order=ipv4first
+
+## enable OpenSSL 3 legacy provider
+--openssl-legacy-provider
+
+
+========== CERTS ==========
+total 32
+drwxr-x--- 2 root elasticsearch  4096 Nov  8 09:07 .
+drwxr-s--- 4 root elasticsearch  4096 Nov  9 11:18 ..
+-rw-rw---- 1 root elasticsearch 10093 Nov  8 09:07 http.p12
+-rw-rw---- 1 root elasticsearch  1935 Nov  8 09:07 http_ca.crt
+-rw-rw---- 1 root elasticsearch  5838 Nov  8 09:07 transport.p12
+
+
+========== END ==========

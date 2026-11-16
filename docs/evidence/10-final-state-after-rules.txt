@@ -1,0 +1,199 @@
+FINAL STATE AFTER DETECTION-RULES WORK (focused extract)
+captured 2026-11-12 from the live cluster
+
+========== CLUSTER ==========
+{
+    "name": "node-1",
+    "cluster_name": "grcico.SIEM",
+    "cluster_uuid": "qLpz5Y1MSxqOucWlV9vndg",
+    "version": {
+        "number": "8.19.24",
+        "build_flavor": "default",
+        "build_type": "deb",
+        "build_hash": "908773e3c727faf1e4b109d60b84cdb74484743f",
+        "build_date": "2026-10-29T00:06:27.871743251Z",
+        "build_snapshot": false,
+        "lucene_version": "9.12.2",
+        "minimum_wire_compatibility_version": "7.17.0",
+        "minimum_index_compatibility_version": "7.0.0"
+    },
+    "tagline": "You Know, for Search"
+}
+{
+  "cluster_name" : "grcico.SIEM",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 104,
+  "active_shards" : 104,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 48,
+  "unassigned_primary_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 68.42105263157895
+}
+name   ip            version heap.percent ram.percent cpu disk.avail
+node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
+
+========== CUSTOM ROLES ==========
+--- GreenCircle ---
+{
+  "cluster": [],
+  "indices": [
+    {
+      "names": [
+        "logs-*-greencircle*",
+        "metrics-*-greencircle*",
+        "traces-*-greencircle*",
+        "synthetics-*-greencircle*",
+        "profiling-*-greencircle*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "grc-*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        ".alerts-security.alerts-grcico-com*",
+        ".internal.alerts-security.alerts-grcico-com*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": true
+    }
+  ],
+  "applications": [
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_all"
+      ],
+      "resources": [
+        "space:grcico-com"
+      ]
+    },
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_read"
+      ],
+      "resources": [
+        "space:default"
+      ]
+    }
+  ],
+  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space."
+}
+--- tkt ---
+{
+  "cluster": [],
+  "indices": [
+    {
+      "names": [
+        "logs-*-tkt*",
+        "metrics-*-tkt*",
+        "traces-*-tkt*",
+        "synthetics-*-tkt*",
+        "profiling-*-tkt*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "tkt-*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        ".alerts-security.alerts-tkt-org*",
+        ".internal.alerts-security.alerts-tkt-org*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": true
+    }
+  ],
+  "applications": [
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_all"
+      ],
+      "resources": [
+        "space:tkt-org"
+      ]
+    },
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_read"
+      ],
+      "resources": [
+        "space:default"
+      ]
+    }
+  ],
+  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space."
+}
+
+========== SPACES ==========
+[
+    {
+        "id": "default",
+        "name": "Default",
+        "description": "This is your default space!",
+        "color": "#00bfb3",
+        "disabledFeatures": [],
+        "_reserved": true
+    },
+    {
+        "id": "grcico-com",
+        "name": "greencircle",
+        "color": "#9170B8",
+        "initials": "g",
+        "imageUrl": "",
+        "disabledFeatures": [],
+        "solution": "classic"
+    },
+    {
+        "id": "tkt-org",
+        "name": "tkt",
+        "color": "#B9A888",
+        "initials": "t",
+        "imageUrl": "",
+        "disabledFeatures": [],
+        "solution": "classic"
+    }
+]
+
+========== DETECTION RULES PER SPACE ==========
+space default: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space grcico-com: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space tkt-org: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+installed security_detection_engine version: 8.19.37 installed
+
+MISSING SECTION: DASHBOARDS PER SPACE

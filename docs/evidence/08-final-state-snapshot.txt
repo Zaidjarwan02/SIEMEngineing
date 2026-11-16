@@ -1,0 +1,345 @@
+
+
+========== CLUSTER ==========
+{
+    "name": "node-1",
+    "cluster_name": "grcico.SIEM",
+    "cluster_uuid": "qLpz5Y1MSxqOucWlV9vndg",
+    "version": {
+        "number": "8.19.24",
+        "build_flavor": "default",
+        "build_type": "deb",
+        "build_hash": "908773e3c727faf1e4b109d60b84cdb74484743f",
+        "build_date": "2026-10-29T00:06:27.871743251Z",
+        "build_snapshot": false,
+        "lucene_version": "9.12.2",
+        "minimum_wire_compatibility_version": "7.17.0",
+        "minimum_index_compatibility_version": "7.0.0"
+    },
+    "tagline": "You Know, for Search"
+}
+{
+  "cluster_name" : "grcico.SIEM",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 104,
+  "active_shards" : 104,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 48,
+  "unassigned_primary_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 68.42105263157895
+}
+name   ip            version heap.percent ram.percent cpu disk.avail
+node-1 192.168.1.212 8.19.24           28          93   3     69.7gb
+
+
+========== LICENSE ==========
+{
+  "type": "basic",
+  "status": "active",
+  "expiry": null
+}
+
+
+========== NON-SYSTEM USERS ==========
+grc_user     roles=['GreenCircle'] enabled=True metadata={}
+tkt_user     roles=['tkt'] enabled=True metadata={}
+
+
+========== CUSTOM ROLES ==========
+--- GreenCircle ---
+{
+  "cluster": [],
+  "indices": [
+    {
+      "names": [
+        "logs-*-greencircle*",
+        "metrics-*-greencircle*",
+        "traces-*-greencircle*",
+        "synthetics-*-greencircle*",
+        "profiling-*-greencircle*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "grc-*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        ".alerts-security.alerts-grcico-com*",
+        ".internal.alerts-security.alerts-grcico-com*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": true
+    }
+  ],
+  "applications": [
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_all"
+      ],
+      "resources": [
+        "space:grcico-com"
+      ]
+    },
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_read"
+      ],
+      "resources": [
+        "space:default"
+      ]
+    }
+  ],
+  "description": "GreenCircle tenant: full read/write on greencircle data and grc-* only; full UI in space grcico-com; read-only in shared Default space."
+}
+--- tkt ---
+{
+  "cluster": [],
+  "indices": [
+    {
+      "names": [
+        "logs-*-tkt*",
+        "metrics-*-tkt*",
+        "traces-*-tkt*",
+        "synthetics-*-tkt*",
+        "profiling-*-tkt*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "tkt-*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        ".alerts-security.alerts-tkt-org*",
+        ".internal.alerts-security.alerts-tkt-org*"
+      ],
+      "privileges": [
+        "all"
+      ],
+      "allow_restricted_indices": true
+    }
+  ],
+  "applications": [
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_all"
+      ],
+      "resources": [
+        "space:tkt-org"
+      ]
+    },
+    {
+      "application": "kibana-.kibana",
+      "privileges": [
+        "space_read"
+      ],
+      "resources": [
+        "space:default"
+      ]
+    }
+  ],
+  "description": "TKT tenant: full read/write on tkt data and tkt-* only; full UI in space tkt-org; read-only in shared Default space."
+}
+
+
+========== SPACES ==========
+[
+    {
+        "id": "default",
+        "name": "Default",
+        "description": "This is your default space!",
+        "color": "#00bfb3",
+        "disabledFeatures": [],
+        "_reserved": true
+    },
+    {
+        "id": "grcico-com",
+        "name": "greencircle",
+        "color": "#9170B8",
+        "initials": "g",
+        "imageUrl": "",
+        "disabledFeatures": [],
+        "solution": "classic"
+    },
+    {
+        "id": "tkt-org",
+        "name": "tkt",
+        "color": "#B9A888",
+        "initials": "t",
+        "imageUrl": "",
+        "disabledFeatures": [],
+        "solution": "classic"
+    }
+]
+
+
+========== DATA VIEWS PER SPACE ==========
+--- space grcico-com ---
+   metrics-* -> metrics-*
+   logs-* -> logs-*
+--- space tkt-org ---
+   .kibana-event-log-* -> .kibana-event-log-*
+   Default security data view -> .alerts-security.alerts-tkt-org,apm-*-transaction*,auditbeat-*,endgame-*,filebeat-*,logs-*,packetbeat-*,traces-apm*,winlogbeat-*,-*elastic-cloud-logs-*
+   Security alert data view -> .alerts-security.alerts-tkt-org
+   metrics-* -> metrics-*
+   logs-* -> logs-*
+
+
+========== DETECTION RULES PER SPACE ==========
+space default: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space grcico-com: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+space tkt-org: total=2062 enabled=0 prebuilt=2062 installed / 2157 in package
+installed security_detection_engine version: 8.19.37 installed
+
+
+========== DASHBOARDS PER SPACE (should be empty after test cleanup) ==========
+space default dashboards: 44
+space grcico-com dashboards: 0
+space tkt-org dashboards: 1
+
+
+========== DATA STREAMS (tenant test streams should be gone) ==========
+total: 51
+  tenant-like: logs-elastic_agent-tkt
+  tenant-like: logs-elastic_agent.filebeat-tkt
+  tenant-like: logs-elastic_agent.metricbeat-tkt
+  tenant-like: logs-system.application-tkt
+  tenant-like: logs-system.security-tkt
+  tenant-like: logs-system.system-tkt
+  tenant-like: metrics-elastic_agent.elastic_agent-tkt
+  tenant-like: metrics-elastic_agent.filebeat-tkt
+  tenant-like: metrics-elastic_agent.filebeat_input-tkt
+  tenant-like: metrics-elastic_agent.metricbeat-tkt
+  tenant-like: metrics-system.cpu-tkt
+  tenant-like: metrics-system.diskio-tkt
+  tenant-like: metrics-system.filesystem-tkt
+  tenant-like: metrics-system.fsstat-tkt
+  tenant-like: metrics-system.memory-tkt
+  tenant-like: metrics-system.network-tkt
+  tenant-like: metrics-system.process-tkt
+  tenant-like: metrics-system.process.summary-tkt
+  tenant-like: metrics-system.socket_summary-tkt
+  tenant-like: metrics-system.uptime-tkt
+
+
+========== INDICES (non-system) ==========
+green  open .ds-.fleet-actions-results-2026.11.09-000001                             4  20.2kb
+yellow open .ds-.items-default-2026.11.12-000001                                     0    249b
+yellow open .ds-.lists-default-2026.11.12-000001                                     0    249b
+yellow open .ds-logs-elastic_agent-default-2026.11.10-000001                       886 504.5kb
+yellow open .ds-logs-elastic_agent-tkt-2026.11.10-000001                          1158   670kb
+yellow open .ds-logs-elastic_agent.filebeat-default-2026.11.10-000001             4428   1.3mb
+yellow open .ds-logs-elastic_agent.filebeat-tkt-2026.11.10-000001                 2870 788.4kb
+yellow open .ds-logs-elastic_agent.fleet_server-default-2026.11.10-000001        33354   3.4mb
+yellow open .ds-logs-elastic_agent.metricbeat-default-2026.11.10-000001           5686   2.4mb
+yellow open .ds-logs-elastic_agent.metricbeat-tkt-2026.11.10-000001               2339   1.3mb
+yellow open .ds-logs-system.application-default-2026.11.10-000001                10089   1.9mb
+yellow open .ds-logs-system.application-tkt-2026.11.10-000001                     2423   733kb
+yellow open .ds-logs-system.auth-default-2026.11.10-000001                        1617     1mb
+yellow open .ds-logs-system.security-default-2026.11.10-000001                 1953929   455mb
+yellow open .ds-logs-system.security-tkt-2026.11.10-000001                       46597   9.9mb
+yellow open .ds-logs-system.syslog-default-2026.11.10-000001                     32207   3.9mb
+yellow open .ds-logs-system.system-default-2026.11.10-000001                      1155   1.6mb
+yellow open .ds-logs-system.system-tkt-2026.11.10-000001                          1810   1.1mb
+yellow open .ds-logs-ti_otx.threat-default-2026.11.12-000001                      4211   1.1mb
+yellow open .ds-metrics-elastic_agent.elastic_agent-default-2026.11.10-000001    33369   7.7mb
+yellow open .ds-metrics-elastic_agent.elastic_agent-tkt-2026.11.10-000001         1008 658.5kb
+yellow open .ds-metrics-elastic_agent.filebeat-default-2026.11.10-000001         10233  10.6mb
+yellow open .ds-metrics-elastic_agent.filebeat-tkt-2026.11.10-000001               286 724.9kb
+yellow open .ds-metrics-elastic_agent.filebeat_input-default-2026.11.10-000001   10559   9.5mb
+yellow open .ds-metrics-elastic_agent.filebeat_input-tkt-2026.11.10-000001         575   1.2mb
+yellow open .ds-metrics-elastic_agent.fleet_server-default-2026.11.10-000001      2836   2.5mb
+yellow open .ds-metrics-elastic_agent.metricbeat-default-2026.11.10-000001       15327  13.6mb
+yellow open .ds-metrics-elastic_agent.metricbeat-tkt-2026.11.10-000001             424 895.9kb
+green  open .ds-metrics-fleet_server.agent_status-default-2026.11.09-000001       3082 433.7kb
+green  open .ds-metrics-fleet_server.agent_versions-default-2026.11.09-000001     4357 345.4kb
+yellow open .ds-metrics-system.cpu-default-2026.11.10-000001                     26401  10.2mb
+yellow open .ds-metrics-system.cpu-tkt-2026.11.10-000001                           803     1mb
+yellow open .ds-metrics-system.diskio-default-2026.11.10-000001                 372962  50.9mb
+yellow open .ds-metrics-system.diskio-tkt-2026.11.10-000001                       1605 640.2kb
+yellow open .ds-metrics-system.filesystem-default-2026.11.10-000001              19975   3.9mb
+yellow open .ds-metrics-system.filesystem-tkt-2026.11.10-000001                    147 667.7kb
+yellow open .ds-metrics-system.fsstat-default-2026.11.10-000001                   4407   2.2mb
+yellow open .ds-metrics-system.fsstat-tkt-2026.11.10-000001                        147 589.4kb
+yellow open .ds-metrics-system.load-default-2026.11.10-000001                    16482   5.9mb
+yellow open .ds-metrics-system.memory-default-2026.11.10-000001                  26400   9.8mb
+
+
+========== FLEET AGENT POLICIES ==========
+grc                  namespace=default      agents=1 status=active
+Agent policy 1       namespace=default      agents=0 status=active
+tkt                  namespace=tkt          agents=1 status=active
+Fleet Server Policy  namespace=default      agents=1 status=active
+
+
+========== FLEET AGENTS ==========
+total: 3
+4e4e8bfe-11be-4196-afd0-086ecbef0798 host=GC-LD-051 status=online policy=877ebc8b-9083-4dd7-a206-b054a2091221
+ed081c97-4a9d-4edd-bc02-95c512ce6aef host=GC-LD-002 status=online policy=ca22092c-460c-489b-b7c8-fa7e8786f189
+d30d95f9-fee3-4577-919d-3986513c1a13 host=ubuntu status=online policy=tkt-org-fleet-server-policy
+
+
+========== KIBANA ENCRYPTION KEYS (masked) ==========
+xpack.encryptedSavedObjects.encryptionKey: 2f7654ec88eb7736ad7f715db87ac890c3c96f6882fea61998943d8ccb467bd9
+
+
+========== SECURITY POSTURE ==========
+--- ufw ---
+Status: inactive
+--- listen ---
+tcp   LISTEN 0      4096       127.0.0.1:8221      0.0.0.0:*    users:(("fleet-server",pid=17310,fd=12))               
+tcp   LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=7663,fd=3),("systemd",pid=1,fd=523))
+tcp   LISTEN 0      511          0.0.0.0:5601      0.0.0.0:*    users:(("MainThread",pid=24566,fd=22))                 
+tcp   LISTEN 0      4096               *:8220            *:*    users:(("fleet-server",pid=17310,fd=11))               
+tcp   LISTEN 0      4096               *:9200            *:*    users:(("java",pid=2578,fd=596))                       
+tcp   LISTEN 0      4096               *:9300            *:*    users:(("java",pid=2578,fd=593))                       
+tcp   LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=7663,fd=4),("systemd",pid=1,fd=524))
+--- ES http ssl ---
+network.host: 192.168.1.212
+xpack.security.enabled: true
+xpack.security.http.ssl:
+xpack.security.transport.ssl:
+http.host: 0.0.0.0
+--- Kibana host/ssl ---
+server.port: 5601
+server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://localhost:9200"]
+--- plaintext kibana_system password present ---
+YES
+--- swap ---
+Swap:             0B          0B          0B
+
+
+========== END ==========
