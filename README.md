@@ -64,29 +64,29 @@ tenant's agents write to that tenant's data-stream namespace.
                         │                   Elasticsearch                   │
                         │              cluster greencircle.SIEM             │
                         │                                                   │
-  T1_user          ────►│  logs-*-greencircle*                              │
-  (Tenant 1)            │  metrics-*-greencircle*                           │
-                        │  traces-*-greencircle*                            │
-                        │  synthetics-*-greencircle*                        │
-                        │  profiling-*-greencircle*                         │
-                        │  greencircle-*                                    │
-                        │  .alerts-security.alerts-greencircle*             │
+  T1_user          ────►│  logs-*-T1*                              │
+  (Tenant 1)            │  metrics-*-T1*                           │
+                        │  traces-*-T1*                            │
+                        │  synthetics-*-T1*                        │
+                        │  profiling-*-T1*                         │
+                        │  T1-*                                    │
+                        │  .alerts-security.alerts-T1*             │
                         │                                                   │
-  T2_user          ────►│  logs-*-tkt*                                      │
-  (Tenant 2)            │  metrics-*-tkt*                                   │
-                        │  traces-*-tkt*                                    │
-                        │  synthetics-*-tkt*                                │
-                        │  profiling-*-tkt*                                 │
-                        │  tkt-*                                            │
-                        │  .alerts-security.alerts-tkt*                     │
+  T2_user          ────►│  logs-*-T2*                                      │
+  (Tenant 2)            │  metrics-*-T2*                                   │
+                        │  traces-*-T2*                                    │
+                        │  synthetics-*-T2*                                │
+                        │  profiling-*-T2*                                 │
+                        │  T2-*                                            │
+                        │  .alerts-security.alerts-T2*                     │
                         └───────────────────────────────────────────────────┘
 
                         ┌───────────────────────────────────────────────────┐
                         │                       Kibana                      │
                         │                                                   │
                         │  default     "All Tenant"  ◄─ every tenant (read) │
-                        │  greencircle "Tenant 1"    ◄─ T1_user             │
-                        │  tkt         "Tenant 2"    ◄─ T2_user             │
+                        │  T1 "Tenant 1"    ◄─ T1_user             │
+                        │  T2         "Tenant 2"    ◄─ T2_user             │
                         └───────────────────────────────────────────────────┘
 ```
 
@@ -112,8 +112,8 @@ a cross-tenant data reader.
 |------|-------|
 | Kibana / Elasticsearch | 8.19.24 |
 | License | Basic (active) |
-| Cluster | `greencircle.SIEM` / `node-1` |
-| Spaces | `default` (All Tenant), `greencircle` (Tenant 1), `tkt` (Tenant 2) |
+| Cluster | `T1.SIEM` / `node-1` |
+| Spaces | `default` (All Tenant), `T1` (Tenant 1), `T2` (Tenant 2) |
 | Detection package | `security_detection_engine` 8.19.37 |
 | Rules per space | 2,062 (of 2,157 packaged; 95 need a higher license) |
 | Rules enabled per space | **2,062 / 2,062** |
@@ -121,7 +121,7 @@ a cross-tenant data reader.
 | Isolation suite | **53 / 53 PASS** |
 | Rule suite | **15 / 15 PASS** |
 | Default alert index | 2 alerts at capture |
-| Tenant alert indices | own alerts only (e.g. `tkt` 1 at capture) |
+| Tenant alert indices | own alerts only (e.g. `T2` 1 at capture) |
 | Cluster health | yellow (single node, unassigned replicas — expected) |
 
 > **Enabled is not the same as healthy.** Many rules report `warning`/`failed`
@@ -240,8 +240,8 @@ profiling-<dataset>-<namespace>
 
 The tenant can also have a custom index pattern such as `<namespace>-*`.
 
-> Tenant 1 uses `greencircle` for its space, namespace and role, with user
-> `T1_user`. Tenant 2 uses `tkt` for its space, namespace and role,
+> Tenant 1 uses `T1` for its space, namespace and role, with user
+> `T1_user`. Tenant 2 uses `T2` for its space, namespace and role,
 > with user `T2_user`.
 
 ---
@@ -474,7 +474,7 @@ chunking:
 ```bash
 python tools/enable_all_rules_http.py default
 python tools/enable_all_rules_http.py greencircle
-python tools/enable_all_rules_http.py tkt
+python tools/enable_all_rules_http.py T1
 
 # Generic new tenant:
 python tools/enable_all_rules_http.py acme --user acme_user --password '<TENANT_PASSWORD>'
@@ -620,7 +620,7 @@ PASS  T1_user READ other data stream (0 hits) (expected 0, got 0)
 PASS  T1_user WRITE own data stream (expected 201, got 201)
 PASS  T1_user WRITE other data stream (403) (expected 403, got 403)
 ...
-PASS  T1_user blocked from tkt alert index (expected 403, got 403)
+PASS  T1_user blocked from T1 alert index (expected 403, got 403)
 PASS  T1_user can READ shared default alerts (expected 200, got 200)
 PASS  T1_user cannot WRITE shared default alerts (expected 403, got 403)
 PASS  T1_user can search default alerts in Kibana (expected 200, got 200)
@@ -632,10 +632,10 @@ PASS=53 FAIL=0
 
 ```
 PASS  default space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  greencircle space has all 2062 rules enabled (expected 2062, got 2062)
-PASS  tkt space has all 2062 rules enabled (expected 2062, got 2062)
+PASS  T1 space has all 2062 rules enabled (expected 2062, got 2062)
+PASS  T1 space has all 2062 rules enabled (expected 2062, got 2062)
 PASS  T1_user can query own space rules (expected 200, got 200)
-PASS  T1_user blocked from tkt rules (403) (expected 403, got 403)
+PASS  T1_user blocked from T1 rules (403) (expected 403, got 403)
 PASS  T1_user can READ shared default rules (expected 200, got 200)
 ...
 PASS=15 FAIL=0
