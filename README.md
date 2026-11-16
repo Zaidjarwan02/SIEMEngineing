@@ -64,12 +64,12 @@ tenant's agents write to that tenant's data-stream namespace.
                          │              Elasticsearch                   │
                          │              cluster grcico.SIEM             │
                          │                                             │
-  grc_user ──role──►     │  logs-*-greencircle*   metrics-*-greencircle*│
+  T1_user ──role──►     │  logs-*-greencircle*   metrics-*-greencircle*│
   (Tenant 1)             │  traces-*-greencircle* synthetics-*-...      │
                          │  grc-*                                       │
                          │  .alerts-security.alerts-grcico-com*         │
                          │                                             │
-  tkt_user ──role──►     │  logs-*-tkt*   metrics-*-tkt*                │
+  T2_user ──role──►     │  logs-*-tkt*   metrics-*-tkt*                │
   (Tenant 2)             │  traces-*-tkt* synthetics-*-tkt*             │
                          │  tkt-*                                       │
                          │  .alerts-security.alerts-tkt-org*            │
